@@ -58,4 +58,60 @@ export default function Hero() {
                 заключаем контракты
                 и строим карьеру мирового уровня.
 
-              </p>
+              </p><div className="mt-12 flex flex-wrap gap-5">
+
+  <a
+    href="/players"
+    className="rounded-full bg-emerald-500 px-10 py-5 text-lg font-bold text-black transition duration-300 hover:scale-105 hover:bg-emerald-400"
+  >
+    Наши игроки
+  </a>
+
+  <a
+    href="/contacts"
+    className="rounded-full border border-white/30 bg-white/10 px-10 py-5 text-lg font-bold text-white backdrop-blur-md transition duration-300 hover:bg-white/20"
+  >
+    Связаться
+  </a>
+
+</div>
+
+<div className="mt-20 grid max-w-3xl grid-cols-3 gap-6">
+
+  <div className="rounded-3xl border border-white/10 bg-white/10 p-8 backdrop-blur-xl">
+
+    <h2 className="text-5xl font-black text-emerald-400">
+      120+
+    </h2>
+
+    <p className="mt-2 text-sm uppercase tracking-widest text-white">
+      Профессиональных игроков
+    </p>
+
+  </div>
+
+  <div className="rounded-3xl border border-white/10 bg-white/10 p-8 backdrop-blur-xl">
+
+    <h2 className="text-5xl font-black text-emerald-400">
+      40+
+    </h2>
+
+    <p className="mt-2 text-sm uppercase tracking-widest text-white">
+      Клубов-партнёров
+    </p>
+
+  </div>
+
+  <div className="rounded-3xl border border-white/10 bg-white/10 p-8 backdrop-blur-xl">
+
+    <h2 className="text-5xl font-black text-emerald-400">
+      18
+    </h2>
+
+    <p className="mt-2 text-sm uppercase tracking-widest text-white">
+      Стран мира
+    </p>
+
+  </div>
+
+</div>
