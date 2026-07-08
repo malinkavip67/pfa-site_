@@ -30,17 +30,17 @@ export default function Hero() {
             PREMIER FOOTBALL AGENCY
           </p>
 
-          <h1 className="leading-none">
+        <h1 className="leading-[0.9]">
 
-            <span className="block text-6xl font-black text-white md:text-8xl">
-              WE BUILD
-            </span>
+  <span className="block text-[56px] font-black uppercase tracking-tight text-white md:text-[96px] xl:text-[120px]">
+    МЫ СОЗДАЁМ
+  </span>
 
-            <span className="block text-7xl font-black text-emerald-400 md:text-9xl">
-              CHAMPIONS
-            </span>
+  <span className="block text-[64px] font-black uppercase tracking-tight text-emerald-400 md:text-[110px] xl:text-[140px]">
+    ЧЕМПИОНОВ
+  </span>
 
-          </h1>
+</h1>
 
           <p className="mt-8 max-w-2xl text-lg leading-8 text-zinc-200">
 
