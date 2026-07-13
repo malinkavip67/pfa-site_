@@ -1,24 +1,28 @@
 @import "tailwindcss";
 
 @theme {
-  --color-pfa-bg: #050B14;
-  --color-pfa-card: #0C1726;
-  --color-pfa-green: #22C55E;
+  --color-pfa-background: #050B14;
+  --color-pfa-surface: #0C1726;
+  --color-pfa-accent: #22C55E;
+  --color-pfa-text: #FFFFFF;
+  --color-pfa-muted: #CBD5E1;
+  --color-pfa-accent-contrast: #031008;
+  --color-pfa-accent-hover: #45D878;
   --font-sans: var(--font-manrope-cyrillic), var(--font-manrope-latin), Arial, sans-serif;
   --font-display: var(--font-bebas-neue), Impact, sans-serif;
 }
 
 :root { color-scheme: dark; }
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; background: #050B14; }
-body { margin: 0; min-width: 320px; overflow-x: clip; background: #050B14; color: #FFFFFF; font-family: var(--font-manrope-cyrillic), var(--font-manrope-latin), Arial, sans-serif; }
+html { scroll-behavior: smooth; background: var(--color-pfa-background); }
+body { margin: 0; min-width: 320px; overflow-x: clip; background: var(--color-pfa-background); color: var(--color-pfa-text); font-family: var(--font-manrope-cyrillic), var(--font-manrope-latin), Arial, sans-serif; }
 button, a { -webkit-tap-highlight-color: transparent; }
 .font-display { font-family: var(--font-bebas-neue), Impact, sans-serif; }
 .text-outline { color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,.72); }
-::selection { color: #050B14; background: #22C55E; }
+::selection { color: var(--color-pfa-background); background: var(--color-pfa-accent); }
 
-:focus-visible { outline: 2px solid #22C55E; outline-offset: 4px; }
-.skip-link { position: fixed; top: 1rem; left: 1rem; z-index: 100; translate: 0 -150%; border-radius: 999px; background: #22C55E; padding: .75rem 1rem; color: #031008; font-size: .75rem; font-weight: 700; text-transform: uppercase; transition: translate .2s ease; }
+:focus-visible { outline: 2px solid var(--color-pfa-accent); outline-offset: 4px; }
+.skip-link { position: fixed; top: 1rem; left: 1rem; z-index: 100; translate: 0 -150%; border-radius: 999px; background: var(--color-pfa-accent); padding: .75rem 1rem; color: var(--color-pfa-accent-contrast); font-size: .75rem; font-weight: 700; text-transform: uppercase; transition: translate .2s ease; }
 .skip-link:focus { translate: 0; }
 
 @media (prefers-reduced-motion: reduce) {
