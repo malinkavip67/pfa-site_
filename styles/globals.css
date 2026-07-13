@@ -15,7 +15,7 @@
 :root { color-scheme: dark; }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; background: var(--color-pfa-background); }
-body { margin: 0; min-width: 320px; overflow-x: clip; background: var(--color-pfa-background); color: var(--color-pfa-text); font-family: var(--font-manrope-cyrillic), var(--font-manrope-latin), Arial, sans-serif; }
+body { margin: 0; overflow-x: clip; background: var(--color-pfa-background); color: var(--color-pfa-text); font-family: var(--font-manrope-cyrillic), var(--font-manrope-latin), Arial, sans-serif; }
 button, a { -webkit-tap-highlight-color: transparent; }
 .font-display { font-family: var(--font-bebas-neue), Impact, sans-serif; }
 .text-outline { color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,.72); }

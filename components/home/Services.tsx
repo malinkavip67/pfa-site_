@@ -7,7 +7,7 @@ import type { Service } from "@/types/service";
 interface Props { services: Service[]; }
 
 export default function Services({ services }: Props) {
-  return <section className="py-36 max-md:py-24"><Container>
+  return <section id="services" className="scroll-mt-24 py-36 max-md:py-24"><Container>
     <AnimatedReveal className="grid grid-cols-[1fr_2fr] max-lg:grid-cols-1 max-lg:gap-10"><SectionHeading index="02">Экспертиза</SectionHeading><h2 className="font-display text-[clamp(5rem,8vw,8rem)] uppercase leading-[.82] max-sm:text-[3.8rem]">Всё, что нужно<br /><span className="text-outline">для большого пути</span></h2></AnimatedReveal>
     <div className="mt-24 border-t border-white/10 max-md:mt-14">{services.map((service, index) => <AnimatedReveal delay={index * 0.06} key={service.id} className="hover:bg-pfa-surface/50 group grid min-h-40 grid-cols-[5rem_1fr_1.15fr_2rem] items-center gap-6 border-b border-white/10 transition hover:px-5 max-md:grid-cols-[2.5rem_1fr_1.5rem] max-md:gap-3 max-md:py-6"><span className="text-pfa-accent text-[11px]">{service.id}</span><h3 className="font-display text-5xl uppercase max-md:text-4xl">{service.title}</h3><p className="text-sm leading-7 text-slate-400 max-md:col-span-2 max-md:col-start-2">{service.description}</p><ArrowUpRight className="text-pfa-accent max-md:col-start-3 max-md:row-start-1" /></AnimatedReveal>)}</div>
   </Container></section>;

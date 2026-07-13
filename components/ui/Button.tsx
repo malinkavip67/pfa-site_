@@ -1,6 +1,6 @@
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
-import type { MouseEventHandler, ReactNode } from "react";
+import type { ReactNode } from "react";
 
 interface Props {
   children: ReactNode;
@@ -9,7 +9,7 @@ interface Props {
   className?: string;
   type?: "button" | "submit" | "reset";
   disabled?: boolean;
-  onClick?: MouseEventHandler<HTMLButtonElement>;
+  onClick?: () => void;
 }
 
 const BASE_STYLES = "inline-flex min-h-16 items-center justify-center gap-5 rounded-full px-8 text-xs font-bold uppercase tracking-[.11em] transition duration-300 hover:-translate-y-1";
@@ -24,7 +24,7 @@ export default function Button({ children, href, variant = "primary", className 
   const content = <>{children}<ArrowUpRight aria-hidden="true" size={19} /></>;
 
   if (href) {
-    return <Link href={href} className={styles}>{content}</Link>;
+    return <Link href={href} className={styles} onClick={onClick}>{content}</Link>;
   }
 
   return <button type={type} className={`${styles} disabled:pointer-events-none disabled:opacity-50`} disabled={disabled} onClick={onClick}>{content}</button>;
