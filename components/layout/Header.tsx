@@ -19,7 +19,7 @@ export default function Header() {
   }, []);
 
   return <header className={`fixed inset-x-0 top-0 z-50 grid h-24 grid-cols-[1fr_auto_1fr] items-center px-12 transition-all duration-500 max-lg:grid-cols-[1fr_auto] max-lg:px-5 ${isScrolled ? "h-[76px] border-b border-white/10 bg-[#050B14]/85 backdrop-blur-xl" : ""}`}>
-    <Link href="/" aria-label="PFA — на главную"><Image src="/images/logo/logo-white.png" width={860} height={190} className="h-auto w-36" alt="Premier Football Agency" priority /></Link>
+    <Link href="/" className="flex h-20 w-36 items-center max-lg:h-16 max-lg:w-28" aria-label="PFA — на главную"><Image src="/images/logo/logo-white.jpg" width={1366} height={768} className="h-full w-full object-contain" alt="Premier Football Agency" priority /></Link>
     <nav className="flex gap-9 max-lg:hidden" aria-label="Основная навигация">{NAVIGATION.map((item) => <Link key={item.href} href={item.href} className="text-[11px] font-semibold uppercase tracking-[.13em] text-slate-300 transition hover:text-white">{item.label}</Link>)}</nav>
     <Link href="/contacts" className="justify-self-end border-b border-[#22C55E] pb-1 text-[11px] font-bold uppercase tracking-[.1em] max-lg:hidden">Начать разговор</Link>
     <button type="button" className="hidden rounded-full border border-white/15 p-3 max-lg:block" onClick={() => setIsOpen(true)} aria-label="Открыть меню"><Menu /></button>
