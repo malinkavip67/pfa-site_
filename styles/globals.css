@@ -1,0 +1,24 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --color-pfa-bg: #050B14;
+  --color-pfa-card: #0C1726;
+  --color-pfa-green: #22C55E;
+  --font-sans: "Manrope", sans-serif;
+  --font-display: "Bebas Neue", sans-serif;
+}
+
+:root { color-scheme: dark; }
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; background: #050B14; }
+body { margin: 0; min-width: 320px; background: #050B14; color: #FFFFFF; font-family: "Manrope", sans-serif; }
+button, a { -webkit-tap-highlight-color: transparent; }
+.font-display { font-family: "Bebas Neue", sans-serif; }
+.text-outline { color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,.72); }
+::selection { color: #050B14; background: #22C55E; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }
+}
