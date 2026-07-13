@@ -3,8 +3,9 @@ import PlayersGrid from "@/components/players/PlayersGrid";
 import Container from "@/components/ui/Container";
 import PageHero from "@/components/ui/PageHero";
 import { getPlayers } from "@/data/players";
+import { createPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = { title: "Игроки" };
+export const metadata: Metadata = createPageMetadata({ title: "Игроки", description: "Профессиональные футболисты Premier Football Agency: талант, характер и долгосрочная стратегия карьеры.", path: "/players", keywords: ["футболисты PFA", "профессиональные футболисты", "футбольные таланты", "представительство игроков"] });
 
 export default async function PlayersPage() {
   const players = await getPlayers();

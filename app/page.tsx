@@ -9,8 +9,17 @@ import Stats from "@/components/home/Stats";
 import { partners } from "@/data/partners";
 import { getPlayers } from "@/data/players";
 import { services } from "@/data/services";
+import { createPageMetadata } from "@/lib/metadata";
+
+export const metadata: Metadata = createPageMetadata({
+  title: "Мы создаём чемпионов",
+  description: "Международное футбольное агентство: стратегия карьеры, трансферы, персональный бренд и профессиональная поддержка игроков.",
+  path: "/",
+  keywords: ["футбольное агентство", "футбольный агент", "трансферы футболистов", "карьера футболиста", "PFA"],
+});
 
 export default async function HomePage() {
   const players = await getPlayers();
   return <><Hero /><About /><Stats /><FeatureStatement /><Services services={services} /><FeaturedPlayers players={players} /><Partners partners={partners} /><CallToAction /></>;
 }
+import type { Metadata } from "next";

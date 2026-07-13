@@ -11,7 +11,7 @@ export default function Hero() {
   const imageY = useTransform(scrollY, [0, 900], [0, 100]);
 
   return <section id="top" className="relative isolate flex min-h-screen items-center overflow-hidden">
-    <motion.div className="absolute -inset-y-24 inset-x-0 z-0 will-change-transform" style={{ y: imageY }}><Image src="/images/hero/hero-stadium.jpg" fill priority sizes="100vw" className="object-cover" alt="Футболист на ночном стадионе" /></motion.div>
+    <motion.div className="absolute -inset-y-24 inset-x-0 z-0 will-change-transform" style={{ y: imageY }}><Image src="/images/hero/hero-stadium.webp" fill priority sizes="100vw" className="object-cover object-center" alt="Футболист на ночном стадионе" /></motion.div>
     <div className="absolute inset-0 z-10 bg-[linear-gradient(90deg,rgba(5,11,20,.98)_0%,rgba(5,11,20,.82)_38%,rgba(5,11,20,.22)_75%),linear-gradient(0deg,rgba(5,11,20,.78),transparent_50%)]" />
     <Container className="relative z-20 pt-24 max-md:pb-24 max-md:pt-48">
       <motion.div initial={false} animate={{ opacity: 1, y: 0 }} className="flex items-center gap-3 text-[11px] font-bold uppercase tracking-[.2em] text-slate-300"><span className="h-px w-10 bg-[#22C55E]" />Premier Football Agency</motion.div>
