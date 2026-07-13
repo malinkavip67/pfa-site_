@@ -1,7 +1,8 @@
 import type { Stat } from "@/types/stat";
 
 export const stats: Stat[] = [
-  { value: "12", label: "рынков присутствия" },
-  { value: "360°", label: "управление карьерой" },
-  { value: "24/7", label: "поддержка игроков" },
+  { value: "120+", label: "Игроков" },
+  { value: "40+", label: "Клубов" },
+  { value: "18", label: "Стран" },
+  { value: "15", label: "Лет опыта" },
 ];

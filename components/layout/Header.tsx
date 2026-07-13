@@ -87,7 +87,7 @@ export default function Header() {
   return (
     <header className={`fixed inset-x-0 top-0 z-50 grid h-24 grid-cols-[1fr_auto_1fr] items-center px-[clamp(1.25rem,3.5vw,3rem)] transition-[height,background-color,border-color] duration-500 max-lg:grid-cols-[1fr_auto] ${isScrolled ? "h-[76px] border-b border-white/10 bg-pfa-background/90 backdrop-blur-md" : "border-b border-transparent bg-transparent"}`}>
       <Link href="/" className="flex h-20 w-32 items-center max-lg:h-16 max-lg:w-28" aria-label="PFA — на главную">
-        <Image src="/images/logo/logo-white.jpg" width={1366} height={768} sizes="(max-width: 1024px) 112px, 128px" className="h-full w-full object-contain" alt="Premier Football Agency" />
+        <Image src="/images/logo/logo-white.jpg" width={1366} height={768} sizes="(max-width: 1024px) 112px, 128px" loading="eager" className="h-full w-full object-contain" alt="Premier Football Agency" />
       </Link>
 
       <nav className="flex items-center gap-7 max-xl:gap-5 max-lg:hidden" aria-label="Основная навигация">
