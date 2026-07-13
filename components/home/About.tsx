@@ -1,13 +1,39 @@
 import AnimatedReveal from "@/components/ui/AnimatedReveal";
 import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
+import type { AboutDirection } from "@/types/service";
 
-export default function About() {
-  return <section id="agency" className="py-36 max-md:py-24"><Container>
-    <AnimatedReveal><SectionHeading index="01">Агентство</SectionHeading></AnimatedReveal>
-    <AnimatedReveal className="mt-16 grid grid-cols-[1.35fr_.65fr] items-end gap-20 max-lg:grid-cols-1 max-lg:gap-12">
-      <h2 className="font-display text-[clamp(5rem,8vw,8rem)] uppercase leading-[.82] max-sm:text-[2.5rem]">Не просто<br />представляем.<br /><span className="text-outline">Развиваем.</span></h2>
-      <div className="max-w-lg"><p className="text-xl leading-relaxed">Талант открывает дверь. Система, характер и точные решения превращают потенциал в карьеру мирового уровня.</p><p className="mt-7 text-sm leading-7 text-slate-400">PFA объединяет спортивную экспертизу, международные связи и персональную ответственность за результат.</p></div>
-    </AnimatedReveal>
-  </Container></section>;
+interface Props {
+  directions: AboutDirection[];
+}
+
+export default function About({ directions }: Props) {
+  return (
+    <section id="agency" className="scroll-mt-24 py-36 max-md:py-24">
+      <Container>
+        <AnimatedReveal className="grid grid-cols-[1.1fr_.9fr] items-end gap-20 max-lg:grid-cols-1 max-lg:gap-10">
+          <div>
+            <SectionHeading index="01">Агентство</SectionHeading>
+            <h2 className="font-display mt-10 text-[clamp(4.5rem,8vw,8rem)] uppercase leading-[.82] max-sm:text-[3rem]">
+              Строим карьеру<br /><span className="text-outline">на годы вперёд</span>
+            </h2>
+          </div>
+          <div className="max-w-xl pb-1">
+            <p className="text-xl leading-relaxed text-pfa-text">PFA сопровождает футболиста как долгосрочный профессиональный проект.</p>
+            <p className="mt-6 text-sm leading-7 text-slate-400">Мы объединяем спортивную стратегию, международные связи и персональную ответственность, чтобы каждое решение усиливало карьеру игрока.</p>
+          </div>
+        </AnimatedReveal>
+
+        <div className="mt-20 grid grid-cols-3 border-y border-white/10 max-md:grid-cols-1">
+          {directions.map((direction, index) => (
+            <AnimatedReveal key={direction.id} delay={index * 0.08} className="border-white/10 px-8 py-9 first:pl-0 last:pr-0 md:border-l md:first:border-l-0 max-md:border-b max-md:px-0 max-md:last:border-b-0">
+              <span className="text-[10px] font-semibold tracking-[.16em] text-pfa-accent">{direction.id}</span>
+              <h3 className="font-display mt-7 text-4xl uppercase">{direction.title}</h3>
+              <p className="mt-4 max-w-sm text-sm leading-7 text-slate-400">{direction.description}</p>
+            </AnimatedReveal>
+          ))}
+        </div>
+      </Container>
+    </section>
+  );
 }
