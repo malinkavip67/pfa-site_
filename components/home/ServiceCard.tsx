@@ -1,4 +1,6 @@
 import { ArrowUpRight } from "lucide-react";
+import Card from "@/components/ui/Card";
+import Typography from "@/components/ui/Typography";
 import type { Service } from "@/types/service";
 
 interface Props {
@@ -7,15 +9,16 @@ interface Props {
 
 export default function ServiceCard({ service }: Props) {
   return (
-    <article className="group flex min-h-80 h-full flex-col border border-white/10 bg-pfa-surface/45 p-8 transition duration-300 hover:-translate-y-1 hover:border-pfa-accent/50 hover:bg-pfa-surface md:p-9 max-sm:p-6">
+    <Card className="group relative flex h-full min-h-[310px] flex-col overflow-hidden border-0 bg-[#09121f] p-8 transition-colors duration-300 hover:bg-[#0c1929] max-sm:min-h-[270px] max-sm:p-6">
+      <span aria-hidden="true" className="absolute inset-x-0 top-0 h-0.5 origin-left scale-x-0 bg-pfa-accent transition-transform duration-300 group-hover:scale-x-100" />
       <div className="flex items-start justify-between gap-6">
-        <span className="text-[10px] font-semibold tracking-[.16em] text-pfa-accent">{service.id}</span>
-        <ArrowUpRight aria-hidden="true" className="text-slate-500 transition duration-300 group-hover:text-pfa-accent" size={21} />
+        <Typography as="span" variant="sectionSubtitle">{service.id}</Typography>
+        <ArrowUpRight aria-hidden="true" className="text-slate-500 transition-colors duration-300 group-hover:text-pfa-accent" size={21} strokeWidth={1.7} />
       </div>
-      <div className="mt-auto pt-16">
-        <h3 className="font-display break-words hyphens-auto text-[clamp(2.4rem,4vw,3.5rem)] uppercase leading-[.92] max-sm:text-[2rem]">{service.title}</h3>
-        <p className="mt-5 text-sm leading-7 text-slate-400">{service.description}</p>
+      <div className="mt-auto pt-14">
+        <Typography as="h3" variant="sectionTitle" className="break-words hyphens-auto text-[clamp(1.75rem,2.5vw,2.5rem)] leading-tight tracking-[-.035em]">{service.title}</Typography>
+        <Typography variant="bodyMedium" className="mt-5 max-w-sm text-slate-300">{service.description}</Typography>
       </div>
-    </article>
+    </Card>
   );
 }
