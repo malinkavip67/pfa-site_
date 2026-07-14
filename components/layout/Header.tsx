@@ -1,7 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { ChevronDown, Menu, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -85,30 +85,38 @@ export default function Header() {
   };
 
   return (
-    <header className={`fixed inset-x-0 top-0 z-50 grid h-24 grid-cols-[1fr_auto_1fr] items-center px-[clamp(1.25rem,3.5vw,3rem)] transition-[height,background-color,border-color] duration-500 max-lg:grid-cols-[1fr_auto] ${isScrolled ? "h-[76px] border-b border-white/10 bg-pfa-background/90 backdrop-blur-md" : "border-b border-transparent bg-transparent"}`}>
-      <Link href="/" className="flex h-20 w-32 items-center max-lg:h-16 max-lg:w-28" aria-label="PFA — на главную">
-        <Image src="/images/logo/logo-white.jpg" width={1366} height={768} sizes="(max-width: 1024px) 112px, 128px" loading="eager" className="h-full w-full object-contain" alt="Premier Football Agency" />
+    <header className={`fixed inset-x-0 top-0 z-50 grid h-[72px] grid-cols-[auto_1fr_auto] items-center border-b border-white/10 bg-[#03070d]/95 px-[clamp(1.25rem,3.5vw,3rem)] transition-[height,background-color] duration-300 ${isScrolled ? "h-16 bg-[#03070d]/98 backdrop-blur-sm" : ""}`}>
+      <Link href="/" className="flex h-16 w-28 items-center" aria-label="PFA — на главную">
+        <Image src="/images/logo/logo-white.jpg" width={1366} height={768} sizes="112px" loading="eager" className="h-full w-full object-contain" alt="Premier Football Agency" />
       </Link>
 
-      <nav className="flex items-center gap-7 max-xl:gap-5 max-lg:hidden" aria-label="Основная навигация">
+      <nav className="flex items-center justify-center gap-7 max-xl:gap-5 max-lg:hidden" aria-label="Основная навигация">
         {NAVIGATION.map((item) => (
           <Link
             key={item.href}
             href={item.href}
             aria-current={isCurrentPage(item.href) ? "page" : undefined}
-            className="relative py-3 text-[10px] font-semibold uppercase tracking-[.12em] text-slate-300 transition-colors after:absolute after:inset-x-0 after:bottom-1 after:h-px after:origin-left after:scale-x-0 after:bg-pfa-accent after:transition-transform hover:text-white aria-[current=page]:text-white aria-[current=page]:after:scale-x-100"
+            className="relative py-3 text-[10px] font-bold uppercase tracking-[.1em] text-slate-200 transition-colors after:absolute after:inset-x-0 after:bottom-1 after:h-px after:origin-left after:scale-x-0 after:bg-pfa-accent after:transition-transform hover:text-pfa-accent aria-[current=page]:text-pfa-accent aria-[current=page]:after:scale-x-100"
           >
             {item.label}
           </Link>
         ))}
       </nav>
 
-      <Button href="/contacts" className="min-h-12 justify-self-end px-5 max-xl:px-4 max-lg:hidden">Связаться</Button>
+      <div className="flex items-center gap-4 max-lg:hidden">
+        <Button href="/contacts" shape="square" size="compact" className="min-h-11 border border-white/30 bg-transparent px-5 text-[10px] text-white shadow-none hover:border-pfa-accent hover:bg-transparent hover:text-pfa-accent max-xl:px-4">Связаться с нами</Button>
+        <label className="relative flex items-center" aria-label="Язык сайта">
+          <select className="h-11 appearance-none bg-transparent pl-2 pr-6 text-[10px] font-bold text-white outline-none" defaultValue="ru">
+            <option className="bg-pfa-background" value="ru">RU</option>
+          </select>
+          <ChevronDown aria-hidden="true" className="pointer-events-none absolute right-0 text-slate-400" size={13} />
+        </label>
+      </div>
 
       <button
         ref={menuButtonRef}
         type="button"
-        className="hidden rounded-full border border-white/20 p-3 transition-colors hover:border-pfa-accent max-lg:block"
+        className="hidden justify-self-end rounded-sm border border-white/20 p-2.5 transition-colors hover:border-pfa-accent max-lg:block"
         onClick={() => setIsOpen(true)}
         aria-label="Открыть меню"
         aria-expanded={isOpen}
@@ -125,15 +133,15 @@ export default function Header() {
             role="dialog"
             aria-modal="true"
             aria-label="Мобильная навигация"
-            className="fixed inset-0 z-50 flex flex-col overflow-y-auto bg-pfa-background px-6 py-7"
+            className="fixed inset-0 z-50 flex flex-col overflow-y-auto bg-[#03070d] px-6 py-6"
             initial={shouldReduceMotion ? false : { clipPath: "inset(0 0 100% 0)" }}
             animate={{ clipPath: "inset(0)" }}
             exit={shouldReduceMotion ? { opacity: 0 } : { clipPath: "inset(0 0 100% 0)" }}
             transition={{ duration: shouldReduceMotion ? 0.01 : 0.45, ease: [0.22, 1, 0.36, 1] }}
           >
             <div className="flex items-start justify-between">
-              <Image src="/images/logo/logo-white.jpg" width={1366} height={768} sizes="112px" className="h-16 w-28 object-contain" alt="Premier Football Agency" />
-              <button ref={closeButtonRef} type="button" className="rounded-full border border-white/20 p-3 transition-colors hover:border-pfa-accent" onClick={closeMenu} aria-label="Закрыть меню">
+              <Image src="/images/logo/logo-white.jpg" width={1366} height={768} sizes="112px" className="h-14 w-28 object-contain" alt="Premier Football Agency" />
+              <button ref={closeButtonRef} type="button" className="rounded-sm border border-white/20 p-2.5 transition-colors hover:border-pfa-accent" onClick={closeMenu} aria-label="Закрыть меню">
                 <X aria-hidden="true" />
               </button>
             </div>
@@ -152,7 +160,10 @@ export default function Header() {
               ))}
             </nav>
 
-            <Button href="/contacts" className="w-full shrink-0" onClick={closeMenu}>Связаться</Button>
+            <div className="flex items-center gap-4">
+              <Button href="/contacts" shape="square" size="compact" className="flex-1" onClick={closeMenu}>Связаться с нами</Button>
+              <span className="text-xs font-bold text-white">RU</span>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

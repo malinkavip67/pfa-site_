@@ -1,8 +1,19 @@
-import type { Stat } from "@/types/stat";
+import { ArrowLeftRight, Globe2, Trophy, UsersRound } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
+import Container from "@/components/ui/Container";
+import Typography from "@/components/ui/Typography";
+import type { Stat, StatIcon } from "@/types/stat";
 
 interface Props {
   stats: Stat[];
 }
+
+const STAT_ICONS: Record<StatIcon, LucideIcon> = {
+  players: UsersRound,
+  countries: Globe2,
+  transfers: ArrowLeftRight,
+  experience: Trophy,
+};
 
 function getBorderStyles(index: number): string {
   const mobileColumnBorder = index % 2 === 1 ? "border-l border-white/10" : "";
@@ -13,13 +24,24 @@ function getBorderStyles(index: number): string {
 
 export default function HeroStats({ stats }: Props) {
   return (
-    <dl className="grid grid-cols-2 border-y border-white/15 bg-pfa-background/30 backdrop-blur-sm md:grid-cols-4">
-      {stats.map((stat, index) => (
-        <div key={stat.label} className={`flex min-h-20 items-center gap-3 px-4 py-3 md:min-h-24 md:justify-center md:px-6 ${getBorderStyles(index)}`}>
-          <dt className="order-2 max-w-20 text-[9px] font-semibold uppercase leading-4 tracking-[.12em] text-pfa-muted md:text-[10px]">{stat.label}</dt>
-          <dd className="order-1 font-display text-4xl leading-none text-pfa-accent md:text-5xl">{stat.value}</dd>
-        </div>
-      ))}
-    </dl>
+    <section aria-label="Premier Football Agency в цифрах" className="border-y border-white/10 bg-[#03070d]">
+      <Container>
+        <dl className="grid grid-cols-2 md:grid-cols-4">
+          {stats.map((stat, index) => {
+            const Icon = STAT_ICONS[stat.icon];
+
+            return (
+              <div key={stat.label} className={`flex min-h-28 min-w-0 items-center gap-2 px-2 py-5 sm:gap-4 sm:px-4 md:min-h-32 md:justify-center md:px-7 ${getBorderStyles(index)}`}>
+                <Icon aria-hidden="true" className="h-7 w-7 shrink-0 text-pfa-accent sm:h-[34px] sm:w-[34px]" strokeWidth={1.7} />
+                <div className="min-w-0">
+                  <Typography as="dd" variant="statValue" className="text-3xl sm:text-4xl md:text-5xl">{stat.value}</Typography>
+                  <Typography as="dt" variant="caption" className="mt-2 max-w-40 leading-4 text-slate-300">{stat.label}</Typography>
+                </div>
+              </div>
+            );
+          })}
+        </dl>
+      </Container>
+    </section>
   );
 }

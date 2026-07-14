@@ -6,21 +6,33 @@ interface Props {
   children: ReactNode;
   href?: string;
   variant?: "primary" | "secondary";
+  shape?: "pill" | "square";
+  size?: "default" | "compact";
   className?: string;
   type?: "button" | "submit" | "reset";
   disabled?: boolean;
   onClick?: () => void;
 }
 
-const BASE_STYLES = "inline-flex min-h-16 items-center justify-center gap-5 rounded-full px-8 text-xs font-bold uppercase tracking-[.11em] transition duration-300 hover:-translate-y-1";
+const BASE_STYLES = "inline-flex items-center justify-center text-xs font-bold uppercase tracking-[.11em] transition duration-300 hover:-translate-y-0.5";
 
 const VARIANT_STYLES = {
   primary: "bg-pfa-accent text-pfa-accent-contrast shadow-[0_16px_40px_rgba(34,197,94,.16)] hover:bg-pfa-accent-hover",
   secondary: "border border-white/30 bg-white/5 text-pfa-text backdrop-blur-md hover:border-white hover:bg-white hover:text-pfa-background",
 } as const;
 
-export default function Button({ children, href, variant = "primary", className = "", type = "button", disabled = false, onClick }: Props) {
-  const styles = `${BASE_STYLES} ${VARIANT_STYLES[variant]} ${className}`;
+const SHAPE_STYLES = {
+  pill: "rounded-full",
+  square: "rounded-sm",
+} as const;
+
+const SIZE_STYLES = {
+  default: "min-h-16 gap-5 px-8",
+  compact: "min-h-14 gap-4 px-7",
+} as const;
+
+export default function Button({ children, href, variant = "primary", shape = "pill", size = "default", className = "", type = "button", disabled = false, onClick }: Props) {
+  const styles = `${BASE_STYLES} ${VARIANT_STYLES[variant]} ${SHAPE_STYLES[shape]} ${SIZE_STYLES[size]} ${className}`;
   const content = <>{children}<ArrowUpRight aria-hidden="true" size={19} /></>;
 
   if (href) {

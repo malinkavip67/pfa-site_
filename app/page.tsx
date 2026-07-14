@@ -4,11 +4,13 @@ import CTA from "@/components/home/CTA";
 import FeaturedPlayers from "@/components/home/FeaturedPlayers";
 import FeatureStatement from "@/components/home/FeatureStatement";
 import Hero from "@/components/home/Hero";
+import HeroStats from "@/components/home/HeroStats";
 import Partners from "@/components/home/Partners";
 import Services from "@/components/home/Services";
 import { partners } from "@/data/partners";
 import { getPlayers } from "@/data/players";
 import { aboutDirections, services } from "@/data/services";
+import { stats } from "@/data/stats";
 import { createPageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = createPageMetadata({
@@ -20,5 +22,5 @@ export const metadata: Metadata = createPageMetadata({
 
 export default async function HomePage() {
   const players = await getPlayers();
-  return <><Hero /><About directions={aboutDirections} /><FeatureStatement /><Services services={services} /><FeaturedPlayers players={players} /><Partners partners={partners} /><CTA /></>;
+  return <><Hero /><HeroStats stats={stats} /><About directions={aboutDirections} /><FeatureStatement /><Services services={services} /><FeaturedPlayers players={players} /><Partners partners={partners} /><CTA /></>;
 }
