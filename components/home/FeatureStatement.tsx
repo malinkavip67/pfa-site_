@@ -21,10 +21,10 @@ export default function FeatureStatement() {
       <div aria-hidden="true" className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-pfa-accent/60 to-transparent" />
 
       <Container className="relative">
-        <div className="grid grid-cols-[1.08fr_.92fr] items-center gap-16 max-lg:grid-cols-1 max-lg:gap-10">
-          <AnimatedReveal>
-            <SectionHeading index="02">О нас</SectionHeading>
-            <Card className="mt-8 border-white/15 bg-[#07111ee8] p-10 shadow-2xl shadow-black/30 backdrop-blur-sm max-sm:p-6">
+        <SectionHeading index="02">О нас</SectionHeading>
+        <div className="mt-8 grid grid-cols-[1.08fr_.92fr] items-center gap-16 max-lg:grid-cols-1 max-lg:gap-10">
+          <AnimatedReveal className="max-lg:order-2">
+            <Card className="border-white/15 bg-[#07111ee8] p-10 shadow-2xl shadow-black/30 backdrop-blur-sm max-sm:p-6">
               <Typography variant="bodyLarge" className="text-xl leading-9 text-white max-sm:text-lg max-sm:leading-8">
                 Premier Football Agency — международное агентство, которое представляет интересы профессиональных футболистов и сопровождает их на каждом этапе карьеры.
               </Typography>
@@ -42,7 +42,7 @@ export default function FeatureStatement() {
             </Card>
           </AnimatedReveal>
 
-          <AnimatedReveal delay={0.1} className="self-end pb-8 max-lg:pb-0">
+          <AnimatedReveal delay={0.1} className="self-end pb-8 max-lg:order-1 max-lg:pb-0">
             <Typography id="about-title" as="h2" variant="sectionTitle" className="text-[clamp(2.25rem,3.5vw,3.8rem)] leading-[.94] tracking-[-.05em] max-sm:text-[1.8rem]">
               Каждая карьера<br /><span className="text-pfa-accent">долгосрочный проект</span>
             </Typography>
