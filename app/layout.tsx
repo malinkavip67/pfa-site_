@@ -20,13 +20,6 @@ const manropeLatin = localFont({
   weight: "200 800",
 });
 
-const bebasNeue = localFont({
-  src: "../styles/fonts/bebas-neue-latin.woff2",
-  variable: "--font-bebas-neue",
-  display: "swap",
-  weight: "400",
-});
-
 export const metadata: Metadata = {
   metadataBase: new URL("https://pfa.agency"),
   title: { default: "Premier Football Agency — Мы создаём чемпионов", template: "%s — PFA" },
@@ -42,5 +35,5 @@ export const viewport: Viewport = { themeColor: "#050B14", width: "device-width"
 interface Props { children: React.ReactNode; }
 
 export default function RootLayout({ children }: Readonly<Props>) {
-  return <html lang="ru"><body className={`${manropeCyrillic.variable} ${manropeLatin.variable} ${bebasNeue.variable}`}><a className="skip-link" href="#main-content">Перейти к содержимому</a><StructuredData data={organizationStructuredData} /><Header /><main id="main-content">{children}</main><Footer /></body></html>;
+  return <html lang="ru"><body className={`${manropeCyrillic.variable} ${manropeLatin.variable}`}><a className="skip-link" href="#main-content">Перейти к содержимому</a><StructuredData data={organizationStructuredData} /><Header /><main id="main-content">{children}</main><Footer /></body></html>;
 }
