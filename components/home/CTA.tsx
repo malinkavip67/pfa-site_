@@ -6,15 +6,21 @@ import Typography from "@/components/ui/Typography";
 
 export default function CTA() {
   return (
-    <section className="relative flex min-h-[72vh] items-center overflow-hidden border-t border-white/10 py-24 text-center">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(34,197,94,.14),transparent_52%)]" />
-      <div className="absolute inset-x-[12%] top-1/2 h-px bg-gradient-to-r from-transparent via-pfa-accent/40 to-transparent" />
+    <section aria-labelledby="cta-title" className="relative overflow-hidden border-t border-white/10 bg-[#061018] py-28 max-md:py-20">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_50%,rgba(0,235,82,.11),transparent_42%)]" />
+      <div aria-hidden="true" className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-pfa-accent/50 to-transparent" />
       <Container className="relative">
-        <AnimatedReveal>
-          <SectionHeading className="justify-center" index="05">Следующий шаг</SectionHeading>
-          <Typography as="h2" variant="sectionTitle" className="mx-auto mt-7 max-w-6xl text-[clamp(1.88rem,3vw,3.2rem)] leading-[.94] tracking-[-.05em] max-sm:text-[1.5rem]">Готовы к новому<br /><span className="text-outline">этапу карьеры?</span></Typography>
-          <p className="mx-auto mt-8 max-w-xl text-sm leading-7 text-pfa-muted">Расскажите о своей задаче — команда PFA свяжется с вами и предложит следующий профессиональный шаг.</p>
-          <Button className="mt-10" href="/contacts">Связаться</Button>
+        <AnimatedReveal className="grid grid-cols-[1.15fr_.85fr] items-end gap-16 max-lg:grid-cols-1 max-lg:gap-9">
+          <div>
+            <SectionHeading index="06">Следующий шаг</SectionHeading>
+            <Typography id="cta-title" as="h2" variant="sectionTitle" className="mt-8 text-[clamp(1.88rem,3vw,3.2rem)] leading-[.94] tracking-[-.05em] max-sm:text-[1.5rem]">
+              Готовы к новому<br /><span className="text-pfa-accent">этапу карьеры?</span>
+            </Typography>
+          </div>
+          <div className="border-l border-pfa-accent/60 pl-8 max-lg:border-l-0 max-lg:border-t max-lg:pl-0 max-lg:pt-7">
+            <Typography variant="bodyLarge" className="max-w-xl text-white">Расскажите о своей задаче — команда PFA свяжется с вами и предложит следующий профессиональный шаг.</Typography>
+            <Button className="mt-8" href="/contacts" shape="square" size="compact">Связаться</Button>
+          </div>
         </AnimatedReveal>
       </Container>
     </section>

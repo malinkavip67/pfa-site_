@@ -34,11 +34,7 @@ export default function Footer() {
             <Typography variant="bodyMedium" className="mt-6 max-w-md text-slate-300">Обсудим карьеру, трансфер, сотрудничество или партнёрство.</Typography>
             <a className="mt-5 block break-all text-lg font-bold text-white transition-colors hover:text-pfa-accent" href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
             <div className="mt-6 flex items-center gap-3">
-              <SocialLink href="https://t.me/PFA_AGENCY" label="PFA в Telegram">
-                <svg aria-hidden="true" viewBox="0 0 24 24" className="size-5 fill-current">
-                  <path d="M21.7 3.4c-.3-.3-.8-.4-1.3-.2L3.1 9.9c-.8.3-1.3.8-1.2 1.4.1.5.5.9 1.2 1.1l4.4 1.4 1.7 5.3c.2.6.6 1 1.1 1h.1c.4 0 .8-.2 1.1-.6l2.5-2.8 4.5 3.3c.5.4 1 .5 1.5.3.5-.2.8-.7.9-1.3l1.4-14.2c.1-.6-.1-1.1-.6-1.4ZM9.9 13.2l7.8-5.7-6.4 6.7-.6 2.8-.8-3.8Z" />
-                </svg>
-              </SocialLink>
+              <SocialLink href="https://t.me/PFA_AGENCY" label="PFA в Telegram" network="telegram" />
             </div>
             <Button href="/contacts" shape="square" size="compact" className="mt-7">Связаться с нами</Button>
           </div>
