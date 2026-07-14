@@ -10,6 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${SITE_URL}/news`, lastModified, changeFrequency: "weekly", priority: 0.8 },
     { url: `${SITE_URL}/partners`, lastModified, changeFrequency: "monthly", priority: 0.7 },
     { url: `${SITE_URL}/contacts`, lastModified, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${SITE_URL}/privacy`, lastModified, changeFrequency: "yearly", priority: 0.3 },
   ];
   const playerPages: MetadataRoute.Sitemap = players.map((player) => ({ url: `${SITE_URL}/players/${player.slug}`, lastModified, changeFrequency: "monthly", priority: 0.8 }));
   return [...staticPages, ...playerPages];
