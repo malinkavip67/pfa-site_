@@ -16,7 +16,7 @@ export default function About({ directions }: Props) {
         <AnimatedReveal className="grid grid-cols-[1.15fr_.85fr] items-end gap-16 max-lg:grid-cols-1 max-lg:gap-9">
           <div>
             <SectionHeading index="01">Агентство</SectionHeading>
-            <Typography id="agency-title" as="h2" variant="sectionTitle" className="mt-8 text-[clamp(3.25rem,5.2vw,5.5rem)] leading-[.94] tracking-[-.05em] max-sm:text-[2.55rem]">
+            <Typography id="agency-title" as="h2" variant="sectionTitle" className="mt-8 text-[clamp(1.88rem,3vw,3.2rem)] leading-[.94] tracking-[-.05em] max-sm:text-[1.5rem]">
               Строим карьеру<br /><span className="text-pfa-accent">на годы вперёд</span>
             </Typography>
           </div>
@@ -32,7 +32,7 @@ export default function About({ directions }: Props) {
               <Card className="group relative h-full min-h-[270px] overflow-hidden border-0 bg-[#09121f] p-8 transition-colors hover:bg-[#0c1929] max-sm:min-h-0 max-sm:p-6">
                 <span aria-hidden="true" className="absolute inset-x-0 top-0 h-0.5 origin-left scale-x-0 bg-pfa-accent transition-transform duration-300 group-hover:scale-x-100" />
                 <Typography as="span" variant="sectionSubtitle">{direction.id}</Typography>
-                <Typography as="h3" variant="sectionTitle" className={`${direction.id === "03" ? "mt-8" : "mt-12"} text-[clamp(1.75rem,2.5vw,2.5rem)] leading-tight tracking-[-.035em]`}>{direction.title}</Typography>
+                <Typography as="h3" variant="sectionTitle" className={`${direction.id === "03" ? "mt-8" : "mt-12"} text-[clamp(1.2rem,1.7vw,1.7rem)] leading-tight tracking-[-.035em]`}>{direction.title}</Typography>
                 <Typography variant="bodyMedium" className={`${direction.id === "03" ? "mt-3" : "mt-5"} max-w-sm text-slate-300`}>{direction.description}</Typography>
               </Card>
             </AnimatedReveal>

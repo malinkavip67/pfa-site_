@@ -2,6 +2,7 @@ import AnimatedReveal from "@/components/ui/AnimatedReveal";
 import Button from "@/components/ui/Button";
 import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
+import Typography from "@/components/ui/Typography";
 
 export default function CTA() {
   return (
@@ -11,7 +12,7 @@ export default function CTA() {
       <Container className="relative">
         <AnimatedReveal>
           <SectionHeading className="justify-center" index="05">Следующий шаг</SectionHeading>
-          <h2 className="font-display mx-auto mt-7 max-w-6xl text-[clamp(4.5rem,10vw,9.5rem)] uppercase leading-[.82] max-sm:text-[3rem]">Готовы к новому<br /><span className="text-outline">этапу карьеры?</span></h2>
+          <Typography as="h2" variant="sectionTitle" className="mx-auto mt-7 max-w-6xl text-[clamp(1.88rem,3vw,3.2rem)] leading-[.94] tracking-[-.05em] max-sm:text-[1.5rem]">Готовы к новому<br /><span className="text-outline">этапу карьеры?</span></Typography>
           <p className="mx-auto mt-8 max-w-xl text-sm leading-7 text-pfa-muted">Расскажите о своей задаче — команда PFA свяжется с вами и предложит следующий профессиональный шаг.</p>
           <Button className="mt-10" href="/contacts">Связаться</Button>
         </AnimatedReveal>
