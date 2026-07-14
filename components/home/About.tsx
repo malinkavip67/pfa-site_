@@ -1,6 +1,8 @@
 import AnimatedReveal from "@/components/ui/AnimatedReveal";
+import Card from "@/components/ui/Card";
 import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
+import Typography from "@/components/ui/Typography";
 import type { AboutDirection } from "@/types/service";
 
 interface Props {
@@ -9,27 +11,30 @@ interface Props {
 
 export default function About({ directions }: Props) {
   return (
-    <section id="agency" className="scroll-mt-24 py-36 max-md:py-24">
+    <section id="agency" aria-labelledby="agency-title" className="scroll-mt-24 bg-[#070e18] py-32 max-md:py-20">
       <Container>
-        <AnimatedReveal className="grid grid-cols-[1.1fr_.9fr] items-end gap-20 max-lg:grid-cols-1 max-lg:gap-10">
+        <AnimatedReveal className="grid grid-cols-[1.15fr_.85fr] items-end gap-16 max-lg:grid-cols-1 max-lg:gap-9">
           <div>
             <SectionHeading index="01">Агентство</SectionHeading>
-            <h2 className="font-display mt-10 text-[clamp(4.5rem,8vw,8rem)] uppercase leading-[.82] max-sm:text-[3rem]">
-              Строим карьеру<br /><span className="text-outline">на годы вперёд</span>
-            </h2>
+            <Typography id="agency-title" as="h2" variant="sectionTitle" className="mt-8 text-[clamp(3.25rem,5.2vw,5.5rem)] leading-[.94] tracking-[-.05em] max-sm:text-[2.55rem]">
+              Строим карьеру<br /><span className="text-pfa-accent">на годы вперёд</span>
+            </Typography>
           </div>
-          <div className="max-w-xl pb-1">
-            <p className="text-xl leading-relaxed text-pfa-text">PFA сопровождает футболиста как долгосрочный профессиональный проект.</p>
-            <p className="mt-6 text-sm leading-7 text-slate-400">Мы объединяем спортивную стратегию, международные связи и персональную ответственность, чтобы каждое решение усиливало карьеру игрока.</p>
+          <div className="max-w-[560px] border-l border-pfa-accent/60 pl-8 max-lg:border-l-0 max-lg:border-t max-lg:pl-0 max-lg:pt-7">
+            <Typography variant="bodyLarge" className="text-white">PFA сопровождает футболиста как долгосрочный профессиональный проект.</Typography>
+            <Typography variant="bodyMedium" className="mt-5 text-slate-300">Мы объединяем спортивную стратегию, международные связи и персональную ответственность, чтобы каждое решение усиливало карьеру игрока.</Typography>
           </div>
         </AnimatedReveal>
 
-        <div className="mt-20 grid grid-cols-3 border-y border-white/10 max-md:grid-cols-1">
+        <div className="mt-16 grid grid-cols-3 gap-px border border-white/10 bg-white/10 max-md:grid-cols-1">
           {directions.map((direction, index) => (
-            <AnimatedReveal key={direction.id} delay={index * 0.08} className="border-white/10 px-8 py-9 first:pl-0 last:pr-0 md:border-l md:first:border-l-0 max-md:border-b max-md:px-0 max-md:last:border-b-0">
-              <span className="text-[10px] font-semibold tracking-[.16em] text-pfa-accent">{direction.id}</span>
-              <h3 className="font-display mt-7 text-4xl uppercase">{direction.title}</h3>
-              <p className="mt-4 max-w-sm text-sm leading-7 text-slate-400">{direction.description}</p>
+            <AnimatedReveal key={direction.id} delay={index * 0.08}>
+              <Card className="group relative min-h-[270px] overflow-hidden border-0 bg-[#09121f] p-8 transition-colors hover:bg-[#0c1929] max-sm:min-h-0 max-sm:p-6">
+                <span aria-hidden="true" className="absolute inset-x-0 top-0 h-0.5 origin-left scale-x-0 bg-pfa-accent transition-transform duration-300 group-hover:scale-x-100" />
+                <Typography as="span" variant="sectionSubtitle">{direction.id}</Typography>
+                <Typography as="h3" variant="sectionTitle" className="mt-12 text-[clamp(1.75rem,2.5vw,2.5rem)] leading-tight tracking-[-.035em]">{direction.title}</Typography>
+                <Typography variant="bodyMedium" className="mt-5 max-w-sm text-slate-300">{direction.description}</Typography>
+              </Card>
             </AnimatedReveal>
           ))}
         </div>

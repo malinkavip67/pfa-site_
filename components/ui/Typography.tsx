@@ -5,6 +5,7 @@ type TypographyVariant = "heroTitle" | "sectionTitle" | "sectionSubtitle" | "bod
 
 interface Props {
   as?: TypographyTag;
+  id?: string;
   variant: TypographyVariant;
   children: ReactNode;
   className?: string;
@@ -20,6 +21,6 @@ const VARIANT_STYLES: Record<TypographyVariant, string> = {
   statValue: "font-display font-bold leading-none tracking-[.01em] text-pfa-text",
 };
 
-export default function Typography({ as: Component = "p", variant, children, className = "" }: Props) {
-  return <Component className={`${VARIANT_STYLES[variant]} ${className}`}>{children}</Component>;
+export default function Typography({ as: Component = "p", id, variant, children, className = "" }: Props) {
+  return <Component id={id} className={`${VARIANT_STYLES[variant]} ${className}`}>{children}</Component>;
 }
