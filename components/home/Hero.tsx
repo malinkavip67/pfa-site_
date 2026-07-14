@@ -17,7 +17,7 @@ export default function Hero() {
     <section ref={heroRef} id="top" className="relative isolate h-[78svh] min-h-[620px] max-h-[760px] overflow-hidden max-md:h-auto max-md:min-h-[720px]">
       <motion.div className="absolute -inset-y-16 inset-x-0 z-0 will-change-transform" style={shouldReduceMotion ? undefined : { y: imageY }}>
         <Image
-          src="/images/hero/hero-stadium.webp"
+          src="/images/hero/hero-pfa-player.webp"
           fill
           priority
           sizes="100vw"
