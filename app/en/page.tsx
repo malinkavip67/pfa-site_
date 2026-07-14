@@ -1,0 +1,22 @@
+import type { Metadata } from "next";
+import About from "@/components/home/About";
+import CTA from "@/components/home/CTA";
+import FeaturedPlayers from "@/components/home/FeaturedPlayers";
+import FeatureStatement from "@/components/home/FeatureStatement";
+import Hero from "@/components/home/Hero";
+import HeroStats from "@/components/home/HeroStats";
+import Partners from "@/components/home/Partners";
+import Services from "@/components/home/Services";
+import { englishAboutDirections, englishPartners, englishPlayers, englishServices, englishStats } from "@/data/english";
+import { createPageMetadata } from "@/lib/metadata";
+
+export const metadata: Metadata = createPageMetadata({
+  title: "We create champions",
+  description: "International football agency providing career strategy, transfers, personal branding and professional player support.",
+  path: "/en",
+  keywords: ["football agency", "football agent", "player transfers", "football career management", "PFA"],
+});
+
+export default function EnglishHomePage() {
+  return <><Hero locale="en" /><HeroStats stats={englishStats} locale="en" /><About directions={englishAboutDirections} locale="en" /><FeatureStatement locale="en" /><Services services={englishServices} locale="en" /><FeaturedPlayers players={englishPlayers} locale="en" /><Partners partners={englishPartners} locale="en" /><CTA locale="en" /></>;
+}

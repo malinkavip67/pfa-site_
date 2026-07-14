@@ -4,10 +4,11 @@ import Link from "next/link";
 import Card from "@/components/ui/Card";
 import Typography from "@/components/ui/Typography";
 import type { Player } from "@/types/player";
+import { localizePath, type Locale } from "@/lib/i18n";
 
-interface Props { player: Player; }
+interface Props { player: Player; locale?: Locale; }
 
-export default function PlayerCard({ player }: Props) {
+export default function PlayerCard({ player, locale = "ru" }: Props) {
   return (
     <Card className="group relative min-h-[410px] overflow-hidden border-white/10 bg-[#07111e] max-sm:min-h-[350px]">
       <Image
@@ -28,12 +29,12 @@ export default function PlayerCard({ player }: Props) {
 
       <div className="absolute inset-x-0 bottom-0 p-7 max-sm:p-6">
         <Typography as="h3" variant="sectionTitle" className="max-w-[80%] text-[clamp(1.75rem,2.4vw,2.5rem)] leading-[.94] tracking-[-.035em]">{player.name}</Typography>
-        <Typography variant="caption" className="mt-3 text-slate-300">{player.club} · {player.country} · {player.age} лет</Typography>
+        <Typography variant="caption" className="mt-3 text-slate-300">{player.club} · {player.country} · {player.age} {locale === "ru" ? "лет" : "years"}</Typography>
       </div>
 
       <Link
-        href={`/players/${player.slug}`}
-        aria-label={`Подробнее: ${player.name}`}
+        href={localizePath(`/players/${player.slug}`, locale)}
+        aria-label={locale === "ru" ? `Подробнее: ${player.name}` : `View profile: ${player.name}`}
         className="absolute bottom-6 right-6 grid size-12 place-items-center border border-white/25 bg-[#07111e]/75 text-white backdrop-blur transition-colors duration-300 hover:border-pfa-accent hover:bg-pfa-accent hover:text-pfa-background focus-visible:border-pfa-accent max-sm:bottom-5 max-sm:right-5"
       >
         <ArrowUpRight aria-hidden="true" size={20} strokeWidth={1.8} />

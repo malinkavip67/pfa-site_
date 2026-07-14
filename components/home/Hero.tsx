@@ -6,8 +6,11 @@ import { useRef } from "react";
 import Button from "@/components/ui/Button";
 import Container from "@/components/ui/Container";
 import Typography from "@/components/ui/Typography";
+import { localizePath, type Locale } from "@/lib/i18n";
 
-export default function Hero() {
+interface Props { locale?: Locale; }
+
+export default function Hero({ locale = "ru" }: Props) {
   const heroRef = useRef<HTMLElement>(null);
   const shouldReduceMotion = useReducedMotion();
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
@@ -44,7 +47,7 @@ export default function Hero() {
             transition={{ duration: shouldReduceMotion ? 0.01 : 0.75, delay: shouldReduceMotion ? 0 : 0.06, ease: [0.22, 1, 0.36, 1] }}
           >
             <Typography as="h1" variant="heroTitle" className="mt-6 text-[clamp(2.75rem,4.25vw,4.7rem)] max-sm:text-[clamp(1.7rem,8.1vw,2.4rem)]">
-              МЫ СОЗДАЁМ<br /><span className="text-pfa-accent">ЧЕМПИОНОВ</span>
+              {locale === "ru" ? <>МЫ СОЗДАЁМ<br /><span className="text-pfa-accent">ЧЕМПИОНОВ</span></> : <>WE CREATE<br /><span className="text-pfa-accent">CHAMPIONS</span></>}
             </Typography>
           </motion.div>
 
@@ -54,7 +57,7 @@ export default function Hero() {
             transition={{ duration: shouldReduceMotion ? 0.01 : 0.7, delay: shouldReduceMotion ? 0 : 0.12, ease: [0.22, 1, 0.36, 1] }}
           >
             <Typography variant="bodyMedium" className="mt-7 max-w-[560px] font-semibold leading-6 text-white/90">
-              Premier Football Agency — международное футбольное агентство, которое сопровождает профессиональных футболистов на каждом этапе карьеры. Мы организуем трансферы, ведём переговоры с клубами и защищаем интересы игроков.
+              {locale === "ru" ? "Premier Football Agency — международное футбольное агентство, которое сопровождает профессиональных футболистов на каждом этапе карьеры. Мы организуем трансферы, ведём переговоры с клубами и защищаем интересы игроков." : "Premier Football Agency is an international football agency supporting professional players at every stage of their careers. We manage transfers, negotiate with clubs and protect our players’ interests."}
             </Typography>
           </motion.div>
 
@@ -64,8 +67,8 @@ export default function Hero() {
             transition={{ duration: shouldReduceMotion ? 0.01 : 0.65, delay: shouldReduceMotion ? 0 : 0.18, ease: [0.22, 1, 0.36, 1] }}
             className="mt-8 flex gap-4 max-sm:grid max-sm:grid-cols-1"
           >
-            <Button href="/players" shape="square" size="compact">Наши игроки</Button>
-            <Button href="/contacts" variant="secondary" shape="square" size="compact">Связаться с нами</Button>
+            <Button href={localizePath("/players", locale)} shape="square" size="compact">{locale === "ru" ? "Наши игроки" : "Our players"}</Button>
+            <Button href={localizePath("/contacts", locale)} variant="secondary" shape="square" size="compact">{locale === "ru" ? "Связаться с нами" : "Contact us"}</Button>
           </motion.div>
         </div>
       </Container>

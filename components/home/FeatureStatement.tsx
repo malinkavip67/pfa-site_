@@ -4,8 +4,11 @@ import Card from "@/components/ui/Card";
 import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Typography from "@/components/ui/Typography";
+import type { Locale } from "@/lib/i18n";
 
-export default function FeatureStatement() {
+interface Props { locale?: Locale; }
+
+export default function FeatureStatement({ locale = "ru" }: Props) {
   return (
     <section aria-labelledby="about-title" className="relative overflow-hidden border-y border-white/10 py-28 max-md:py-20">
       <Image
@@ -21,22 +24,22 @@ export default function FeatureStatement() {
       <div aria-hidden="true" className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-pfa-accent/60 to-transparent" />
 
       <Container className="relative">
-        <SectionHeading index="02">О нас</SectionHeading>
+        <SectionHeading index="02">{locale === "ru" ? "О нас" : "About us"}</SectionHeading>
         <div className="mt-8 grid grid-cols-[1.08fr_.92fr] items-center gap-16 max-lg:grid-cols-1 max-lg:gap-10">
           <AnimatedReveal className="max-lg:order-2">
             <Card className="border-white/15 bg-[#07111ee8] p-10 shadow-2xl shadow-black/30 backdrop-blur-sm max-sm:p-6">
               <Typography variant="bodyLarge" className="text-xl leading-9 text-white max-sm:text-lg max-sm:leading-8">
-                Premier Football Agency — международное агентство, которое представляет интересы профессиональных футболистов и сопровождает их на каждом этапе карьеры.
+                {locale === "ru" ? "Premier Football Agency — международное агентство, которое представляет интересы профессиональных футболистов и сопровождает их на каждом этапе карьеры." : "Premier Football Agency is an international agency representing professional footballers and supporting them at every stage of their careers."}
               </Typography>
 
               <div className="my-7 h-px bg-gradient-to-r from-pfa-accent/70 via-white/15 to-transparent" />
 
               <div className="space-y-6">
                 <Typography variant="bodyMedium" className="text-xl font-medium leading-9 text-white max-sm:text-lg max-sm:leading-8">
-                  Мы разрабатываем индивидуальную стратегию, ведём переговоры с клубами, организуем трансферы и сопровождаем заключение контрактов. Каждое решение должно усиливать карьеру игрока сегодня и в перспективе.
+                  {locale === "ru" ? "Мы разрабатываем индивидуальную стратегию, ведём переговоры с клубами, организуем трансферы и сопровождаем заключение контрактов. Каждое решение должно усиливать карьеру игрока сегодня и в перспективе." : "We develop individual strategies, negotiate with clubs, arrange transfers and support contract signings. Every decision is made to strengthen the player’s career today and in the future."}
                 </Typography>
                 <Typography variant="bodyMedium" className="text-xl font-medium leading-9 text-white max-sm:text-lg max-sm:leading-8">
-                  Для нас каждый футболист — долгосрочный проект. Мы помогаем раскрывать потенциал, развивать личный бренд, находить сильные возможности и уверенно выходить на международный уровень.
+                  {locale === "ru" ? "Для нас каждый футболист — долгосрочный проект. Мы помогаем раскрывать потенциал, развивать личный бренд, находить сильные возможности и уверенно выходить на международный уровень." : "Every footballer is a long-term project for us. We help players unlock their potential, build their personal brand, find strong opportunities and progress confidently onto the international stage."}
                 </Typography>
               </div>
             </Card>
@@ -44,7 +47,7 @@ export default function FeatureStatement() {
 
           <AnimatedReveal delay={0.1} className="self-end pb-8 max-lg:order-1 max-lg:pb-0">
             <Typography id="about-title" as="h2" variant="sectionTitle" className="text-[clamp(2.25rem,3.5vw,3.8rem)] leading-[.94] tracking-[-.05em] max-sm:text-[1.8rem]">
-              Каждая карьера<br /><span className="text-pfa-accent">долгосрочный проект</span>
+              {locale === "ru" ? <>Каждая карьера<br /><span className="text-pfa-accent">долгосрочный проект</span></> : <>Every career<br /><span className="text-pfa-accent">a long-term project</span></>}
             </Typography>
           </AnimatedReveal>
         </div>

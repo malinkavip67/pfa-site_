@@ -8,6 +8,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import Button from "@/components/ui/Button";
 import { NAVIGATION } from "@/lib/constants";
+import { getLocaleFromPathname, localizePath, NAVIGATION_LABELS, type Locale } from "@/lib/i18n";
 
 const FOCUSABLE_ELEMENTS = "a[href], button:not([disabled])";
 
@@ -16,6 +17,7 @@ export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [currentHash, setCurrentHash] = useState("");
   const pathname = usePathname();
+  const locale = getLocaleFromPathname(pathname);
   const shouldReduceMotion = useReducedMotion();
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
@@ -79,14 +81,19 @@ export default function Header() {
   const closeMenu = (): void => setIsOpen(false);
 
   const isCurrentPage = (href: string): boolean => {
-    if (href === "/") return pathname === "/" && currentHash !== "#services";
-    if (href.startsWith("/#")) return pathname === "/" && currentHash === href.slice(1);
-    return pathname === href || pathname.startsWith(`${href}/`);
+    const localizedHref = localizePath(href, locale);
+    const [localizedPathname, localizedHash] = localizedHref.split("#");
+    if (href === "/") return pathname === localizedPathname && currentHash !== "#services";
+    if (localizedHash) return pathname === localizedPathname && currentHash === `#${localizedHash}`;
+    return pathname === localizedPathname || pathname.startsWith(`${localizedPathname}/`);
   };
+
+  const alternateLocale: Locale = locale === "ru" ? "en" : "ru";
+  const alternateHref = localizePath(`${pathname}${currentHash}`, alternateLocale);
 
   return (
     <header className={`fixed inset-x-0 top-0 z-50 grid h-[72px] grid-cols-[auto_1fr_auto] items-center border-b border-white/10 bg-[#03070d]/95 px-[clamp(1.25rem,3.5vw,3rem)] transition-[height,background-color] duration-300 ${isScrolled ? "h-16 bg-[#03070d]/98 backdrop-blur-sm" : ""}`}>
-      <Link href="/" className="flex h-16 w-28 items-center" aria-label="PFA — на главную">
+      <Link href={localizePath("/", locale)} className="flex h-16 w-28 items-center" aria-label={locale === "ru" ? "PFA — на главную" : "PFA — home"}>
         <Image src="/images/logo/logo-white.jpg" width={1366} height={768} sizes="112px" loading="eager" className="h-full w-full object-contain" alt="Premier Football Agency" />
       </Link>
 
@@ -94,20 +101,21 @@ export default function Header() {
         {NAVIGATION.map((item) => (
           <Link
             key={item.href}
-            href={item.href}
+            href={localizePath(item.href, locale)}
             aria-current={isCurrentPage(item.href) ? "page" : undefined}
             className="relative py-3 text-[10px] font-bold uppercase tracking-[.1em] text-slate-200 transition-colors after:absolute after:inset-x-0 after:bottom-1 after:h-px after:origin-left after:scale-x-0 after:bg-pfa-accent after:transition-transform hover:text-pfa-accent aria-[current=page]:text-pfa-accent aria-[current=page]:after:scale-x-100"
           >
-            {item.label}
+            {NAVIGATION_LABELS[locale][item.href]}
           </Link>
         ))}
       </nav>
 
       <div className="flex items-center gap-4 max-lg:hidden">
-        <Button href="/contacts" shape="square" size="compact" className="min-h-11 border border-white/30 bg-transparent px-5 text-[10px] text-white shadow-none hover:border-pfa-accent hover:bg-transparent hover:text-pfa-accent max-xl:px-4">Связаться с нами</Button>
-        <label className="relative flex items-center" aria-label="Язык сайта">
-          <select className="h-11 appearance-none bg-transparent pl-2 pr-6 text-[10px] font-bold text-white outline-none" defaultValue="ru">
+        <Button href={localizePath("/contacts", locale)} shape="square" size="compact" className="min-h-11 border border-white/30 bg-transparent px-5 text-[10px] text-white shadow-none hover:border-pfa-accent hover:bg-transparent hover:text-pfa-accent max-xl:px-4">{locale === "ru" ? "Связаться с нами" : "Contact us"}</Button>
+        <label className="relative flex items-center" aria-label={locale === "ru" ? "Язык сайта" : "Website language"}>
+          <select className="h-11 appearance-none bg-transparent pl-2 pr-6 text-[10px] font-bold text-white outline-none" value={locale} onChange={(event) => { window.location.href = localizePath(`${pathname}${currentHash}`, event.target.value as Locale); }}>
             <option className="bg-pfa-background" value="ru">RU</option>
+            <option className="bg-pfa-background" value="en">EN</option>
           </select>
           <ChevronDown aria-hidden="true" className="pointer-events-none absolute right-0 text-slate-400" size={13} />
         </label>
@@ -150,19 +158,19 @@ export default function Header() {
               {NAVIGATION.map((item) => (
                 <Link
                   key={item.href}
-                  href={item.href}
+                  href={localizePath(item.href, locale)}
                   aria-current={isCurrentPage(item.href) ? "page" : undefined}
                   onClick={closeMenu}
                   className="font-display text-[clamp(2.8rem,13vw,5.5rem)] uppercase leading-[.92] transition-colors hover:text-pfa-accent aria-[current=page]:text-pfa-accent"
                 >
-                  {item.label}
+                  {NAVIGATION_LABELS[locale][item.href]}
                 </Link>
               ))}
             </nav>
 
             <div className="flex items-center gap-4">
-              <Button href="/contacts" shape="square" size="compact" className="flex-1" onClick={closeMenu}>Связаться с нами</Button>
-              <span className="text-xs font-bold text-white">RU</span>
+              <Button href={localizePath("/contacts", locale)} shape="square" size="compact" className="flex-1" onClick={closeMenu}>{locale === "ru" ? "Связаться с нами" : "Contact us"}</Button>
+              <Link href={alternateHref} onClick={closeMenu} className="text-xs font-bold text-white transition-colors hover:text-pfa-accent">{alternateLocale.toUpperCase()}</Link>
             </div>
           </motion.div>
         )}

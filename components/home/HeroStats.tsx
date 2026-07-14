@@ -3,9 +3,11 @@ import type { LucideIcon } from "lucide-react";
 import Container from "@/components/ui/Container";
 import Typography from "@/components/ui/Typography";
 import type { Stat, StatIcon } from "@/types/stat";
+import type { Locale } from "@/lib/i18n";
 
 interface Props {
   stats: Stat[];
+  locale?: Locale;
 }
 
 const STAT_ICONS: Record<StatIcon, LucideIcon> = {
@@ -22,9 +24,9 @@ function getBorderStyles(index: number): string {
   return `${mobileColumnBorder} ${mobileRowBorder} ${desktopBorder}`;
 }
 
-export default function HeroStats({ stats }: Props) {
+export default function HeroStats({ stats, locale = "ru" }: Props) {
   return (
-    <section aria-label="Premier Football Agency в цифрах" className="border-y border-white/10 bg-[#03070d]">
+    <section aria-label={locale === "ru" ? "Premier Football Agency в цифрах" : "Premier Football Agency in numbers"} className="border-y border-white/10 bg-[#03070d]">
       <Container>
         <dl className="grid grid-cols-2 md:grid-cols-4">
           {stats.map((stat, index) => {
