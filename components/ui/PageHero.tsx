@@ -1,7 +1,16 @@
 import Container from "@/components/ui/Container";
+import Typography from "@/components/ui/Typography";
 
 interface Props { eyebrow: string; title: string; description: string; }
 
 export default function PageHero({ eyebrow, title, description }: Props) {
-  return <section className="flex min-h-[62vh] items-end border-b border-white/10 pb-20 pt-40"><Container><span className="text-pfa-accent text-[10px] font-bold uppercase tracking-[.2em]">{eyebrow}</span><h1 className="font-display mt-5 text-[clamp(6rem,13vw,12rem)] uppercase leading-[.78] max-sm:text-[4.2rem]">{title}</h1><p className="mt-8 max-w-xl text-sm leading-7 text-slate-400">{description}</p></Container></section>;
+  return (
+    <section className="flex min-h-[460px] items-end border-b border-white/10 pb-16 pt-32 max-md:min-h-[400px] max-md:pb-12 max-md:pt-28">
+      <Container>
+        <Typography as="span" variant="sectionSubtitle">{eyebrow}</Typography>
+        <Typography as="h1" variant="sectionTitle" className="mt-6 text-[clamp(1.88rem,3vw,3.2rem)] leading-[.94] tracking-[-.05em] max-sm:text-[1.5rem]">{title}</Typography>
+        <Typography variant="bodyLarge" className="mt-7 max-w-2xl text-slate-300">{description}</Typography>
+      </Container>
+    </section>
+  );
 }
