@@ -3,11 +3,11 @@
 @theme {
   --color-pfa-background: #050B14;
   --color-pfa-surface: #0C1726;
-  --color-pfa-accent: #22C55E;
+  --color-pfa-accent: #00EB52;
   --color-pfa-text: #FFFFFF;
   --color-pfa-muted: #CBD5E1;
   --color-pfa-accent-contrast: #031008;
-  --color-pfa-accent-hover: #45D878;
+  --color-pfa-accent-hover: #2BFF75;
   --font-sans: var(--font-manrope-cyrillic), var(--font-manrope-latin), Arial, sans-serif;
   --font-display: var(--font-bebas-neue), Impact, sans-serif;
 }

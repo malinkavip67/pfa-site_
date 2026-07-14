@@ -11,7 +11,7 @@ interface Props {
 }
 
 const VARIANT_STYLES: Record<TypographyVariant, string> = {
-  heroTitle: "font-display font-bold uppercase leading-[.88] tracking-[.01em] text-pfa-text",
+  heroTitle: "font-sans font-extrabold uppercase leading-[.94] tracking-[-.055em] text-pfa-text",
   sectionTitle: "font-display font-bold uppercase leading-[.88] tracking-[.01em] text-pfa-text",
   sectionSubtitle: "text-[10px] font-bold uppercase tracking-[.18em] text-pfa-accent",
   bodyLarge: "text-lg font-semibold leading-8 text-pfa-muted",

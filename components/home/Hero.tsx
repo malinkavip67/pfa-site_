@@ -21,7 +21,7 @@ export default function Hero() {
           fill
           priority
           sizes="100vw"
-          className="object-cover object-[66%_center] md:object-center"
+          className="object-cover object-[66%_center] brightness-[1.08] contrast-[1.08] saturate-[1.06] md:object-center"
           alt="Футболист с мячом на ночном стадионе"
         />
       </motion.div>
@@ -43,7 +43,7 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: shouldReduceMotion ? 0.01 : 0.75, delay: shouldReduceMotion ? 0 : 0.06, ease: [0.22, 1, 0.36, 1] }}
           >
-            <Typography as="h1" variant="heroTitle" className="mt-6 text-[clamp(4rem,6.2vw,6.5rem)] max-sm:text-[clamp(2.625rem,13vw,3.25rem)]">
+            <Typography as="h1" variant="heroTitle" className="mt-6 text-[clamp(4rem,6.2vw,6.5rem)] max-sm:text-[clamp(2.15rem,10.5vw,3.25rem)]">
               МЫ СОЗДАЁМ<br /><span className="text-pfa-accent">ЧЕМПИОНОВ</span>
             </Typography>
           </motion.div>
