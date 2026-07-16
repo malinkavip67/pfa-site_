@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import About from "@/components/home/About";
+import AudiencePaths from "@/components/home/AudiencePaths";
 import CTA from "@/components/home/CTA";
 import FeaturedPlayers from "@/components/home/FeaturedPlayers";
 import FeatureStatement from "@/components/home/FeatureStatement";
@@ -18,5 +19,5 @@ export const metadata: Metadata = createPageMetadata({
 });
 
 export default function EnglishHomePage() {
-  return <><Hero locale="en" /><HeroStats stats={englishStats} locale="en" /><About directions={englishAboutDirections} locale="en" /><FeatureStatement locale="en" /><Services services={englishServices} locale="en" /><FeaturedPlayers players={englishPlayers} locale="en" /><Partners partners={englishPartners} locale="en" /><CTA locale="en" /></>;
+  return <><Hero locale="en" /><HeroStats stats={englishStats} locale="en" /><AudiencePaths locale="en" /><About directions={englishAboutDirections} locale="en" /><FeatureStatement locale="en" /><Services services={englishServices} locale="en" /><FeaturedPlayers players={englishPlayers} locale="en" /><Partners partners={englishPartners} locale="en" /><CTA locale="en" /></>;
 }

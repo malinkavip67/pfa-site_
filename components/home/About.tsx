@@ -13,7 +13,7 @@ interface Props {
 
 export default function About({ directions, locale = "ru" }: Props) {
   return (
-    <section id="agency" aria-labelledby="agency-title" className="scroll-mt-24 bg-[#070e18] py-32 max-md:py-20">
+    <section id="agency" aria-labelledby="agency-title" className="scroll-mt-24 bg-[#070e18] pb-32 pt-16 max-md:pb-20 max-md:pt-16">
       <Container>
         <AnimatedReveal className="grid grid-cols-[1.15fr_.85fr] items-end gap-16 max-lg:grid-cols-1 max-lg:gap-9">
           <div>

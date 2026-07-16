@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import About from "@/components/home/About";
+import AudiencePaths from "@/components/home/AudiencePaths";
 import CTA from "@/components/home/CTA";
 import FeaturedPlayers from "@/components/home/FeaturedPlayers";
 import FeatureStatement from "@/components/home/FeatureStatement";
@@ -22,5 +23,5 @@ export const metadata: Metadata = createPageMetadata({
 
 export default async function HomePage() {
   const players = await getPlayers();
-  return <><Hero /><HeroStats stats={stats} /><About directions={aboutDirections} /><FeatureStatement /><Services services={services} /><FeaturedPlayers players={players} /><Partners partners={partners} /><CTA /></>;
+  return <><Hero /><HeroStats stats={stats} /><AudiencePaths /><About directions={aboutDirections} /><FeatureStatement /><Services services={services} /><FeaturedPlayers players={players} /><Partners partners={partners} /><CTA /></>;
 }
