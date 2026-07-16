@@ -7,6 +7,7 @@ import FeatureStatement from "@/components/home/FeatureStatement";
 import Hero from "@/components/home/Hero";
 import HeroStats from "@/components/home/HeroStats";
 import Partners from "@/components/home/Partners";
+import PlayerJourney from "@/components/home/PlayerJourney";
 import Services from "@/components/home/Services";
 import { englishAboutDirections, englishPartners, englishPlayers, englishServices, englishStats } from "@/data/english";
 import { createPageMetadata } from "@/lib/metadata";
@@ -19,5 +20,5 @@ export const metadata: Metadata = createPageMetadata({
 });
 
 export default function EnglishHomePage() {
-  return <><Hero locale="en" /><HeroStats stats={englishStats} locale="en" /><About directions={englishAboutDirections} locale="en" /><AudiencePaths locale="en" /><FeatureStatement locale="en" /><Services services={englishServices} locale="en" /><FeaturedPlayers players={englishPlayers} locale="en" /><Partners partners={englishPartners} locale="en" /><CTA locale="en" /></>;
+  return <><Hero locale="en" /><HeroStats stats={englishStats} locale="en" /><About directions={englishAboutDirections} locale="en" /><PlayerJourney locale="en" /><AudiencePaths locale="en" /><FeatureStatement locale="en" /><Services services={englishServices} locale="en" /><FeaturedPlayers players={englishPlayers} locale="en" /><Partners partners={englishPartners} locale="en" /><CTA locale="en" /></>;
 }

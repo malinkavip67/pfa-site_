@@ -39,6 +39,9 @@ const content = {
       name: "Имя",
       phone: "Телефон",
       email: "Почта",
+      playerStory: "Кратко о себе и футбольном опыте",
+      parentStory: "Кратко расскажите об игроке",
+      storyPlaceholder: "Команда, позиция, опыт, цели и другая важная информация",
       submit: "Написать в PFA",
       close: "Закрыть форму",
       note: "После нажатия откроется ваше почтовое приложение с готовым письмом.",
@@ -73,6 +76,9 @@ const content = {
       name: "First name",
       phone: "Phone",
       email: "Email",
+      playerStory: "Tell us briefly about yourself and your football experience",
+      parentStory: "Tell us briefly about the player",
+      storyPlaceholder: "Team, position, experience, goals and any other important information",
       submit: "Write to PFA",
       close: "Close form",
       note: "Your email application will open with a ready-to-send message.",
@@ -112,15 +118,15 @@ export default function AudiencePaths({ locale = "ru" }: Props) {
       ? (locale === "ru" ? "Обращение родителя с сайта PFA" : "Parent enquiry from the PFA website")
       : (locale === "ru" ? "Заявка игрока с сайта PFA" : "Player application from the PFA website");
     const body = locale === "ru"
-      ? `Фамилия: ${formData.get("surname")}\nИмя: ${formData.get("name")}\nТелефон: ${formData.get("phone")}\nПочта: ${formData.get("email")}`
-      : `Last name: ${formData.get("surname")}\nFirst name: ${formData.get("name")}\nPhone: ${formData.get("phone")}\nEmail: ${formData.get("email")}`;
+      ? `Фамилия: ${formData.get("surname")}\nИмя: ${formData.get("name")}\nТелефон: ${formData.get("phone")}\nПочта: ${formData.get("email")}\n\nКраткий рассказ:\n${formData.get("story")}`
+      : `Last name: ${formData.get("surname")}\nFirst name: ${formData.get("name")}\nPhone: ${formData.get("phone")}\nEmail: ${formData.get("email")}\n\nBrief introduction:\n${formData.get("story")}`;
 
     window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   };
 
   return (
     <>
-      <section id="choose-your-path" aria-labelledby="audience-paths-title" className="relative scroll-mt-20 overflow-hidden border-b border-white/10 bg-[#070e18] pb-6 pt-16 max-md:pb-6 max-md:pt-12">
+      <section id="choose-your-path" aria-labelledby="audience-paths-title" className="relative scroll-mt-20 overflow-hidden border-b border-white/10 bg-[#070e18] pb-6 pt-12 max-md:pb-6 max-md:pt-10">
       <div aria-hidden="true" className="absolute left-1/2 top-0 h-px w-[min(1280px,calc(100%-5rem))] -translate-x-1/2 bg-gradient-to-r from-transparent via-pfa-accent/70 to-transparent max-md:w-[calc(100%-2.5rem)]" />
       <div aria-hidden="true" className="absolute -right-32 top-8 h-80 w-80 rounded-full bg-pfa-accent/[.045] blur-3xl" />
 
@@ -239,6 +245,19 @@ export default function AudiencePaths({ locale = "ru" }: Props) {
                   />
                 </label>
               ))}
+
+              <label className="col-span-2 block max-sm:col-span-1">
+                <span className="mb-2 block text-[10px] font-bold uppercase tracking-[.15em] text-slate-300">
+                  {formAudience === "parent" ? copy.form.parentStory : copy.form.playerStory}
+                </span>
+                <textarea
+                  required
+                  name="story"
+                  rows={4}
+                  placeholder={copy.form.storyPlaceholder}
+                  className="min-h-28 w-full resize-y rounded-none border border-white/15 bg-white/[.035] px-4 py-3 text-sm leading-6 text-white outline-none transition-colors placeholder:text-slate-600 focus:border-pfa-accent"
+                />
+              </label>
 
               <div className="col-span-2 mt-3 flex items-center justify-between gap-6 max-sm:col-span-1 max-sm:flex-col max-sm:items-stretch">
                 <Typography variant="caption" className="max-w-[300px] normal-case tracking-normal text-slate-400">{copy.form.note}</Typography>
