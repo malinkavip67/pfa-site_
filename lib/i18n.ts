@@ -20,6 +20,7 @@ export const NAVIGATION_LABELS: Record<Locale, Record<string, string>> = {
     "/news": "Новости",
     "/#services": "Услуги",
     "/partners": "Партнёры",
+    "/faq": "Вопросы",
     "/contacts": "Контакты",
   },
   en: {
@@ -28,6 +29,7 @@ export const NAVIGATION_LABELS: Record<Locale, Record<string, string>> = {
     "/news": "News",
     "/#services": "Services",
     "/partners": "Partners",
+    "/faq": "FAQ",
     "/contacts": "Contacts",
   },
 };

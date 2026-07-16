@@ -20,5 +20,5 @@ export const metadata: Metadata = createPageMetadata({
 });
 
 export default function EnglishHomePage() {
-  return <><Hero locale="en" /><HeroStats stats={englishStats} locale="en" /><About directions={englishAboutDirections} locale="en" /><PlayerJourney locale="en" /><AudiencePaths locale="en" /><FeatureStatement locale="en" /><Services services={englishServices} locale="en" /><FeaturedPlayers players={englishPlayers} locale="en" /><Partners partners={englishPartners} locale="en" /><CTA locale="en" /></>;
+  return <><Hero locale="en" /><HeroStats stats={englishStats} locale="en" /><About directions={englishAboutDirections} locale="en" /><FeatureStatement locale="en" /><PlayerJourney locale="en" /><AudiencePaths locale="en" /><Services services={englishServices} locale="en" /><FeaturedPlayers players={englishPlayers} locale="en" /><Partners partners={englishPartners} locale="en" /><CTA locale="en" /></>;
 }

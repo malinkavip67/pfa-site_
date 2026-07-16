@@ -31,11 +31,11 @@ export default function About({ directions, locale = "ru" }: Props) {
         <div className="mt-16 grid grid-cols-3 gap-px border border-white/10 bg-white/10 max-md:grid-cols-1">
           {directions.map((direction, index) => (
             <AnimatedReveal key={direction.id} delay={index * 0.08} className="h-full">
-              <Card className="group relative h-full min-h-[270px] overflow-hidden border-0 bg-[#09121f] p-8 transition-colors hover:bg-[#0c1929] max-sm:min-h-0 max-sm:p-6">
+              <Card className="group relative h-full min-h-[216px] overflow-hidden border-0 bg-[#09121f] p-7 transition-colors hover:bg-[#0c1929] max-sm:min-h-0 max-sm:p-6">
                 <span aria-hidden="true" className="absolute inset-x-0 top-0 h-0.5 origin-left scale-x-0 bg-pfa-accent transition-transform duration-300 group-hover:scale-x-100" />
                 <Typography as="span" variant="sectionSubtitle">{direction.id}</Typography>
-                <Typography as="h3" variant="sectionTitle" className={`${direction.id === "03" ? "mt-8" : "mt-12"} text-[clamp(1.2rem,1.7vw,1.7rem)] leading-tight tracking-[-.035em]`}>{direction.title}</Typography>
-                <Typography variant="bodyMedium" className={`${direction.id === "03" ? "mt-3" : "mt-5"} max-w-sm text-slate-300`}>{direction.description}</Typography>
+                <Typography as="h3" variant="sectionTitle" className={`${direction.id === "03" ? "mt-6" : "mt-8"} text-[clamp(1.2rem,1.7vw,1.7rem)] leading-tight tracking-[-.035em]`}>{direction.title}</Typography>
+                <Typography variant="bodyMedium" className={`${direction.id === "03" ? "mt-3" : "mt-4"} max-w-sm text-slate-300`}>{direction.description}</Typography>
               </Card>
             </AnimatedReveal>
           ))}

@@ -8,5 +8,6 @@ export const NAVIGATION = [
   { label: "Новости", href: "/news" },
   { label: "Услуги", href: "/#services" },
   { label: "Партнёры", href: "/partners" },
+  { label: "Вопросы", href: "/faq" },
   { label: "Контакты", href: "/contacts" },
 ] as const;
