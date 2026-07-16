@@ -23,5 +23,5 @@ export const metadata: Metadata = createPageMetadata({
 
 export default async function HomePage() {
   const players = await getPlayers();
-  return <><Hero /><HeroStats stats={stats} /><AudiencePaths /><About directions={aboutDirections} /><FeatureStatement /><Services services={services} /><FeaturedPlayers players={players} /><Partners partners={partners} /><CTA /></>;
+  return <><Hero /><HeroStats stats={stats} /><About directions={aboutDirections} /><AudiencePaths /><FeatureStatement /><Services services={services} /><FeaturedPlayers players={players} /><Partners partners={partners} /><CTA /></>;
 }

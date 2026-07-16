@@ -120,7 +120,7 @@ export default function AudiencePaths({ locale = "ru" }: Props) {
 
   return (
     <>
-      <section id="choose-your-path" aria-labelledby="audience-paths-title" className="relative scroll-mt-20 overflow-hidden border-b border-white/10 bg-[#070e18] pb-6 pt-18 max-md:pb-6 max-md:pt-12">
+      <section id="choose-your-path" aria-labelledby="audience-paths-title" className="relative scroll-mt-20 overflow-hidden border-b border-white/10 bg-[#070e18] pb-6 pt-16 max-md:pb-6 max-md:pt-12">
       <div aria-hidden="true" className="absolute left-1/2 top-0 h-px w-[min(1280px,calc(100%-5rem))] -translate-x-1/2 bg-gradient-to-r from-transparent via-pfa-accent/70 to-transparent max-md:w-[calc(100%-2.5rem)]" />
       <div aria-hidden="true" className="absolute -right-32 top-8 h-80 w-80 rounded-full bg-pfa-accent/[.045] blur-3xl" />
 
