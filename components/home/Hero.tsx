@@ -41,15 +41,11 @@ export default function Hero({ locale = "ru" }: Props) {
             <Typography variant="bodyMedium" className="font-bold text-white">Premier Football Agency</Typography>
           </motion.div>
 
-          <motion.div
-            initial={shouldReduceMotion ? false : { opacity: 0, y: 22 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: shouldReduceMotion ? 0.01 : 0.75, delay: shouldReduceMotion ? 0 : 0.06, ease: [0.22, 1, 0.36, 1] }}
-          >
+          <div>
             <Typography as="h1" variant="heroTitle" className="mt-6 text-[clamp(2.75rem,4.25vw,4.7rem)] max-sm:text-[clamp(1.7rem,8.1vw,2.4rem)]">
               {locale === "ru" ? <>МЫ СОЗДАЁМ<br /><span className="text-pfa-accent">ЧЕМПИОНОВ</span></> : <>WE CREATE<br /><span className="text-pfa-accent">CHAMPIONS</span></>}
             </Typography>
-          </motion.div>
+          </div>
 
           <motion.div
             initial={shouldReduceMotion ? false : { opacity: 0, y: 18 }}

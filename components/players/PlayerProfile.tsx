@@ -10,8 +10,8 @@ interface Props { player: Player; locale?: Locale; }
 
 export default function PlayerProfile({ player, locale = "ru" }: Props) {
   const labels = locale === "ru"
-    ? { country: "Страна", age: "Возраст", height: "Рост", weight: "Вес", years: "", cm: "см", kg: "кг", back: "Все игроки" }
-    : { country: "Country", age: "Age", height: "Height", weight: "Weight", years: "", cm: "cm", kg: "kg", back: "All players" };
+    ? { country: "Страна", age: "Возраст", height: "Рост", weight: "Вес", years: "", cm: "см", kg: "кг", back: "Все игроки", career: "Карьера и достижения" }
+    : { country: "Country", age: "Age", height: "Height", weight: "Weight", years: "", cm: "cm", kg: "kg", back: "All players", career: "Career and achievements" };
 
   return (
     <section className="min-h-screen pb-24 pt-32 max-md:pb-20 max-md:pt-24">
@@ -21,7 +21,7 @@ export default function PlayerProfile({ player, locale = "ru" }: Props) {
             <Image src={player.image} fill priority sizes="(max-width: 1024px) 100vw, 45vw" className="object-cover object-center" alt={player.name} />
             <div className="absolute inset-0 bg-gradient-to-t from-[#08111d]/55 via-transparent to-transparent lg:hidden" />
           </div>
-          <div className="flex flex-col justify-center p-12 max-md:p-8 max-sm:p-6">
+          <div className="min-w-0 flex flex-col justify-center p-12 max-md:p-8 max-sm:p-6">
             <div className="flex items-center justify-between gap-6 border-b border-white/10 pb-6">
               <Typography as="span" variant="sectionSubtitle">{player.position}</Typography>
               <Typography as="span" variant="caption" className="text-slate-300">{player.club}</Typography>
@@ -40,6 +40,18 @@ export default function PlayerProfile({ player, locale = "ru" }: Props) {
                 </div>
               ))}
             </dl>
+            <div className="mt-10 border-t border-white/10 pt-8">
+              <Typography as="h2" variant="sectionSubtitle">{labels.career}</Typography>
+              <Typography variant="bodyMedium" className="mt-5 text-base leading-8 text-slate-200">{player.summary}</Typography>
+              <ul className="mt-6 space-y-4">
+                {player.highlights.map((highlight, index) => (
+                  <li className="grid min-w-0 grid-cols-[32px_minmax(0,1fr)] gap-3" key={highlight}>
+                    <Typography as="span" variant="sectionSubtitle">{String(index + 1).padStart(2, "0")}</Typography>
+                    <Typography variant="bodyMedium" className="text-slate-300">{highlight}</Typography>
+                  </li>
+                ))}
+              </ul>
+            </div>
             <Button href={localizePath("/players", locale)} variant="secondary" shape="square" size="compact" className="mt-10 self-start">{labels.back}</Button>
           </div>
         </Card>

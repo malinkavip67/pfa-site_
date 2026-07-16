@@ -9,4 +9,6 @@ export interface Player {
   weight: number;
   image: string;
   slug: string;
+  summary: string;
+  highlights: string[];
 }

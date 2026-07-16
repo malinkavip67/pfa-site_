@@ -27,9 +27,21 @@ export const englishServices: Service[] = [
 ];
 
 export const englishPlayers: Player[] = [
-  { id: "01", name: "Alex Marin", position: "Midfielder", club: "Madrid", country: "Spain", age: 24, height: 184, weight: 78, image: "/images/players/player-card.webp", slug: "alex-marin" },
-  { id: "02", name: "Mark Bennet", position: "Forward", club: "London", country: "England", age: 22, height: 188, weight: 82, image: "/images/players/player-card.webp", slug: "mark-bennet" },
-  { id: "03", name: "Luka Wolf", position: "Defender", club: "Berlin", country: "Germany", age: 25, height: 191, weight: 86, image: "/images/players/player-card.webp", slug: "luka-wolf" },
+  {
+    id: "01", name: "Alex Marin", position: "Midfielder", club: "Madrid", country: "Spain", age: 24, height: 184, weight: 78, image: "/images/players/player-card.webp", slug: "alex-marin",
+    summary: "A technical central midfielder with an exceptional work rate, precise first pass and ability to join the attack.",
+    highlights: ["Top scorer at the 2024/25 youth tournament.", "Recorded 10 goals and 8 assists during the season.", "Developed at Madrid Football School."],
+  },
+  {
+    id: "02", name: "Mark Bennet", position: "Forward", club: "London", country: "England", age: 22, height: 188, weight: 82, image: "/images/players/player-card.webp", slug: "mark-bennet",
+    summary: "A powerful centre-forward who is confident inside the box and creates space for his teammates.",
+    highlights: ["Top scorer in the 2025/26 regional championship.", "Scored a hat-trick against Westbridge FC.", "A graduate of London Elite Football Academy."],
+  },
+  {
+    id: "03", name: "Luka Wolf", position: "Defender", club: "Berlin", country: "Germany", age: 25, height: 191, weight: 86, image: "/images/players/player-card.webp", slug: "luka-wolf",
+    summary: "A central defender with dominant aerial ability, a reliable first pass and strong leadership qualities.",
+    highlights: ["Named in the 2025/26 team of the season.", "Helped the team record 14 clean sheets.", "Developed at Berlin Professional Football School."],
+  },
 ];
 
 export const englishPartners: Partner[] = [

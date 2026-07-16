@@ -89,7 +89,7 @@ export default function Header() {
   };
 
   const alternateLocale: Locale = locale === "ru" ? "en" : "ru";
-  const alternateHref = localizePath(`${pathname}${currentHash}`, alternateLocale);
+  const alternateHref = localizePath("/", alternateLocale);
 
   return (
     <header className={`fixed inset-x-0 top-0 z-50 grid h-[72px] grid-cols-[auto_1fr_auto] items-center border-b border-white/10 bg-[#03070d]/95 px-[clamp(1.25rem,3.5vw,3rem)] transition-[height,background-color] duration-300 ${isScrolled ? "h-16 bg-[#03070d]/98 backdrop-blur-sm" : ""}`}>
@@ -113,7 +113,7 @@ export default function Header() {
       <div className="flex items-center gap-4 max-lg:hidden">
         <Button href={localizePath("/contacts", locale)} shape="square" size="compact" className="min-h-11 border border-white/30 bg-transparent px-5 text-[10px] text-white shadow-none hover:border-pfa-accent hover:bg-transparent hover:text-pfa-accent max-xl:px-4">{locale === "ru" ? "Связаться с нами" : "Contact us"}</Button>
         <label className="relative flex items-center" aria-label={locale === "ru" ? "Язык сайта" : "Website language"}>
-          <select className="h-11 appearance-none bg-transparent pl-2 pr-6 text-[10px] font-bold text-white outline-none" value={locale} onChange={(event) => { window.location.href = localizePath(`${pathname}${currentHash}`, event.target.value as Locale); }}>
+          <select className="h-11 appearance-none bg-transparent pl-2 pr-6 text-[10px] font-bold text-white outline-none" value={locale} onChange={(event) => { window.location.href = localizePath("/", event.target.value as Locale); }}>
             <option className="bg-pfa-background" value="ru">RU</option>
             <option className="bg-pfa-background" value="en">EN</option>
           </select>

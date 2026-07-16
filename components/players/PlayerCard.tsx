@@ -29,7 +29,7 @@ export default function PlayerCard({ player, locale = "ru" }: Props) {
 
       <div className="absolute inset-x-0 bottom-0 p-7 max-sm:p-6">
         <Typography as="h3" variant="sectionTitle" className="max-w-[80%] text-[clamp(1.75rem,2.4vw,2.5rem)] leading-[.94] tracking-[-.035em]">{player.name}</Typography>
-        <Typography variant="caption" className="mt-3 text-slate-300">{player.club} · {player.country} · {player.age} {locale === "ru" ? "лет" : "years"}</Typography>
+        <Typography variant="caption" className="mt-3 max-w-[calc(100%-4rem)] text-slate-300">{player.club} · {player.country} · {player.age} {locale === "ru" ? "лет" : "years"}</Typography>
       </div>
 
       <Link
