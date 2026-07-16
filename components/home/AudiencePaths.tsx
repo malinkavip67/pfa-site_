@@ -139,26 +139,26 @@ export default function AudiencePaths({ locale = "ru" }: Props) {
 
         <div className="mt-8 grid min-w-0 grid-cols-2 gap-4 max-md:grid-cols-1 max-sm:w-[calc(100vw-2.5rem)]">
           <AnimatedReveal className="h-full min-w-0">
-            <Card as="div" className="group relative flex h-full min-h-[300px] min-w-0 max-w-full flex-col overflow-hidden border-pfa-accent/35 !bg-pfa-accent p-6 text-pfa-accent-contrast shadow-[0_24px_70px_rgba(0,235,82,.1)] max-sm:min-h-0 max-sm:p-5">
-              <span aria-hidden="true" className="absolute -right-3 -top-10 text-[10.5rem] font-extrabold leading-none text-black/[.06] transition-transform duration-500 group-hover:-translate-y-2">01</span>
+            <Card as="div" className="group relative flex h-full min-h-[300px] min-w-0 max-w-full flex-col overflow-hidden border-white/15 bg-[#0a1523] p-6 max-sm:min-h-0 max-sm:p-5">
+              <span aria-hidden="true" className="absolute -right-3 -top-10 text-[10.5rem] font-extrabold leading-none text-white/[.035] transition-transform duration-500 group-hover:-translate-y-2">01</span>
               <div className="relative flex items-center justify-between gap-5">
-                <Typography as="span" variant="caption" className="!text-pfa-accent-contrast">{copy.player.label}</Typography>
-                <Trophy aria-hidden="true" className="text-pfa-accent-contrast" size={25} strokeWidth={1.7} />
+                <Typography as="span" variant="caption" className="text-white">{copy.player.label}</Typography>
+                <Trophy aria-hidden="true" className="text-pfa-accent" size={25} strokeWidth={1.7} />
               </div>
-              <Typography as="h3" variant="sectionTitle" className="relative mt-8 max-w-[480px] text-[clamp(1.1rem,1.55vw,1.55rem)] leading-tight tracking-[-.035em] !text-pfa-accent-contrast">
+              <Typography as="h3" variant="sectionTitle" className="relative mt-8 max-w-[480px] text-[clamp(1.1rem,1.55vw,1.55rem)] leading-tight tracking-[-.035em]">
                 {copy.player.title}
               </Typography>
-              <Typography variant="bodyMedium" className="relative mt-3 max-w-[500px] break-words !text-[#073817]">
+              <Typography variant="bodyMedium" className="relative mt-3 max-w-[500px] break-words text-slate-300">
                 {copy.player.description}
               </Typography>
-              <ul className="relative mt-4 grid grid-cols-3 gap-2 border-t border-black/15 pt-3 max-sm:grid-cols-1">
+              <ul className="relative mt-4 grid grid-cols-3 gap-2 border-t border-white/10 pt-3 max-sm:grid-cols-1">
                 {copy.player.points.map((point, index) => (
-                  <li className="min-w-0 text-[10px] font-bold uppercase tracking-[.1em]" key={point}>
-                    <span className="mr-2 text-black/45">{String(index + 1).padStart(2, "0")}</span>{point}
+                  <li className="min-w-0 text-[10px] font-bold uppercase tracking-[.1em] text-slate-200" key={point}>
+                    <span className="mr-2 text-pfa-accent">{String(index + 1).padStart(2, "0")}</span>{point}
                   </li>
                 ))}
               </ul>
-              <Button onClick={() => setFormAudience("player")} variant="secondary" shape="square" size="compact" className="relative mt-4 min-h-[52px] self-start px-6 !border-black !bg-black !text-white hover:!bg-[#08111d]">
+              <Button onClick={() => setFormAudience("player")} variant="secondary" shape="square" size="compact" className="relative mt-4 min-h-[52px] self-start px-6 !border-white/20 !bg-black !text-white hover:!border-white hover:!bg-white hover:!text-pfa-background">
                 {copy.player.action}
               </Button>
             </Card>
