@@ -2,13 +2,14 @@
 
 import { ShieldCheck, Trophy } from "lucide-react";
 import { useEffect, useState, type FormEvent } from "react";
+import ApplicationButton, { APPLICATION_FORM_EVENT, type ApplicationAudience } from "@/components/forms/ApplicationButton";
 import AnimatedReveal from "@/components/ui/AnimatedReveal";
 import Button from "@/components/ui/Button";
 import Card from "@/components/ui/Card";
 import Container from "@/components/ui/Container";
 import Typography from "@/components/ui/Typography";
 import { CONTACT_EMAIL } from "@/lib/constants";
-import type { Locale } from "@/lib/i18n";
+import { localizePath, type Locale } from "@/lib/i18n";
 
 interface Props { locale?: Locale; }
 
@@ -48,6 +49,10 @@ const content = {
       parentEyebrow: "Обращение родителя",
       parentTitle: "Обсудим карьеру игрока",
       parentDescription: "Оставьте контактные данные. Мы подготовим письмо в PFA, чтобы команда могла лично ответить на ваши вопросы.",
+      consentBeforeLink: "Я даю согласие PFA на обработку указанных данных для рассмотрения заявки и ответа в соответствии с",
+      privacyLink: "политикой конфиденциальности",
+      playerConfirmation: "Мне исполнилось 18 лет. Если нет, форму должен заполнить родитель или законный представитель.",
+      parentConfirmation: "Я являюсь родителем или законным представителем игрока и имею право передавать его данные.",
     },
   },
   en: {
@@ -85,6 +90,10 @@ const content = {
       parentEyebrow: "Parent enquiry",
       parentTitle: "Let’s discuss the player’s career",
       parentDescription: "Leave your contact details. We will prepare an email to PFA so the team can personally answer your questions.",
+      consentBeforeLink: "I consent to PFA processing the submitted data to review and respond to this enquiry in accordance with the",
+      privacyLink: "privacy policy",
+      playerConfirmation: "I am at least 18 years old. Otherwise, this form must be completed by a parent or legal representative.",
+      parentConfirmation: "I am the player’s parent or legal representative and have the right to provide their data.",
     },
   },
 } as const;
@@ -93,6 +102,23 @@ export default function AudiencePaths({ locale = "ru" }: Props) {
   const copy = content[locale];
   const [formAudience, setFormAudience] = useState<"player" | "parent" | null>(null);
   const isFormOpen = formAudience !== null;
+
+  useEffect(() => {
+    const openApplication = (event: Event) => {
+      const audience = (event as CustomEvent<ApplicationAudience>).detail;
+      setFormAudience(audience === "parent" ? "parent" : "player");
+    };
+
+    window.addEventListener(APPLICATION_FORM_EVENT, openApplication);
+
+    const requestedAudience = new URLSearchParams(window.location.search).get("application");
+    if (requestedAudience === "player" || requestedAudience === "parent") {
+      queueMicrotask(() => setFormAudience(requestedAudience));
+      window.history.replaceState({}, "", window.location.pathname + window.location.hash);
+    }
+
+    return () => window.removeEventListener(APPLICATION_FORM_EVENT, openApplication);
+  }, []);
 
   useEffect(() => {
     if (!isFormOpen) return;
@@ -117,9 +143,12 @@ export default function AudiencePaths({ locale = "ru" }: Props) {
     const subject = formAudience === "parent"
       ? (locale === "ru" ? "Обращение родителя с сайта PFA" : "Parent enquiry from the PFA website")
       : (locale === "ru" ? "Заявка игрока с сайта PFA" : "Player application from the PFA website");
+    const audienceConfirmation = formAudience === "parent"
+      ? (locale === "ru" ? "Статус: родитель или законный представитель" : "Status: parent or legal representative")
+      : (locale === "ru" ? "Возраст: 18 лет или старше" : "Age: 18 or older");
     const body = locale === "ru"
-      ? `Фамилия: ${formData.get("surname")}\nИмя: ${formData.get("name")}\nТелефон: ${formData.get("phone")}\nПочта: ${formData.get("email")}\n\nКраткий рассказ:\n${formData.get("story")}`
-      : `Last name: ${formData.get("surname")}\nFirst name: ${formData.get("name")}\nPhone: ${formData.get("phone")}\nEmail: ${formData.get("email")}\n\nBrief introduction:\n${formData.get("story")}`;
+      ? `Фамилия: ${formData.get("surname")}\nИмя: ${formData.get("name")}\nТелефон: ${formData.get("phone")}\nПочта: ${formData.get("email")}\n\nКраткий рассказ:\n${formData.get("story")}\n\nСогласие на обработку персональных данных: предоставлено\n${audienceConfirmation}`
+      : `Last name: ${formData.get("surname")}\nFirst name: ${formData.get("name")}\nPhone: ${formData.get("phone")}\nEmail: ${formData.get("email")}\n\nBrief introduction:\n${formData.get("story")}\n\nConsent to personal data processing: granted\n${audienceConfirmation}`;
 
     window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   };
@@ -164,9 +193,9 @@ export default function AudiencePaths({ locale = "ru" }: Props) {
                   </li>
                 ))}
               </ul>
-              <Button onClick={() => setFormAudience("player")} variant="secondary" shape="square" size="compact" className="relative mt-4 min-h-[52px] self-start px-6 !border-white/20 !bg-black !text-white hover:!border-white hover:!bg-white hover:!text-pfa-background">
+              <ApplicationButton audience="player" variant="secondary" shape="square" size="compact" className="relative mt-4 min-h-[52px] self-start px-6 !border-white/20 !bg-black !text-white hover:!border-white hover:!bg-white hover:!text-pfa-background">
                 {copy.player.action}
-              </Button>
+              </ApplicationButton>
             </Card>
           </AnimatedReveal>
 
@@ -190,9 +219,9 @@ export default function AudiencePaths({ locale = "ru" }: Props) {
                   </li>
                 ))}
               </ul>
-              <Button onClick={() => setFormAudience("parent")} shape="square" size="compact" className="relative mt-4 min-h-[52px] self-start px-6">
+              <ApplicationButton audience="parent" shape="square" size="compact" className="relative mt-4 min-h-[52px] self-start px-6">
                 {copy.parent.action}
-              </Button>
+              </ApplicationButton>
             </Card>
           </AnimatedReveal>
         </div>
@@ -258,6 +287,40 @@ export default function AudiencePaths({ locale = "ru" }: Props) {
                   className="min-h-28 w-full resize-y rounded-none border border-white/15 bg-white/[.035] px-4 py-3 text-sm leading-6 text-white outline-none transition-colors placeholder:text-slate-600 focus:border-pfa-accent"
                 />
               </label>
+
+              <div className="col-span-2 grid gap-3 border-t border-white/10 pt-5 max-sm:col-span-1">
+                <label className="flex cursor-pointer items-start gap-3 text-xs leading-5 text-slate-300">
+                  <input
+                    required
+                    name="privacyConsent"
+                    type="checkbox"
+                    value="granted"
+                    className="mt-0.5 h-4 w-4 shrink-0 accent-[#00EB52]"
+                  />
+                  <span>
+                    {copy.form.consentBeforeLink}{" "}
+                    <a
+                      className="font-bold text-white underline decoration-pfa-accent/70 underline-offset-4 transition-colors hover:text-pfa-accent"
+                      href={localizePath("/privacy", locale)}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      {copy.form.privacyLink}
+                    </a>.
+                  </span>
+                </label>
+
+                <label className="flex cursor-pointer items-start gap-3 text-xs leading-5 text-slate-300">
+                  <input
+                    required
+                    name="audienceConfirmation"
+                    type="checkbox"
+                    value="confirmed"
+                    className="mt-0.5 h-4 w-4 shrink-0 accent-[#00EB52]"
+                  />
+                  <span>{formAudience === "parent" ? copy.form.parentConfirmation : copy.form.playerConfirmation}</span>
+                </label>
+              </div>
 
               <div className="col-span-2 mt-3 flex items-center justify-between gap-6 max-sm:col-span-1 max-sm:flex-col max-sm:items-stretch">
                 <Typography variant="caption" className="max-w-[300px] normal-case tracking-normal text-slate-400">{copy.form.note}</Typography>

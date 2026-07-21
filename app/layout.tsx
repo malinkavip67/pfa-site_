@@ -4,6 +4,7 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import DocumentLanguage from "@/components/layout/DocumentLanguage";
 import StructuredData from "@/components/layout/StructuredData";
+import CookieNotice from "@/components/layout/CookieNotice";
 import { organizationStructuredData } from "@/lib/structured-data";
 import "@/styles/globals.css";
 
@@ -36,5 +37,5 @@ export const viewport: Viewport = { themeColor: "#050B14", width: "device-width"
 interface Props { children: React.ReactNode; }
 
 export default function RootLayout({ children }: Readonly<Props>) {
-  return <html lang="ru" suppressHydrationWarning><body suppressHydrationWarning className={`${manropeCyrillic.variable} ${manropeLatin.variable}`}><DocumentLanguage /><a className="skip-link" href="#main-content">Перейти к содержимому</a><StructuredData data={organizationStructuredData} /><Header /><main id="main-content">{children}</main><Footer /></body></html>;
+  return <html lang="ru" suppressHydrationWarning><body suppressHydrationWarning className={`${manropeCyrillic.variable} ${manropeLatin.variable}`}><DocumentLanguage /><a className="skip-link" href="#main-content">Перейти к содержимому</a><StructuredData data={organizationStructuredData} /><Header /><main id="main-content">{children}</main><Footer /><CookieNotice /></body></html>;
 }

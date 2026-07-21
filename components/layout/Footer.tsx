@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import Button from "@/components/ui/Button";
+import ApplicationButton from "@/components/forms/ApplicationButton";
 import Container from "@/components/ui/Container";
 import SocialLink from "@/components/ui/SocialLink";
 import Typography from "@/components/ui/Typography";
@@ -42,7 +42,7 @@ export default function Footer() {
             <div className="mt-6 flex items-center gap-3">
               <SocialLink href="https://t.me/PFA_AGENCY" label={locale === "ru" ? "PFA в Telegram" : "PFA on Telegram"} network="telegram" />
             </div>
-            <Button href={localizePath("/contacts", locale)} shape="square" size="compact" className="mt-7">{locale === "ru" ? "Связаться с нами" : "Contact us"}</Button>
+            <ApplicationButton shape="square" size="compact" className="mt-7">{locale === "ru" ? "Оставить заявку" : "Leave an application"}</ApplicationButton>
           </div>
         </div>
 

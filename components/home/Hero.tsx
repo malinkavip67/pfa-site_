@@ -4,6 +4,7 @@ import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion
 import Image from "next/image";
 import { useRef } from "react";
 import Button from "@/components/ui/Button";
+import ApplicationButton from "@/components/forms/ApplicationButton";
 import Container from "@/components/ui/Container";
 import Typography from "@/components/ui/Typography";
 import { localizePath, type Locale } from "@/lib/i18n";
@@ -24,12 +25,12 @@ export default function Hero({ locale = "ru" }: Props) {
           fill
           priority
           sizes="100vw"
-          className="object-cover object-[66%_center] brightness-[1.08] contrast-[1.08] saturate-[1.06] md:object-center"
+          className="object-cover object-[66%_center] brightness-[1.16] contrast-[1.06] saturate-[1.06] md:object-center"
           alt="Футболист с мячом на ночном стадионе"
         />
       </motion.div>
 
-      <div className="absolute inset-0 z-10 bg-[linear-gradient(90deg,rgba(2,6,12,.98)_0%,rgba(2,6,12,.9)_34%,rgba(2,6,12,.42)_62%,rgba(2,6,12,.12)_100%),linear-gradient(0deg,rgba(2,6,12,.62),transparent_50%)] max-md:bg-[linear-gradient(90deg,rgba(2,6,12,.96),rgba(2,6,12,.58)),linear-gradient(0deg,rgba(2,6,12,.72),transparent_55%)]" />
+      <div className="absolute inset-0 z-10 bg-[linear-gradient(90deg,rgba(2,6,12,.86)_0%,rgba(2,6,12,.68)_34%,rgba(2,6,12,.25)_62%,rgba(2,6,12,.05)_100%),linear-gradient(0deg,rgba(2,6,12,.38),transparent_50%)] max-md:bg-[linear-gradient(90deg,rgba(2,6,12,.65),rgba(2,6,12,.22)),linear-gradient(0deg,rgba(2,6,12,.5),transparent_55%)]" />
 
       <Container className="relative z-20 flex h-full min-h-[620px] items-center pb-12 pt-28 max-md:min-h-[720px] max-md:pb-16 max-md:pt-32">
         <div className="max-w-[620px]">
@@ -64,7 +65,7 @@ export default function Hero({ locale = "ru" }: Props) {
             className="mt-8 flex gap-4 max-sm:grid max-sm:grid-cols-1"
           >
             <Button href={localizePath("/players", locale)} shape="square" size="compact">{locale === "ru" ? "Наши игроки" : "Our players"}</Button>
-            <Button href={localizePath("/contacts", locale)} variant="secondary" shape="square" size="compact">{locale === "ru" ? "Связаться с нами" : "Contact us"}</Button>
+            <ApplicationButton variant="secondary" shape="square" size="compact">{locale === "ru" ? "Оставить заявку" : "Leave an application"}</ApplicationButton>
           </motion.div>
         </div>
       </Container>

@@ -45,10 +45,10 @@ export const englishPlayers: Player[] = [
 ];
 
 export const englishPartners: Partner[] = [
-  { id: "01", name: "Northline", category: "Performance" },
-  { id: "02", name: "Apex", category: "Legal" },
-  { id: "03", name: "Elevate", category: "Media" },
-  { id: "04", name: "Vector", category: "Analytics" },
+  { id: "01", name: "PIK", category: "Real estate development", logo: "/images/partners/pik.svg", website: "https://www.pik.ru/" },
+  { id: "02", name: "Major Auto", category: "Automotive holding", logo: "/images/partners/major-auto.svg", website: "https://www.major-auto.ru/" },
+  { id: "03", name: "Vkusno — i tochka", category: "Restaurant chain", logo: "/images/partners/vkusno-i-tochka.svg", website: "https://vkusnoitochka.ru/" },
+  { id: "04", name: "Sports Centre LLC", category: "Football Agency Europe", logo: "/images/partners/sport-center-europe.png", website: "https://www.footballagency.ru/", emblem: true },
 ];
 
 export const englishNews: NewsItem[] = [

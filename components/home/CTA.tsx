@@ -1,9 +1,9 @@
 import AnimatedReveal from "@/components/ui/AnimatedReveal";
-import Button from "@/components/ui/Button";
+import ApplicationButton from "@/components/forms/ApplicationButton";
 import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Typography from "@/components/ui/Typography";
-import { localizePath, type Locale } from "@/lib/i18n";
+import type { Locale } from "@/lib/i18n";
 
 interface Props { locale?: Locale; }
 
@@ -22,7 +22,7 @@ export default function CTA({ locale = "ru" }: Props) {
           </div>
           <div className="border-l border-pfa-accent/60 pl-8 max-lg:border-l-0 max-lg:border-t max-lg:pl-0 max-lg:pt-7">
             <Typography variant="bodyLarge" className="max-w-xl text-white">{locale === "ru" ? "Расскажите о своей задаче — команда PFA свяжется с вами и предложит следующий профессиональный шаг." : "Tell us about your goals. The PFA team will contact you and propose the next professional step."}</Typography>
-            <Button className="mt-8" href={localizePath("/contacts", locale)} shape="square" size="compact">{locale === "ru" ? "Связаться" : "Contact us"}</Button>
+            <ApplicationButton className="mt-8" shape="square" size="compact">{locale === "ru" ? "Оставить заявку" : "Leave an application"}</ApplicationButton>
           </div>
         </AnimatedReveal>
       </Container>

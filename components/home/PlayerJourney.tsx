@@ -1,3 +1,4 @@
+import Image from "next/image";
 import AnimatedReveal from "@/components/ui/AnimatedReveal";
 import Card from "@/components/ui/Card";
 import Container from "@/components/ui/Container";
@@ -40,9 +41,20 @@ export default function PlayerJourney({ locale = "ru" }: Props) {
 
   return (
     <section id="player-journey" aria-labelledby="player-journey-title" className="relative scroll-mt-20 overflow-hidden border-b border-white/10 bg-pfa-background pb-8 pt-24 max-md:pb-8 max-md:pt-16">
+      <Image
+        fill
+        priority={false}
+        sizes="100vw"
+        src="/images/journey/player-journey-preview.png"
+        alt=""
+        aria-hidden="true"
+        className="object-cover object-[center_30%] opacity-90 max-md:object-[62%_center]"
+      />
+      <div aria-hidden="true" className="absolute inset-0 bg-[#050b14]/28" />
+      <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-r from-[#050b14]/55 via-[#050b14]/14 to-[#050b14]/25" />
       <div aria-hidden="true" className="absolute -left-24 top-1/3 h-72 w-72 rounded-full bg-pfa-accent/[.035] blur-3xl" />
 
-      <Container className="!w-[min(1120px,calc(100%-5rem))] max-md:!w-[calc(100%-2.5rem)]">
+      <Container className="relative z-10 !w-[min(1120px,calc(100%-5rem))] max-md:!w-[calc(100%-2.5rem)]">
         <AnimatedReveal className="grid grid-cols-[.9fr_1.1fr] items-end gap-14 max-lg:grid-cols-1 max-lg:gap-7">
           <div>
             <Typography as="span" variant="sectionSubtitle">{copy.eyebrow}</Typography>
