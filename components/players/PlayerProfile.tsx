@@ -10,8 +10,17 @@ interface Props { player: Player; locale?: Locale; }
 
 export default function PlayerProfile({ player, locale = "ru" }: Props) {
   const labels = locale === "ru"
-    ? { country: "Страна", age: "Возраст", height: "Рост", weight: "Вес", years: "", cm: "см", kg: "кг", back: "Все игроки", career: "Карьера и достижения" }
-    : { country: "Country", age: "Age", height: "Height", weight: "Weight", years: "", cm: "cm", kg: "kg", back: "All players", career: "Career and achievements" };
+    ? { country: "Страна и город", age: "Возраст", birthDate: "Дата рождения", height: "Рост", weight: "Вес", preferredFoot: "Ведущая нога", years: "", cm: "см", kg: "кг", back: "Все игроки", career: "Карьера и достижения" }
+    : { country: "Country and city", age: "Age", birthDate: "Date of birth", height: "Height", weight: "Weight", preferredFoot: "Preferred foot", years: "", cm: "cm", kg: "kg", back: "All players", career: "Career and achievements" };
+
+  const playerDetails = [
+    [labels.country, player.city ? `${player.country}, ${player.city}` : player.country],
+    [labels.age, `${player.age}${labels.years}`],
+    ...(player.birthDate ? [[labels.birthDate, player.birthDate]] : []),
+    [labels.height, `${player.height} ${labels.cm}`],
+    [labels.weight, `${player.weight} ${labels.kg}`],
+    ...(player.preferredFoot ? [[labels.preferredFoot, player.preferredFoot]] : []),
+  ];
 
   return (
     <section className="min-h-screen pb-24 pt-32 max-md:pb-20 max-md:pt-24">
@@ -28,12 +37,7 @@ export default function PlayerProfile({ player, locale = "ru" }: Props) {
             </div>
             <Typography as="h1" variant="sectionTitle" className="mt-8 text-[clamp(2.6rem,5vw,4.5rem)] leading-[.9] tracking-[-.05em] max-sm:text-[2.25rem]">{player.name}</Typography>
             <dl className="mt-10 grid grid-cols-2 border-l border-t border-white/10 max-sm:mt-8">
-              {[
-                [labels.country, player.country],
-                [labels.age, `${player.age}${labels.years}`],
-                [labels.height, `${player.height} ${labels.cm}`],
-                [labels.weight, `${player.weight} ${labels.kg}`],
-              ].map(([label, value]) => (
+              {playerDetails.map(([label, value]) => (
                 <div className="border-b border-r border-white/10 p-5 max-sm:p-4" key={label}>
                   <Typography as="dt" variant="caption" className="text-slate-400">{label}</Typography>
                   <Typography as="dd" variant="bodyLarge" className="mt-2 text-white">{value}</Typography>

@@ -28,9 +28,9 @@ export const englishServices: Service[] = [
 
 export const englishPlayers: Player[] = [
   {
-    id: "01", name: "Alex Marin", position: "Midfielder", club: "Madrid", country: "Spain", age: 24, height: 184, weight: 78, image: "/images/players/alex-marin.webp", slug: "alex-marin",
-    summary: "A technical central midfielder with an exceptional work rate, precise first pass and ability to join the attack.",
-    highlights: ["Top scorer at the 2024/25 youth tournament.", "Recorded 10 goals and 8 assists during the season.", "Developed at Madrid Football School."],
+    id: "01", name: "Roman Proshunin", position: "Midfielder", club: "A. Zhuravlev Football Academy", country: "Russia", city: "Moscow", age: 23, birthDate: "24.06.2003", height: 180, weight: 75, preferredFoot: "Left", image: "/images/players/roman-proshunin.jpg", slug: "roman-proshunin",
+    summary: "A technical left-footed midfielder with strong football intelligence and an excellent first touch. He combines refined dribbling with a powerful long-range strike, contributes both in build-up play and finishing, and uses his acceleration and vision to play aggressive vertical passes and press consistently.",
+    highlights: ["Refined dribbling technique and a powerful long-range strike with his left foot.", "Effective contribution in both build-up play and finishing attacks.", "Aggressive vertical passing and consistent participation in pressing."],
   },
   {
     id: "02", name: "Mark Bennet", position: "Forward", club: "London", country: "England", age: 22, height: 188, weight: 82, image: "/images/players/mark-bennet.webp", slug: "mark-bennet",
