@@ -2,7 +2,7 @@
 
 import { ShieldCheck, Trophy } from "lucide-react";
 import { useEffect, useState, type FormEvent } from "react";
-import ApplicationButton, { APPLICATION_FORM_EVENT, type ApplicationAudience } from "@/components/forms/ApplicationButton";
+import ApplicationButton, { type ApplicationAudience } from "@/components/forms/ApplicationButton";
 import AnimatedReveal from "@/components/ui/AnimatedReveal";
 import Button from "@/components/ui/Button";
 import Card from "@/components/ui/Card";
@@ -11,7 +11,10 @@ import Typography from "@/components/ui/Typography";
 import { CONTACT_EMAIL } from "@/lib/constants";
 import { localizePath, type Locale } from "@/lib/i18n";
 
-interface Props { locale?: Locale; }
+interface Props {
+  locale?: Locale;
+  initialAudience?: ApplicationAudience | null;
+}
 
 const content = {
   ru: {
@@ -98,26 +101,16 @@ const content = {
   },
 } as const;
 
-export default function AudiencePaths({ locale = "ru" }: Props) {
+export default function AudiencePaths({ locale = "ru", initialAudience = null }: Props) {
   const copy = content[locale];
-  const [formAudience, setFormAudience] = useState<"player" | "parent" | null>(null);
+  const [formAudience, setFormAudience] = useState<ApplicationAudience | null>(initialAudience);
   const isFormOpen = formAudience !== null;
 
   useEffect(() => {
-    const openApplication = (event: Event) => {
-      const audience = (event as CustomEvent<ApplicationAudience>).detail;
-      setFormAudience(audience === "parent" ? "parent" : "player");
-    };
-
-    window.addEventListener(APPLICATION_FORM_EVENT, openApplication);
-
     const requestedAudience = new URLSearchParams(window.location.search).get("application");
     if (requestedAudience === "player" || requestedAudience === "parent") {
       queueMicrotask(() => setFormAudience(requestedAudience));
-      window.history.replaceState({}, "", window.location.pathname + window.location.hash);
     }
-
-    return () => window.removeEventListener(APPLICATION_FORM_EVENT, openApplication);
   }, []);
 
   useEffect(() => {
@@ -239,14 +232,13 @@ export default function AudiencePaths({ locale = "ru" }: Props) {
           }}
         >
           <Card as="div" className="relative my-auto w-full max-w-[680px] border-pfa-accent/30 !bg-[#08111d] p-10 shadow-[0_30px_100px_rgba(0,0,0,.6)] max-sm:p-6">
-            <button
-              type="button"
+            <a
               aria-label={copy.form.close}
               className="absolute right-5 top-5 flex h-11 w-11 items-center justify-center border border-white/15 text-xl text-white transition-colors hover:border-pfa-accent hover:text-pfa-accent"
-              onClick={() => setFormAudience(null)}
+              href={localizePath("/", locale)}
             >
               ×
-            </button>
+            </a>
 
             <Typography as="span" variant="sectionSubtitle">{formAudience === "parent" ? copy.form.parentEyebrow : copy.form.eyebrow}</Typography>
             <Typography id="player-form-title" as="h2" variant="sectionTitle" className="mt-6 pr-14 text-[clamp(1.5rem,2.5vw,2.4rem)] leading-[.95] tracking-[-.04em]">

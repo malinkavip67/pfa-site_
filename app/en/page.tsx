@@ -19,6 +19,13 @@ export const metadata: Metadata = createPageMetadata({
   keywords: ["football agency", "football agent", "player transfers", "football career management", "PFA"],
 });
 
-export default function EnglishHomePage() {
-  return <><Hero locale="en" /><HeroStats stats={englishStats} locale="en" /><About directions={englishAboutDirections} locale="en" /><FeatureStatement locale="en" /><PlayerJourney locale="en" /><AudiencePaths locale="en" /><Services services={englishServices} locale="en" /><FeaturedPlayers players={englishPlayers} locale="en" /><Partners partners={englishPartners} locale="en" /><CTA locale="en" /></>;
+interface EnglishHomePageProps {
+  searchParams: Promise<{ application?: string | string[] }>;
+}
+
+export default async function EnglishHomePage({ searchParams }: EnglishHomePageProps) {
+  const requestedApplication = (await searchParams).application;
+  const initialAudience = requestedApplication === "parent" ? "parent" : requestedApplication === "player" ? "player" : null;
+
+  return <><Hero locale="en" /><HeroStats stats={englishStats} locale="en" /><About directions={englishAboutDirections} locale="en" /><FeatureStatement locale="en" /><PlayerJourney locale="en" /><AudiencePaths key={initialAudience ?? "closed"} locale="en" initialAudience={initialAudience} /><Services services={englishServices} locale="en" /><FeaturedPlayers players={englishPlayers} locale="en" /><Partners partners={englishPartners} locale="en" /><CTA locale="en" /></>;
 }

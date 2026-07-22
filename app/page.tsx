@@ -22,7 +22,13 @@ export const metadata: Metadata = createPageMetadata({
   keywords: ["футбольное агентство", "футбольный агент", "трансферы футболистов", "карьера футболиста", "PFA"],
 });
 
-export default async function HomePage() {
+interface HomePageProps {
+  searchParams: Promise<{ application?: string | string[] }>;
+}
+
+export default async function HomePage({ searchParams }: HomePageProps) {
+  const requestedApplication = (await searchParams).application;
+  const initialAudience = requestedApplication === "parent" ? "parent" : requestedApplication === "player" ? "player" : null;
   const players = await getPlayers();
-  return <><Hero /><HeroStats stats={stats} /><About directions={aboutDirections} /><FeatureStatement /><PlayerJourney /><AudiencePaths /><Services services={services} /><FeaturedPlayers players={players} /><Partners partners={partners} /><CTA /></>;
+  return <><Hero /><HeroStats stats={stats} /><About directions={aboutDirections} /><FeatureStatement /><PlayerJourney /><AudiencePaths key={initialAudience ?? "closed"} initialAudience={initialAudience} /><Services services={services} /><FeaturedPlayers players={players} /><Partners partners={partners} /><CTA /></>;
 }
