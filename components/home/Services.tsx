@@ -18,7 +18,7 @@ export default function Services({ services, locale = "ru" }: Props) {
         <AnimatedReveal className="grid grid-cols-[1.15fr_.85fr] items-end gap-16 max-lg:grid-cols-1 max-lg:gap-9">
           <div>
             <SectionHeading index="03">{locale === "ru" ? "Экспертиза" : "Expertise"}</SectionHeading>
-            <Typography id="services-title" as="h2" variant="sectionTitle" className="mt-8 text-[clamp(1.88rem,3vw,3.2rem)] leading-[.94] tracking-[-.05em] max-sm:text-[1.5rem]">
+            <Typography id="services-title" as="h1" variant="sectionTitle" className="mt-8 text-[clamp(1.88rem,3vw,3.2rem)] leading-[.94] tracking-[-.05em] max-sm:text-[1.5rem]">
               {locale === "ru" ? <>Всё, что нужно<br /><span className="text-pfa-accent">для большого пути</span></> : <>Everything needed<br /><span className="text-pfa-accent">for the journey</span></>}
             </Typography>
           </div>

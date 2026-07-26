@@ -1,0 +1,8 @@
+import { revalidatePath } from "next/cache";
+import { NextResponse } from "next/server";
+import { isAdminAuthenticated } from "@/lib/admin-auth";
+import { validateNewsPayload } from "@/lib/admin-content-validation";
+import { createDatabaseId, neonQuery } from "@/lib/neon";
+export const runtime="nodejs";const select=`"id","createdAt","updatedAt","title","slug","excerpt","content","imageUrl","publishedAt","isPublished"`;
+export async function GET(){if(!(await isAdminAuthenticated()))return NextResponse.json({ok:false},{status:401});try{return NextResponse.json({ok:true,news:await neonQuery(`SELECT ${select} FROM "News" ORDER BY "publishedAt" DESC NULLS LAST,"createdAt" DESC`)});}catch{return NextResponse.json({ok:false,message:"Не удалось загрузить новости."},{status:500});}}
+export async function POST(request:Request){if(!(await isAdminAuthenticated()))return NextResponse.json({ok:false},{status:401});try{const value=validateNewsPayload(await request.json());if(!("data"in value))return NextResponse.json({ok:false,message:value.error},{status:400});const d=value.data!;const rows=await neonQuery(`INSERT INTO "News" ("id","createdAt","updatedAt","title","slug","excerpt","content","imageUrl","publishedAt","isPublished") VALUES ($1,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,$2,$3,$4,$5,$6,$7,$8) RETURNING ${select}`,[createDatabaseId(),d.title,d.slug,d.excerpt,d.content,d.imageUrl,d.publishedAt?.toISOString()??null,d.isPublished]);revalidatePath("/news");return NextResponse.json({ok:true,item:rows[0]},{status:201});}catch(error){if((error as{code?:string}).code==="23505")return NextResponse.json({ok:false,message:"Новость с таким slug уже существует."},{status:409});return NextResponse.json({ok:false,message:"Не удалось создать новость."},{status:500});}}

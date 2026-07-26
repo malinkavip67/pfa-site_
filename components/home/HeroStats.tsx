@@ -26,7 +26,7 @@ function getBorderStyles(index: number): string {
 
 export default function HeroStats({ stats, locale = "ru" }: Props) {
   return (
-    <section aria-label={locale === "ru" ? "Premier Football Agency в цифрах" : "Premier Football Agency in numbers"} className="border-y border-white/10 bg-[#03070d]">
+    <section aria-label={locale === "ru" ? "Премьер Футбольное Агентство в цифрах" : "Premier Football Agency in numbers"} className="border-y border-white/10 bg-[#03070d]">
       <Container>
         <dl className="grid grid-cols-2 md:grid-cols-4">
           {stats.map((stat, index) => {

@@ -7,12 +7,9 @@ interface Props { partners: Partner[]; }
 
 function PartnerCard({ partner }: { partner: Partner }) {
   return (
-    <Card as="div" className="relative flex h-full min-h-[216px] flex-col justify-between overflow-hidden border-0 bg-[#09121f] p-7 transition-colors duration-300 group-hover:bg-[#0c1929] group-focus-visible:ring-2 group-focus-visible:ring-inset group-focus-visible:ring-pfa-accent max-sm:min-h-0 max-sm:p-6">
-      <span aria-hidden="true" className="absolute inset-x-0 top-0 h-0.5 origin-left scale-x-0 bg-pfa-accent transition-transform duration-300 group-hover:scale-x-100 group-focus-visible:scale-x-100" />
-      <div className="flex items-center justify-between gap-4">
-        <Typography as="span" variant="sectionSubtitle">{partner.id}</Typography>
-        {partner.website && <span aria-hidden="true" className="size-2 border-r border-t border-white/35 transition-colors group-hover:border-pfa-accent" />}
-      </div>
+    <Card as="div" className="relative flex h-full min-h-[216px] flex-col justify-between overflow-hidden border-0 bg-[#09121f] p-7 max-sm:min-h-0 max-sm:p-6">
+      <span aria-hidden="true" className="absolute inset-x-0 top-0 h-0.5 bg-pfa-accent/70" />
+      <Typography as="span" variant="sectionSubtitle">{partner.id}</Typography>
       <div>
         <div className={`flex items-center ${partner.emblem ? "mb-3 h-20" : "mb-4 h-16"}`}>
           {partner.logo ? (
@@ -30,13 +27,9 @@ function PartnerCard({ partner }: { partner: Partner }) {
 
 export default function PartnersGrid({ partners }: Props) {
   return (
-    <div className="grid grid-cols-4 gap-px border border-white/10 bg-white/10 max-lg:grid-cols-2 max-sm:grid-cols-1">
-      {partners.map((partner) => partner.website ? (
-        <a href={partner.website} target="_blank" rel="noreferrer" className="group block focus-visible:outline-none" key={partner.id} aria-label={`${partner.name}: ${partner.category}`}>
-          <PartnerCard partner={partner} />
-        </a>
-      ) : (
-        <div className="group" key={partner.id}>
+    <div className="grid grid-cols-3 gap-px border border-white/10 bg-white/10 max-lg:grid-cols-2 max-sm:grid-cols-1">
+      {partners.map((partner) => (
+        <div key={partner.id}>
           <PartnerCard partner={partner} />
         </div>
       ))}

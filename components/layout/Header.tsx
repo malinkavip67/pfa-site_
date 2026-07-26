@@ -12,7 +12,9 @@ import { getLocaleFromPathname, localizePath, NAVIGATION_LABELS, type Locale } f
 
 const FOCUSABLE_ELEMENTS = "a[href], button:not([disabled])";
 
-export default function Header() {
+interface HeaderProps { siteName?: string; }
+
+export default function Header({ siteName }: HeaderProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [currentHash, setCurrentHash] = useState("");
@@ -94,7 +96,7 @@ export default function Header() {
   return (
     <header className={`fixed inset-x-0 top-0 z-50 grid h-[72px] grid-cols-[auto_1fr_auto] items-center border-b border-white/10 bg-[#03070d]/95 px-[clamp(1.25rem,3.5vw,3rem)] transition-[height,background-color] duration-300 ${isScrolled ? "h-16 bg-[#03070d]/98 backdrop-blur-sm" : ""}`}>
       <Link href={localizePath("/", locale)} className="flex h-16 w-28 items-center" aria-label={locale === "ru" ? "PFA — на главную" : "PFA — home"}>
-        <Image src="/images/logo/logo-white.jpg" width={1366} height={768} sizes="112px" loading="eager" className="h-full w-full object-contain" alt="Premier Football Agency" />
+        <Image src="/images/logo/logo-white.jpg" width={1366} height={768} sizes="112px" loading="eager" className="h-full w-full object-contain" alt={siteName ?? (locale === "ru" ? "Премьер Футбольное Агентство" : "Premier Football Agency")} />
       </Link>
 
       <nav className="flex items-center justify-center gap-7 max-xl:gap-5 max-lg:hidden" aria-label="Основная навигация">
@@ -112,6 +114,12 @@ export default function Header() {
 
       <div className="flex items-center gap-4 max-lg:hidden">
         <ApplicationButton shape="square" size="compact" className="min-h-11 border border-white/30 bg-transparent px-5 text-[10px] text-white shadow-none hover:border-pfa-accent hover:bg-transparent hover:text-pfa-accent max-xl:px-4">{locale === "ru" ? "Оставить заявку" : "Leave an application"}</ApplicationButton>
+        <Link
+          href="/admin/login"
+          className="text-[10px] font-bold uppercase tracking-[.1em] text-slate-200 transition-colors hover:text-pfa-accent"
+        >
+          {locale === "ru" ? "Вход" : "Admin"}
+        </Link>
         <label className="relative flex items-center" aria-label={locale === "ru" ? "Язык сайта" : "Website language"}>
           <select className="h-11 appearance-none bg-transparent pl-2 pr-6 text-[10px] font-bold text-white outline-none" value={locale} onChange={(event) => { window.location.href = localizePath("/", event.target.value as Locale); }}>
             <option className="bg-pfa-background" value="ru">RU</option>
@@ -148,7 +156,7 @@ export default function Header() {
             transition={{ duration: shouldReduceMotion ? 0.01 : 0.45, ease: [0.22, 1, 0.36, 1] }}
           >
             <div className="flex items-start justify-between">
-              <Image src="/images/logo/logo-white.jpg" width={1366} height={768} sizes="112px" className="h-14 w-28 object-contain" alt="Premier Football Agency" />
+              <Image src="/images/logo/logo-white.jpg" width={1366} height={768} sizes="112px" className="h-14 w-28 object-contain" alt={siteName ?? (locale === "ru" ? "Премьер Футбольное Агентство" : "Premier Football Agency")} />
               <button ref={closeButtonRef} type="button" className="rounded-sm border border-white/20 p-2.5 transition-colors hover:border-pfa-accent" onClick={closeMenu} aria-label="Закрыть меню">
                 <X aria-hidden="true" />
               </button>
@@ -170,6 +178,9 @@ export default function Header() {
 
             <div className="flex items-center gap-4">
               <ApplicationButton shape="square" size="compact" className="flex-1" onClick={closeMenu}>{locale === "ru" ? "Оставить заявку" : "Leave an application"}</ApplicationButton>
+              <Link href="/admin/login" onClick={closeMenu} className="text-xs font-bold uppercase text-white transition-colors hover:text-pfa-accent">
+                {locale === "ru" ? "Вход" : "Admin"}
+              </Link>
               <Link href={alternateHref} onClick={closeMenu} className="text-xs font-bold text-white transition-colors hover:text-pfa-accent">{alternateLocale.toUpperCase()}</Link>
             </div>
           </motion.div>

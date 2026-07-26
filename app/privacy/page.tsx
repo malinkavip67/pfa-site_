@@ -8,7 +8,7 @@ import { createPageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = createPageMetadata({
   title: "Политика конфиденциальности",
-  description: "Информация о принципах обработки и защиты персональных данных на сайте Premier Football Agency.",
+  description: "Информация о принципах обработки и защиты персональных данных на сайте Премьер Футбольного Агентства.",
   path: "/privacy",
   keywords: ["политика конфиденциальности PFA", "обработка персональных данных"],
 });
@@ -43,10 +43,10 @@ const sections = [
 export default function PrivacyPage() {
   return (
     <>
-      <PageHero eyebrow="Правовая информация" title="Конфиденциальность" description="Мы бережно относимся к информации, которую вы передаёте Premier Football Agency." />
+      <PageHero eyebrow="Правовая информация" title="Конфиденциальность" description="Мы бережно относимся к информации, которую вы передаёте Премьер Футбольному Агентству." />
       <Container className="py-20 max-md:py-14">
         <Card as="div" className="mx-auto max-w-4xl border-white/10 bg-[#08111d] p-10 max-sm:p-6">
-          <Typography variant="bodyLarge" className="text-white">Настоящая политика описывает подход Premier Football Agency к обработке персональных данных посетителей сайта и пользователей форм обратной связи.</Typography>
+          <Typography variant="bodyLarge" className="text-white">Настоящая политика описывает подход Премьер Футбольного Агентства к обработке персональных данных посетителей сайта и пользователей форм обратной связи.</Typography>
           <Typography variant="caption" className="mt-4 text-slate-500">Последнее обновление: 16 июля 2026 года</Typography>
 
           <div className="mt-10 divide-y divide-white/10 border-y border-white/10">

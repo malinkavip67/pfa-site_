@@ -23,13 +23,13 @@ export default function PlayerCard({ player, locale = "ru" }: Props) {
       <span aria-hidden="true" className="absolute inset-x-0 top-0 h-0.5 origin-left scale-x-0 bg-pfa-accent transition-transform duration-300 group-hover:scale-x-100" />
 
       <div className="absolute inset-x-0 top-0 flex items-start justify-between p-7 max-sm:p-6">
-        <Typography as="span" variant="sectionSubtitle">{player.id}</Typography>
-        <Typography as="span" variant="caption" className="text-white">{player.position}</Typography>
+        <Typography as="span" variant="sectionSubtitle">{player.displayId ?? player.id}</Typography>
+        <Typography as="span" variant="caption" className="text-white">{player.position ?? "Игрок"}</Typography>
       </div>
 
       <div className="absolute inset-x-0 bottom-0 p-7 max-sm:p-6">
         <Typography as="h3" variant="sectionTitle" className="max-w-[80%] text-[clamp(1.75rem,2.4vw,2.5rem)] leading-[.94] tracking-[-.035em]">{player.name}</Typography>
-        <Typography variant="caption" className="mt-3 max-w-[calc(100%-4rem)] text-slate-300">{player.club} · {player.city ? `${player.country}, ${player.city}` : player.country} · {player.age} {locale === "ru" ? "лет" : "years"}</Typography>
+        <Typography variant="caption" className="mt-3 max-w-[calc(100%-4rem)] text-slate-300">{[player.club, player.city ? [player.country, player.city].filter(Boolean).join(", ") : player.country, player.age ? `${player.age} ${locale === "ru" ? "лет" : "years"}` : null].filter(Boolean).join(" · ")}</Typography>
       </div>
 
       <Link

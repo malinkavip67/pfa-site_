@@ -12,7 +12,7 @@ export default function FeatureStatement({ locale = "ru" }: Props) {
   return (
     <section aria-labelledby="about-title" className="relative overflow-hidden border-y border-white/10 py-20 max-md:py-16">
       <Image
-        src="/images/about/pfa-office-preview.png"
+        src={locale === "ru" ? "/images/about/pfa-office-preview-ru.webp" : "/images/about/pfa-office-preview.png"}
         fill
         loading="lazy"
         sizes="100vw"
@@ -29,7 +29,7 @@ export default function FeatureStatement({ locale = "ru" }: Props) {
           <AnimatedReveal className="max-lg:order-2">
             <Card className="border-white/15 bg-[#07111ee8] p-8 shadow-2xl shadow-black/30 backdrop-blur-sm max-sm:p-6">
               <Typography variant="bodyLarge" className="text-xl leading-9 text-white max-sm:text-lg max-sm:leading-8">
-                {locale === "ru" ? "Premier Football Agency — международное агентство, которое представляет интересы профессиональных футболистов и сопровождает их на каждом этапе карьеры." : "Premier Football Agency is an international agency representing professional footballers and supporting them at every stage of their careers."}
+                {locale === "ru" ? "Премьер Футбольное Агентство — международное агентство, которое представляет интересы профессиональных футболистов и сопровождает их на каждом этапе карьеры." : "Premier Football Agency is an international agency representing professional footballers and supporting them at every stage of their careers."}
               </Typography>
 
               <div className="my-5 h-px bg-gradient-to-r from-pfa-accent/70 via-white/15 to-transparent" />

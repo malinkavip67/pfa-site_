@@ -15,7 +15,7 @@ export default function FeaturedPlayers({ players, locale = "ru" }: Props) {
       <Container>
         <AnimatedReveal className="grid grid-cols-[1.15fr_.85fr] items-end gap-16 max-lg:grid-cols-1 max-lg:gap-9">
           <div>
-            <SectionHeading index="04">{locale === "ru" ? "Игроки" : "Players"}</SectionHeading>
+            <SectionHeading index="03">{locale === "ru" ? "Игроки" : "Players"}</SectionHeading>
             <Typography id="players-title" as="h2" variant="sectionTitle" className="mt-8 text-[clamp(1.88rem,3vw,3.2rem)] leading-[.94] tracking-[-.05em] max-sm:text-[1.5rem]">
               {locale === "ru" ? <>Талант. Характер.<br /><span className="text-pfa-accent">Будущее.</span></> : <>Talent. Character.<br /><span className="text-pfa-accent">Future.</span></>}
             </Typography>

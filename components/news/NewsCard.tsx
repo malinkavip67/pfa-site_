@@ -1,11 +1,12 @@
 import Image from "next/image";
+import Link from "next/link";
 import Card from "@/components/ui/Card";
 import Typography from "@/components/ui/Typography";
 import type { NewsItem } from "@/types/news";
 
-interface Props { item: NewsItem; }
+interface Props { item: NewsItem; locale?: "ru" | "en"; }
 
-export default function NewsCard({ item }: Props) {
+export default function NewsCard({ item, locale = "ru" }: Props) {
   return (
     <Card className="group h-full overflow-hidden border-white/10 bg-[#08111d]">
       <div className="relative aspect-[16/9] overflow-hidden bg-pfa-surface">
@@ -14,11 +15,11 @@ export default function NewsCard({ item }: Props) {
       </div>
       <div className="p-6">
         <div className="flex items-center justify-between gap-4">
-          <Typography as="span" variant="sectionSubtitle">{item.id}</Typography>
+          <Typography as="span" variant="sectionSubtitle">{item.displayId ?? item.id}</Typography>
           <Typography as="span" variant="caption" className="text-slate-400">{item.date}</Typography>
         </div>
-        <Typography as="h2" variant="sectionTitle" className="mt-6 text-[clamp(1.25rem,1.65vw,1.7rem)] leading-tight tracking-[-.035em]">{item.title}</Typography>
-        <Typography variant="bodyMedium" className="mt-4 max-w-lg text-slate-300">{item.excerpt}</Typography>
+        <Typography as="h2" variant="sectionTitle" className="mt-6 text-[clamp(1.25rem,1.65vw,1.7rem)] leading-tight tracking-[-.035em]"><Link href={`${locale === "en" ? "/en" : ""}/news/${item.slug}`} className="transition-colors hover:text-pfa-accent">{item.title}</Link></Typography>
+        {item.excerpt && <Typography variant="bodyMedium" className="mt-4 max-w-lg text-slate-300">{item.excerpt}</Typography>}
       </div>
     </Card>
   );

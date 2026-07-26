@@ -4,6 +4,5 @@ export interface Partner {
   category: string;
   logo?: string;
   mark?: string;
-  website?: string;
   emblem?: boolean;
 }

@@ -6,7 +6,7 @@ export const NAVIGATION = [
   { label: "Главная", href: "/" },
   { label: "Игроки", href: "/players" },
   { label: "Новости", href: "/news" },
-  { label: "Услуги", href: "/#services" },
+  { label: "Услуги", href: "/services" },
   { label: "Партнёры", href: "/partners" },
   { label: "Вопросы", href: "/faq" },
   { label: "Контакты", href: "/contacts" },

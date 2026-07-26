@@ -8,14 +8,16 @@ import ApplicationButton from "@/components/forms/ApplicationButton";
 import Container from "@/components/ui/Container";
 import Typography from "@/components/ui/Typography";
 import { localizePath, type Locale } from "@/lib/i18n";
+import type { ResolvedSiteSettings } from "@/lib/site-settings";
 
-interface Props { locale?: Locale; }
+interface Props { locale?: Locale; settings?: ResolvedSiteSettings; }
 
-export default function Hero({ locale = "ru" }: Props) {
+export default function Hero({ locale = "ru", settings }: Props) {
   const heroRef = useRef<HTMLElement>(null);
   const shouldReduceMotion = useReducedMotion();
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
   const imageY = useTransform(scrollYProgress, [0, 1], [0, 56]);
+  const titleLines = settings?.heroTitle.split(/\r?\n/).filter(Boolean) ?? [];
 
   return (
     <section ref={heroRef} id="top" className="relative isolate h-[78svh] min-h-[620px] max-h-[760px] overflow-hidden max-md:h-auto max-md:min-h-[720px]">
@@ -35,23 +37,23 @@ export default function Hero({ locale = "ru" }: Props) {
       <Container className="relative z-20 flex h-full min-h-[620px] items-center pb-12 pt-28 max-md:min-h-[720px] max-md:pb-16 max-md:pt-32">
         <div className="max-w-[620px]">
           <div>
-            <Typography variant="bodyMedium" className="font-bold text-white">Premier Football Agency</Typography>
+            <Typography variant="bodyMedium" className="font-bold text-white">{settings?.siteName ?? (locale === "ru" ? "Премьер Футбольное Агентство" : "Premier Football Agency")}</Typography>
           </div>
 
           <div>
             <Typography as="h1" variant="heroTitle" className="mt-6 text-[clamp(2.75rem,4.25vw,4.7rem)] max-sm:text-[clamp(1.7rem,8.1vw,2.4rem)]">
-              {locale === "ru" ? <>МЫ СОЗДАЁМ<br /><span className="text-pfa-accent">ЧЕМПИОНОВ</span></> : <>WE CREATE<br /><span className="text-pfa-accent">CHAMPIONS</span></>}
+              {settings ? titleLines.map((line, index) => <span className={index === titleLines.length - 1 ? "text-pfa-accent" : undefined} key={`${line}-${index}`}>{line}{index < titleLines.length - 1 && <br />}</span>) : locale === "ru" ? <>МЫ СОЗДАЁМ<br /><span className="text-pfa-accent">ЧЕМПИОНОВ</span></> : <>WE CREATE<br /><span className="text-pfa-accent">CHAMPIONS</span></>}
             </Typography>
           </div>
 
           <div>
             <Typography variant="bodyMedium" className="mt-7 max-w-[560px] font-semibold leading-6 text-white/90">
-              {locale === "ru" ? "Premier Football Agency — международное футбольное агентство, которое сопровождает профессиональных футболистов на каждом этапе карьеры. Мы организуем трансферы, ведём переговоры с клубами и защищаем интересы игроков." : "Premier Football Agency is an international football agency supporting professional players at every stage of their careers. We manage transfers, negotiate with clubs and protect our players’ interests."}
+              {settings?.heroSubtitle ?? (locale === "ru" ? "Премьер Футбольное Агентство — международное футбольное агентство, которое сопровождает профессиональных футболистов на каждом этапе карьеры. Мы организуем трансферы, ведём переговоры с клубами и защищаем интересы игроков." : "Premier Football Agency is an international football agency supporting professional players at every stage of their careers. We manage transfers, negotiate with clubs and protect our players’ interests.")}
             </Typography>
           </div>
 
           <div className="mt-8 flex gap-4 max-sm:grid max-sm:grid-cols-1">
-            <Button href={localizePath("/players", locale)} shape="square" size="compact">{locale === "ru" ? "Наши игроки" : "Our players"}</Button>
+            <Button href={settings?.heroButtonLink ?? localizePath("/players", locale)} shape="square" size="compact">{settings?.heroButtonText ?? (locale === "ru" ? "Наши игроки" : "Our players")}</Button>
             <ApplicationButton variant="secondary" shape="square" size="compact">{locale === "ru" ? "Оставить заявку" : "Leave an application"}</ApplicationButton>
           </div>
         </div>

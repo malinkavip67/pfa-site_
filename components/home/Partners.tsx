@@ -14,7 +14,7 @@ export default function Partners({ partners, locale = "ru" }: Props) {
       <Container>
         <AnimatedReveal className="grid grid-cols-[1.15fr_.85fr] items-end gap-16 max-lg:grid-cols-1 max-lg:gap-9">
           <div>
-            <SectionHeading index="05">{locale === "ru" ? "Партнёры" : "Partners"}</SectionHeading>
+            <SectionHeading index="04">{locale === "ru" ? "Партнёры" : "Partners"}</SectionHeading>
             <Typography id="partners-title" as="h2" variant="sectionTitle" className="mt-8 text-[clamp(1.88rem,3vw,3.2rem)] leading-[.94] tracking-[-.05em] max-sm:text-[1.5rem]">
               {locale === "ru" ? <>Надёжные связи.<br /><span className="text-pfa-accent">Сильные решения.</span></> : <>Trusted connections.<br /><span className="text-pfa-accent">Strong solutions.</span></>}
             </Typography>

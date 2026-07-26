@@ -45,10 +45,12 @@ export const englishPlayers: Player[] = [
 ];
 
 export const englishPartners: Partner[] = [
-  { id: "01", name: "PIK", category: "Real estate development", logo: "/images/partners/pik.svg", website: "https://www.pik.ru/" },
-  { id: "02", name: "Major Auto", category: "Automotive holding", logo: "/images/partners/major-auto.svg", website: "https://www.major-auto.ru/" },
-  { id: "03", name: "Vkusno — i tochka", category: "Restaurant chain", logo: "/images/partners/vkusno-i-tochka.svg", website: "https://vkusnoitochka.ru/" },
-  { id: "04", name: "Sports Centre LLC", category: "Football Agency Europe", logo: "/images/partners/sport-center-europe.png", website: "https://www.footballagency.ru/", emblem: true },
+  { id: "01", name: "PIK", category: "Real estate development", logo: "/images/partners/pik.svg" },
+  { id: "02", name: "Major Auto", category: "Automotive holding", logo: "/images/partners/major-auto.svg" },
+  { id: "03", name: "Vkusno — i tochka", category: "Restaurant chain", logo: "/images/partners/vkusno-i-tochka.svg" },
+  { id: "04", name: "Sports Centre LLC", category: "Football Agency Europe", logo: "/images/partners/sport-center-europe.png", emblem: true },
+  { id: "05", name: "Белый слон", category: "PFA partner", logo: "/images/partners/white-elephant.jpg" },
+  { id: "06", name: "Opta by Stats Perform", category: "Sports analytics", logo: "/images/partners/opta-stats-perform.jpg" },
 ];
 
 export const englishNews: NewsItem[] = [

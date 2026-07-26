@@ -6,6 +6,7 @@ import DocumentLanguage from "@/components/layout/DocumentLanguage";
 import StructuredData from "@/components/layout/StructuredData";
 import CookieNotice from "@/components/layout/CookieNotice";
 import { organizationStructuredData } from "@/lib/structured-data";
+import { getSiteSettings } from "@/lib/site-settings";
 import "@/styles/globals.css";
 
 const manropeCyrillic = localFont({
@@ -24,7 +25,7 @@ const manropeLatin = localFont({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://pfa.agency"),
-  title: { default: "Premier Football Agency — Мы создаём чемпионов", template: "%s — PFA" },
+  title: { default: "Премьер Футбольное Агентство — Мы создаём чемпионов", template: "%s — PFA" },
   description: "Международное футбольное агентство. Стратегическое управление карьерой профессиональных футболистов.",
   applicationName: "PFA",
   category: "sports",
@@ -33,9 +34,11 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = { themeColor: "#050B14", width: "device-width", initialScale: 1 };
+export const dynamic = "force-dynamic";
 
 interface Props { children: React.ReactNode; }
 
-export default function RootLayout({ children }: Readonly<Props>) {
-  return <html lang="ru" suppressHydrationWarning><body suppressHydrationWarning className={`${manropeCyrillic.variable} ${manropeLatin.variable}`}><DocumentLanguage /><a className="skip-link" href="#main-content">Перейти к содержимому</a><StructuredData data={organizationStructuredData} /><Header /><main id="main-content">{children}</main><Footer /><CookieNotice /></body></html>;
+export default async function RootLayout({ children }: Readonly<Props>) {
+  const settings = await getSiteSettings();
+  return <html lang="ru" suppressHydrationWarning><body suppressHydrationWarning className={`${manropeCyrillic.variable} ${manropeLatin.variable}`}><DocumentLanguage /><a className="skip-link" href="#main-content">Перейти к содержимому</a><StructuredData data={organizationStructuredData} /><Header siteName={settings.siteName} /><main id="main-content">{children}</main><Footer settings={settings} /><CookieNotice /></body></html>;
 }

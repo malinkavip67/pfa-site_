@@ -1,23 +1,9 @@
+import "server-only";
+import { neonQuery } from "@/lib/neon";
 import type { Player } from "@/types/player";
-
-export const players: Player[] = [
-  {
-    id: "01", name: "Прошунин Роман", position: "Полузащитник", club: "Футбольная академия А. Журавлева", country: "Россия", city: "Москва", age: 23, birthDate: "24.06.2003", height: 180, weight: 75, preferredFoot: "Левая", image: "/images/players/roman-proshunin.jpg", slug: "roman-proshunin",
-    summary: "Техничный левоногий полузащитник с высоким игровым интеллектом и отличным первым касанием. Отличается филигранной техникой обводки и поставленным дальним ударом с левой ноги, эффективно действует как в подыгрыше, так и при завершении атак. Благодаря хорошей стартовой скорости и видению поля предпочитает агрессивные вертикальные передачи и регулярно участвует в прессинге.",
-    highlights: ["Филигранная техника обводки и поставленный дальний удар с левой ноги.", "Эффективная игра в подыгрыше и при завершении атак.", "Агрессивные вертикальные передачи и активное участие в прессинге."],
-  },
-  {
-    id: "02", name: "Марк Беннет", position: "Нападающий", club: "London", country: "Англия", age: 22, height: 188, weight: 82, image: "/images/players/mark-bennet.webp", slug: "mark-bennet",
-    summary: "Мощный центральный нападающий, уверенно играющий в штрафной площади и создающий пространство для партнёров.",
-    highlights: ["Лучший бомбардир регионального чемпионата сезона 2025/26.", "Оформил хет-трик в матче против Westbridge FC.", "Воспитанник London Elite Football Academy."],
-  },
-  {
-    id: "03", name: "Лука Вольф", position: "Защитник", club: "Berlin", country: "Германия", age: 25, height: 191, weight: 86, image: "/images/players/luka-wolf.webp", slug: "luka-wolf",
-    summary: "Центральный защитник с сильной игрой в воздухе, качественным первым пасом и лидерскими качествами.",
-    highlights: ["Вошёл в символическую сборную чемпионата сезона 2025/26.", "Провёл 14 матчей без пропущенных мячей.", "Прошёл подготовку в Berlin Professional Football School."],
-  },
-];
-
-export async function getPlayers(): Promise<Player[]> {
-  return players;
-}
+interface Row { id:string; firstName:string; lastName:string; slug:string; birthDate:string|null; nationality:string|null; city:string|null; position:string|null; club:string|null; height:number|null; weight:number|null; preferredFoot:string|null; description:string|null; achievements:string|null; photoUrl:string|null; videoUrl:string|null; }
+function age(value:string|null){if(!value)return undefined;const date=new Date(value),today=new Date();let result=today.getUTCFullYear()-date.getUTCFullYear();if(today.getUTCMonth()<date.getUTCMonth()||(today.getUTCMonth()===date.getUTCMonth()&&today.getUTCDate()<date.getUTCDate()))result--;return result;}
+function format(row:Row,index=0):Player{return{id:row.id,displayId:String(index+1).padStart(2,"0"),name:`${row.firstName} ${row.lastName}`,position:row.position??undefined,club:row.club??undefined,country:row.nationality??undefined,city:row.city??undefined,age:age(row.birthDate),birthDate:row.birthDate?new Date(row.birthDate).toLocaleDateString("ru-RU",{timeZone:"UTC"}):undefined,height:row.height??undefined,weight:row.weight??undefined,preferredFoot:row.preferredFoot??undefined,image:row.photoUrl||"/images/players/player-card.webp",slug:row.slug,summary:row.description??undefined,highlights:row.achievements?.split(/\r?\n/).map(v=>v.trim()).filter(Boolean)??[],videoUrl:row.videoUrl??undefined};}
+const fields=`"id","firstName","lastName","slug","birthDate","nationality","city","position","club","height","weight","preferredFoot","description","achievements","photoUrl","videoUrl"`;
+export async function getPlayers():Promise<Player[]>{try{return(await neonQuery<Row>(`SELECT ${fields} FROM "Player" WHERE "isPublished"=true ORDER BY "sortOrder" ASC,"createdAt" DESC`)).map(format);}catch{console.error("Published players loading failed.");return[];}}
+export async function getPlayerBySlug(slug:string):Promise<Player|null>{try{const rows=await neonQuery<Row>(`SELECT ${fields} FROM "Player" WHERE "slug"=$1 AND "isPublished"=true LIMIT 1`,[slug]);return rows[0]?format(rows[0]):null;}catch{console.error("Player profile loading failed.");return null;}}

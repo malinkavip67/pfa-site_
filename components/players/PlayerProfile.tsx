@@ -14,11 +14,11 @@ export default function PlayerProfile({ player, locale = "ru" }: Props) {
     : { country: "Country and city", age: "Age", birthDate: "Date of birth", height: "Height", weight: "Weight", preferredFoot: "Preferred foot", years: "", cm: "cm", kg: "kg", back: "All players", career: "Career and achievements" };
 
   const playerDetails = [
-    [labels.country, player.city ? `${player.country}, ${player.city}` : player.country],
-    [labels.age, `${player.age}${labels.years}`],
+    ...(player.country || player.city ? [[labels.country, player.city ? [player.country, player.city].filter(Boolean).join(", ") : player.country!]] : []),
+    ...(player.age ? [[labels.age, `${player.age}${labels.years}`]] : []),
     ...(player.birthDate ? [[labels.birthDate, player.birthDate]] : []),
-    [labels.height, `${player.height} ${labels.cm}`],
-    [labels.weight, `${player.weight} ${labels.kg}`],
+    ...(player.height ? [[labels.height, `${player.height} ${labels.cm}`]] : []),
+    ...(player.weight ? [[labels.weight, `${player.weight} ${labels.kg}`]] : []),
     ...(player.preferredFoot ? [[labels.preferredFoot, player.preferredFoot]] : []),
   ];
 
@@ -32,8 +32,8 @@ export default function PlayerProfile({ player, locale = "ru" }: Props) {
           </div>
           <div className="min-w-0 flex flex-col justify-center p-12 max-md:p-8 max-sm:p-6">
             <div className="flex items-center justify-between gap-6 border-b border-white/10 pb-6">
-              <Typography as="span" variant="sectionSubtitle">{player.position}</Typography>
-              <Typography as="span" variant="caption" className="text-slate-300">{player.club}</Typography>
+              <Typography as="span" variant="sectionSubtitle">{player.position ?? (locale === "ru" ? "Игрок" : "Player")}</Typography>
+              <Typography as="span" variant="caption" className="text-slate-300">{player.club ?? "PFA"}</Typography>
             </div>
             <Typography as="h1" variant="sectionTitle" className="mt-8 text-[clamp(2.6rem,5vw,4.5rem)] leading-[.9] tracking-[-.05em] max-sm:text-[2.25rem]">{player.name}</Typography>
             <dl className="mt-10 grid grid-cols-2 border-l border-t border-white/10 max-sm:mt-8">
@@ -44,9 +44,9 @@ export default function PlayerProfile({ player, locale = "ru" }: Props) {
                 </div>
               ))}
             </dl>
-            <div className="mt-10 border-t border-white/10 pt-8">
+            {(player.summary || player.highlights.length > 0) && <div className="mt-10 border-t border-white/10 pt-8">
               <Typography as="h2" variant="sectionSubtitle">{labels.career}</Typography>
-              <Typography variant="bodyMedium" className="mt-5 text-base leading-8 text-slate-200">{player.summary}</Typography>
+              {player.summary && <Typography variant="bodyMedium" className="mt-5 text-base leading-8 text-slate-200">{player.summary}</Typography>}
               <ul className="mt-6 space-y-4">
                 {player.highlights.map((highlight, index) => (
                   <li className="grid min-w-0 grid-cols-[32px_minmax(0,1fr)] gap-3" key={highlight}>
@@ -55,7 +55,7 @@ export default function PlayerProfile({ player, locale = "ru" }: Props) {
                   </li>
                 ))}
               </ul>
-            </div>
+            </div>}
             <Button href={localizePath("/players", locale)} variant="secondary" shape="square" size="compact" className="mt-10 self-start">{labels.back}</Button>
           </div>
         </Card>

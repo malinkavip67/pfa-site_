@@ -8,13 +8,17 @@ import Button from "@/components/ui/Button";
 import Card from "@/components/ui/Card";
 import Container from "@/components/ui/Container";
 import Typography from "@/components/ui/Typography";
-import { CONTACT_EMAIL } from "@/lib/constants";
 import { localizePath, type Locale } from "@/lib/i18n";
 
 interface Props {
   locale?: Locale;
   initialAudience?: ApplicationAudience | null;
 }
+
+type SubmissionState =
+  | { status: "idle"; message: "" }
+  | { status: "submitting"; message: "" }
+  | { status: "success" | "error"; message: string };
 
 const content = {
   ru: {
@@ -38,7 +42,7 @@ const content = {
     form: {
       eyebrow: "Заявка игрока",
       title: "Начнём знакомство",
-      description: "Оставьте контактные данные. Мы подготовим письмо в PFA, чтобы команда могла лично продолжить разговор.",
+      description: "Оставьте контактные данные. Заявка поступит в PFA, чтобы команда могла лично продолжить разговор.",
       surname: "Фамилия",
       name: "Имя",
       phone: "Телефон",
@@ -46,12 +50,15 @@ const content = {
       playerStory: "Кратко о себе и футбольном опыте",
       parentStory: "Кратко расскажите об игроке",
       storyPlaceholder: "Команда, позиция, опыт, цели и другая важная информация",
-      submit: "Написать в PFA",
+      submit: "Отправить заявку",
+      submitting: "Отправка",
       close: "Закрыть форму",
-      note: "После нажатия откроется ваше почтовое приложение с готовым письмом.",
+      note: "Мы сохраним заявку и используем данные только для рассмотрения обращения.",
+      success: "Заявка отправлена. Команда PFA свяжется с вами после рассмотрения.",
+      error: "Не удалось отправить заявку. Проверьте данные и попробуйте ещё раз.",
       parentEyebrow: "Обращение родителя",
       parentTitle: "Обсудим карьеру игрока",
-      parentDescription: "Оставьте контактные данные. Мы подготовим письмо в PFA, чтобы команда могла лично ответить на ваши вопросы.",
+      parentDescription: "Оставьте контактные данные. Заявка поступит в PFA, чтобы команда могла лично ответить на ваши вопросы.",
       consentBeforeLink: "Я даю согласие PFA на обработку указанных данных для рассмотрения заявки и ответа в соответствии с",
       privacyLink: "политикой конфиденциальности",
       playerConfirmation: "Мне исполнилось 18 лет. Если нет, форму должен заполнить родитель или законный представитель.",
@@ -79,7 +86,7 @@ const content = {
     form: {
       eyebrow: "Player application",
       title: "Let’s get acquainted",
-      description: "Leave your contact details. We will prepare an email to PFA so the team can continue the conversation personally.",
+      description: "Leave your contact details. The application will reach PFA so the team can continue the conversation personally.",
       surname: "Last name",
       name: "First name",
       phone: "Phone",
@@ -87,12 +94,15 @@ const content = {
       playerStory: "Tell us briefly about yourself and your football experience",
       parentStory: "Tell us briefly about the player",
       storyPlaceholder: "Team, position, experience, goals and any other important information",
-      submit: "Write to PFA",
+      submit: "Send application",
+      submitting: "Sending",
       close: "Close form",
-      note: "Your email application will open with a ready-to-send message.",
+      note: "We will store the application and use the information only to review your enquiry.",
+      success: "Your application has been sent. The PFA team will contact you after reviewing it.",
+      error: "The application could not be sent. Check the information and try again.",
       parentEyebrow: "Parent enquiry",
       parentTitle: "Let’s discuss the player’s career",
-      parentDescription: "Leave your contact details. We will prepare an email to PFA so the team can personally answer your questions.",
+      parentDescription: "Leave your contact details. The application will reach PFA so the team can personally answer your questions.",
       consentBeforeLink: "I consent to PFA processing the submitted data to review and respond to this enquiry in accordance with the",
       privacyLink: "privacy policy",
       playerConfirmation: "I am at least 18 years old. Otherwise, this form must be completed by a parent or legal representative.",
@@ -104,6 +114,7 @@ const content = {
 export default function AudiencePaths({ locale = "ru", initialAudience = null }: Props) {
   const copy = content[locale];
   const [formAudience, setFormAudience] = useState<ApplicationAudience | null>(initialAudience);
+  const [submissionState, setSubmissionState] = useState<SubmissionState>({ status: "idle", message: "" });
   const isFormOpen = formAudience !== null;
 
   useEffect(() => {
@@ -130,20 +141,42 @@ export default function AudiencePaths({ locale = "ru", initialAudience = null }:
     };
   }, [isFormOpen]);
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const formData = new FormData(event.currentTarget);
-    const subject = formAudience === "parent"
-      ? (locale === "ru" ? "Обращение родителя с сайта PFA" : "Parent enquiry from the PFA website")
-      : (locale === "ru" ? "Заявка игрока с сайта PFA" : "Player application from the PFA website");
-    const audienceConfirmation = formAudience === "parent"
-      ? (locale === "ru" ? "Статус: родитель или законный представитель" : "Status: parent or legal representative")
-      : (locale === "ru" ? "Возраст: 18 лет или старше" : "Age: 18 or older");
-    const body = locale === "ru"
-      ? `Фамилия: ${formData.get("surname")}\nИмя: ${formData.get("name")}\nТелефон: ${formData.get("phone")}\nПочта: ${formData.get("email")}\n\nКраткий рассказ:\n${formData.get("story")}\n\nСогласие на обработку персональных данных: предоставлено\n${audienceConfirmation}`
-      : `Last name: ${formData.get("surname")}\nFirst name: ${formData.get("name")}\nPhone: ${formData.get("phone")}\nEmail: ${formData.get("email")}\n\nBrief introduction:\n${formData.get("story")}\n\nConsent to personal data processing: granted\n${audienceConfirmation}`;
+    if (!formAudience || submissionState.status === "submitting") return;
 
-    window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+    setSubmissionState({ status: "submitting", message: "" });
+
+    try {
+      const response = await fetch("/api/applications", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          type: formAudience === "parent" ? "PARENT" : "PLAYER",
+          firstName: formData.get("name"),
+          lastName: formData.get("surname"),
+          phone: formData.get("phone"),
+          email: formData.get("email"),
+          story: formData.get("story"),
+          isAdult: formData.get("audienceConfirmation") === "confirmed",
+          consent: formData.get("privacyConsent") === "granted",
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(copy.form.error);
+      }
+
+      form.reset();
+      setSubmissionState({ status: "success", message: copy.form.success });
+    } catch (error) {
+      setSubmissionState({
+        status: "error",
+        message: error instanceof Error && error.message ? error.message : copy.form.error,
+      });
+    }
   };
 
   return (
@@ -315,8 +348,29 @@ export default function AudiencePaths({ locale = "ru", initialAudience = null }:
               </div>
 
               <div className="col-span-2 mt-3 flex items-center justify-between gap-6 max-sm:col-span-1 max-sm:flex-col max-sm:items-stretch">
-                <Typography variant="caption" className="max-w-[300px] normal-case tracking-normal text-slate-400">{copy.form.note}</Typography>
-                <Button type="submit" shape="square" size="compact" className="shrink-0">{copy.form.submit}</Button>
+                <div aria-live="polite" className="max-w-[360px]">
+                  <Typography
+                    variant="caption"
+                    className={`normal-case tracking-normal ${
+                      submissionState.status === "error"
+                        ? "text-red-300"
+                        : submissionState.status === "success"
+                          ? "text-pfa-accent"
+                          : "text-slate-400"
+                    }`}
+                  >
+                    {submissionState.message || copy.form.note}
+                  </Typography>
+                </div>
+                <Button
+                  type="submit"
+                  shape="square"
+                  size="compact"
+                  className="shrink-0"
+                  disabled={submissionState.status === "submitting"}
+                >
+                  {submissionState.status === "submitting" ? copy.form.submitting : copy.form.submit}
+                </Button>
               </div>
             </form>
           </Card>

@@ -1,0 +1,111 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+enum ApplicationType {
+  PLAYER
+  PARENT
+}
+
+enum ApplicationStatus {
+  NEW
+  IN_PROGRESS
+  COMPLETED
+  ARCHIVED
+}
+
+model Application {
+  id           String            @id @default(cuid())
+  createdAt    DateTime          @default(now())
+  updatedAt    DateTime          @updatedAt
+  type         ApplicationType
+  firstName    String
+  lastName     String
+  phone        String
+  email        String
+  story        String            @db.Text
+  isAdult      Boolean
+  consent      Boolean
+  status       ApplicationStatus @default(NEW)
+  internalNote String?           @db.Text
+
+  @@index([createdAt])
+  @@index([status])
+  @@index([email])
+}
+
+model Player {
+  id            String   @id @default(cuid())
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  firstName     String
+  lastName      String
+  slug          String   @unique
+  birthDate     DateTime?
+  nationality   String?
+  city          String?
+  position      String?
+  club          String?
+  height        Int?
+  weight        Int?
+  preferredFoot String?
+  description   String?  @db.Text
+  achievements  String?  @db.Text
+  photoUrl      String?
+  videoUrl      String?
+  isPublished   Boolean  @default(false)
+  sortOrder     Int      @default(0)
+
+  @@index([isPublished])
+  @@index([sortOrder])
+  @@index([createdAt])
+}
+
+model News {
+  id          String    @id @default(cuid())
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  title       String
+  slug        String    @unique
+  excerpt     String?   @db.Text
+  content     String    @db.Text
+  imageUrl    String?
+  publishedAt DateTime?
+  isPublished Boolean   @default(false)
+
+  @@index([isPublished])
+  @@index([publishedAt])
+  @@index([createdAt])
+}
+
+model SiteSettings {
+  id             String   @id @default("main")
+  updatedAt      DateTime @updatedAt
+  siteName       String?
+  heroTitle      String?
+  heroSubtitle   String?
+  heroButtonText String?
+  heroButtonLink String?
+  phone          String?
+  email          String?
+  telegram       String?
+  whatsapp       String?
+  address        String?
+  footerText     String?  @db.Text
+}
+
+model AdminCredential {
+  adminId         String    @id
+  passwordHash    String?
+  resetTokenHash  String?   @unique
+  resetExpiresAt  DateTime?
+  updatedAt       DateTime  @updatedAt
+
+  @@index([resetExpiresAt])
+}
