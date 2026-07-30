@@ -43,7 +43,7 @@ export default async function ApplicationsPage() {
       <Container>
         <SectionHeading index="CRM">Заявки</SectionHeading>
         <div className="mt-6 grid grid-cols-[minmax(0,1fr)_minmax(280px,.55fr)] items-end gap-10 max-lg:grid-cols-1">
-          <Typography as="h1" variant="sectionTitle" className="text-[clamp(2rem,5.5vw,5rem)] leading-[.9] tracking-[-.05em]">
+          <Typography as="h1" variant="sectionTitle" className="text-[clamp(1.8rem,3.4vw,3.4rem)] leading-[.94] tracking-[-.04em]">
             Работа с<br /><span className="text-pfa-accent">обращениями</span>
           </Typography>
           <Typography variant="bodyLarge" className="border-l border-pfa-accent/60 pl-6 text-white max-lg:border-l-0 max-lg:border-t max-lg:pl-0 max-lg:pt-5">

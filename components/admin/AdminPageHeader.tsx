@@ -17,7 +17,7 @@ export default function AdminPageHeader({ eyebrow, title, description, actionHre
       <div className="flex flex-wrap items-end justify-between gap-8">
         <div>
           <SectionHeading index="ADMIN">{eyebrow}</SectionHeading>
-          <Typography as="h1" variant="sectionTitle" className="mt-6 text-[clamp(2rem,5vw,4.5rem)] leading-[.92] tracking-[-.05em]">{title}</Typography>
+          <Typography as="h1" variant="sectionTitle" className="mt-6 text-[clamp(1.7rem,3.1vw,3rem)] leading-[.96] tracking-[-.04em]">{title}</Typography>
           <Typography variant="bodyMedium" className="mt-5 max-w-2xl text-slate-300">{description}</Typography>
         </div>
         {actionHref && actionLabel && <Button href={actionHref} shape="square" size="compact">{actionLabel}</Button>}

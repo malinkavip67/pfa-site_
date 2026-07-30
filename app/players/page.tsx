@@ -10,5 +10,5 @@ export const dynamic = "force-dynamic";
 
 export default async function PlayersPage() {
   const players = await getPlayers();
-  return <><PageHero eyebrow="Команда PFA" title="Игроки" description="Представляем талант, характер и амбиции. Каждое решение подчинено одной цели — долгой карьере на высшем уровне." /><Container className="py-24"><PlayersGrid players={players} /></Container></>;
+  return <><PageHero eyebrow="Команда PFA" title="Игроки" description="Представляем талант, характер и амбиции. Каждое решение подчинено одной цели — долгой карьере на высшем уровне." /><Container className="py-24"><PlayersGrid players={players} editorialSlots={6} /></Container></>;
 }

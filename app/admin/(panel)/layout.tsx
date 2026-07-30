@@ -11,6 +11,5 @@ export default async function AdminPanelLayout({ children }: Readonly<Props>) {
   if (!session) {
     redirect("/admin/login");
   }
-
   return <AdminShell administratorName={session.name}>{children}</AdminShell>;
 }

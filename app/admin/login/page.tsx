@@ -4,7 +4,7 @@ import AdminLoginForm from "@/components/admin/AdminLoginForm";
 import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Typography from "@/components/ui/Typography";
-import { isAdminAuthenticated } from "@/lib/admin-auth";
+import { getAdminSession } from "@/lib/admin-auth";
 
 export const dynamic = "force-dynamic";
 
@@ -15,7 +15,8 @@ export const metadata: Metadata = {
 };
 
 export default async function AdminLoginPage() {
-  if (await isAdminAuthenticated()) {
+  const session = await getAdminSession();
+  if (session) {
     redirect("/admin/applications");
   }
 

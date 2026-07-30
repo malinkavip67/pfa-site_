@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useState, type FormEvent } from "react";
 import Button from "@/components/ui/Button";
 import Card from "@/components/ui/Card";
@@ -50,7 +49,7 @@ export default function AdminLoginForm() {
 
   return (
     <Card as="div" className="w-full max-w-[520px] bg-[#081321] p-8 max-sm:p-6">
-      <Typography as="h1" variant="sectionTitle" className="text-[clamp(1.8rem,5vw,3.4rem)] leading-[.92]">
+      <Typography as="h1" variant="sectionTitle" className="text-[clamp(1.65rem,3.4vw,2.55rem)] leading-[.96]">
         Вход в <span className="text-pfa-accent">CRM</span>
       </Typography>
       <Typography variant="bodyMedium" className="mt-5 text-slate-300">
@@ -102,9 +101,6 @@ export default function AdminLoginForm() {
           {isSubmitting ? "Проверяем" : "Войти"}
         </Button>
       </form>
-      <Link href="/admin/forgot-password" className="mt-6 inline-block text-sm text-slate-300 underline-offset-4 hover:text-white hover:underline">
-        Забыли пароль?
-      </Link>
     </Card>
   );
 }

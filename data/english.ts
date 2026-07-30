@@ -33,14 +33,9 @@ export const englishPlayers: Player[] = [
     highlights: ["Refined dribbling technique and a powerful long-range strike with his left foot.", "Effective contribution in both build-up play and finishing attacks.", "Aggressive vertical passing and consistent participation in pressing."],
   },
   {
-    id: "02", name: "Mark Bennet", position: "Forward", club: "London", country: "England", age: 22, height: 188, weight: 82, image: "/images/players/mark-bennet.webp", slug: "mark-bennet",
-    summary: "A powerful centre-forward who is confident inside the box and creates space for his teammates.",
-    highlights: ["Top scorer in the 2025/26 regional championship.", "Scored a hat-trick against Westbridge FC.", "A graduate of London Elite Football Academy."],
-  },
-  {
-    id: "03", name: "Luka Wolf", position: "Defender", club: "Berlin", country: "Germany", age: 25, height: 191, weight: 86, image: "/images/players/luka-wolf.webp", slug: "luka-wolf",
-    summary: "A central defender with dominant aerial ability, a reliable first pass and strong leadership qualities.",
-    highlights: ["Named in the 2025/26 team of the season.", "Helped the team record 14 clean sheets.", "Developed at Berlin Professional Football School."],
+    id: "03", name: "Sergey Kudryavtsev", position: "Goalkeeper", country: "Russia", city: "Yaroslavl", age: 19, birthDate: "12.10.2006", height: 190, weight: 82, preferredFoot: "Right", image: "/images/players/sergey-kudryavtsev-v2.webp", slug: "sergey-kudryavtsev",
+    summary: "A modern goalkeeper with sharp reactions, confident play on the line and quick positional decisions. He is reliable in one-on-one situations, commands his penalty area and starts attacks with accurate distribution.",
+    highlights: ["Sharp reactions and confident play on the goal line.", "Reliable decision-making in one-on-one situations.", "Strong command of the penalty area and accurate distribution."],
   },
 ];
 

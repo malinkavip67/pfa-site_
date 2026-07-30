@@ -18,7 +18,6 @@ const ITEMS = [
   { href: "/admin/players", label: "Игроки" },
   { href: "/admin/news", label: "Новости" },
   { href: "/admin/settings", label: "Настройки сайта" },
-  { href: "/admin/change-password", label: "Безопасность" },
 ] as const;
 
 export default function AdminShell({ children, administratorName }: Props) {

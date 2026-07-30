@@ -11,11 +11,11 @@ INSERT INTO "Player" (
   '/images/players/roman-proshunin.jpg',NULL,true,1
 ),
 (
-  'seed-player-luka-wolf',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,'Лука','Вольф','luka-wolf',NULL,
-  'Германия',NULL,'Защитник','Berlin',191,86,NULL,
-  'Центральный защитник с сильной игрой в воздухе, качественным первым пасом и лидерскими качествами.',
-  E'Вошёл в символическую сборную чемпионата сезона 2025/26.\nПровёл 14 матчей без пропущенных мячей.\nПрошёл подготовку в Berlin Professional Football School.',
-  '/images/players/luka-wolf.webp',NULL,true,3
+  'seed-player-sergey-kudryavtsev',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,'Сергей','Кудрявцев','sergey-kudryavtsev','2006-10-12 12:00:00',
+  'Россия','Ярославль','Вратарь',NULL,190,82,'Правая',
+  'Современный вратарь с хорошей реакцией, уверенной игрой на линии и быстрым выбором позиции. Надёжно действует при выходах один в один, контролирует штрафную площадь и начинает атаки точными передачами. Отличается спокойствием, дисциплиной и уверенностью в ключевых эпизодах матча.',
+  E'Хорошая реакция и уверенная игра на линии ворот.\nНадёжные действия при выходах один в один.\nКонтроль штрафной площади и точное начало атак.',
+  '/images/players/sergey-kudryavtsev-v2.webp',NULL,true,3
 )
 ON CONFLICT ("slug") DO NOTHING;
 
