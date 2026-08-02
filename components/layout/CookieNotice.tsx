@@ -59,6 +59,12 @@ export default function CookieNotice() {
   }, []);
 
   const saveConsent = (analytics: boolean) => {
+    let previousConsent: CookieConsent | null = null;
+    try {
+      previousConsent = parseCookieConsent(window.localStorage.getItem(COOKIE_CONSENT_STORAGE_KEY));
+    } catch {
+      // Storage may be unavailable.
+    }
     const consent: CookieConsent = {
       version: COOKIE_CONSENT_VERSION,
       necessary: true,
@@ -74,6 +80,10 @@ export default function CookieNotice() {
     }
 
     setIsVisible(false);
+
+    if (previousConsent?.analytics === true && !analytics) {
+      window.location.reload();
+    }
   };
 
   if (!isVisible) return null;

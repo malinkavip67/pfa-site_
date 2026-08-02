@@ -67,7 +67,7 @@ export default function EnglishCookiesPage() {
       introduction="Essential technologies support website security and core functions. Yandex Metrica and Google Analytics may be enabled only after the visitor gives separate consent."
       updatedLabel="Version dated 2 August 2026"
       sections={sections}
-      notice="Until analytics identifiers are added, the website does not load Yandex Metrica or Google Analytics."
+      notice="Yandex Metrica and Google Analytics are loaded only after the visitor selects “Allow analytics”. Analytics remains disabled on local development addresses regardless of the saved choice."
     />
   );
 }

@@ -5,6 +5,7 @@ import Footer from "@/components/layout/Footer";
 import DocumentLanguage from "@/components/layout/DocumentLanguage";
 import StructuredData from "@/components/layout/StructuredData";
 import CookieNotice from "@/components/layout/CookieNotice";
+import Analytics from "@/components/analytics/Analytics";
 import { organizationStructuredData } from "@/lib/structured-data";
 import { getSiteSettings } from "@/lib/site-settings";
 import "@/styles/globals.css";
@@ -40,5 +41,5 @@ interface Props { children: React.ReactNode; }
 
 export default async function RootLayout({ children }: Readonly<Props>) {
   const settings = await getSiteSettings();
-  return <html lang="ru" suppressHydrationWarning><body suppressHydrationWarning className={`${manropeCyrillic.variable} ${manropeLatin.variable}`}><DocumentLanguage /><a className="skip-link" href="#main-content">Перейти к содержимому</a><StructuredData data={organizationStructuredData} /><Header siteName={settings.siteName} /><main id="main-content">{children}</main><Footer settings={settings} /><CookieNotice /></body></html>;
+  return <html lang="ru" suppressHydrationWarning><body suppressHydrationWarning className={`${manropeCyrillic.variable} ${manropeLatin.variable}`}><DocumentLanguage /><a className="skip-link" href="#main-content">Перейти к содержимому</a><StructuredData data={organizationStructuredData} /><Header siteName={settings.siteName} /><main id="main-content">{children}</main><Footer settings={settings} /><Analytics googleAnalyticsId={process.env.GOOGLE_ANALYTICS_ID} yandexMetricaId={process.env.YANDEX_METRICA_ID} /><CookieNotice /></body></html>;
 }
