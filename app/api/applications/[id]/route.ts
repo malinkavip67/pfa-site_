@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { isAdminAuthenticated } from "@/lib/admin-auth";
-import { neonQuery } from "@/lib/neon";
+import { databaseQuery } from "@/lib/postgres";
 import { APPLICATION_STATUSES, type ApplicationStatusValue } from "@/types/application";
 
 export const runtime = "nodejs";
@@ -53,7 +53,7 @@ export async function PATCH(request: Request, { params }: RouteContext) {
       return NextResponse.json({ ok: false, message: "Нет данных для сохранения." }, { status: 400 });
     }
 
-    const rows = await neonQuery<{
+    const rows = await databaseQuery<{
       id: string;
       status: ApplicationStatusValue;
       internalNote: string | null;

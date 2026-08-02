@@ -4,7 +4,7 @@ import Card from "@/components/ui/Card";
 import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Typography from "@/components/ui/Typography";
-import { neonQuery } from "@/lib/neon";
+import { databaseQuery } from "@/lib/postgres";
 import type { ApplicationRecord } from "@/types/application";
 
 export const dynamic = "force-dynamic";
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 
 async function loadApplications(): Promise<{ applications: ApplicationRecord[]; error: boolean }> {
   try {
-    const applications = await neonQuery<ApplicationRecord>(
+    const applications = await databaseQuery<ApplicationRecord>(
       `SELECT "id","createdAt","type","firstName","lastName","phone","email","story",
        "isAdult","consent","status","internalNote"
        FROM "Application" ORDER BY "createdAt" DESC`,

@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { isAdminAuthenticated } from "@/lib/admin-auth";
-import { createDatabaseId, neonQuery } from "@/lib/neon";
+import { createDatabaseId, databaseQuery } from "@/lib/postgres";
 import type { ApplicationRecord } from "@/types/application";
 
 export const runtime = "nodejs";
@@ -25,7 +25,7 @@ export async function GET() {
   }
 
   try {
-    const applications = await neonQuery<ApplicationRecord>(
+    const applications = await databaseQuery<ApplicationRecord>(
       `SELECT "id","createdAt","type","firstName","lastName","phone","email","story",
        "isAdult","consent","status","internalNote"
        FROM "Application" ORDER BY "createdAt" DESC`,
@@ -75,7 +75,7 @@ export async function POST(request: Request) {
     }
 
     const id = createDatabaseId();
-    await neonQuery(
+    await databaseQuery(
       `INSERT INTO "Application"
        ("id","createdAt","updatedAt","type","firstName","lastName","phone","email","story","isAdult","consent","status")
        VALUES ($1,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,$2::"ApplicationType",$3,$4,$5,$6,$7,$8,$9,'NEW'::"ApplicationStatus")`,

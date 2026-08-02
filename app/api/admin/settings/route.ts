@@ -2,7 +2,7 @@ import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
 import { isAdminAuthenticated } from "@/lib/admin-auth";
 import { validateSettingsPayload } from "@/lib/admin-content-validation";
-import { neonQuery } from "@/lib/neon";
+import { databaseQuery } from "@/lib/postgres";
 import type { SiteSettingsRecord } from "@/types/admin-content";
 
 export const runtime = "nodejs";
@@ -13,13 +13,10 @@ export async function GET() {
   if (!(await isAdminAuthenticated())) return NextResponse.json({ ok: false }, { status: 401 });
 
   try {
-    const rows = await neonQuery<SiteSettingsRecord>(
-      `INSERT INTO "SiteSettings" ("id","updatedAt")
-       VALUES ('main',CURRENT_TIMESTAMP)
-       ON CONFLICT ("id") DO UPDATE SET "id"=EXCLUDED."id"
-       RETURNING ${settingsFields}`,
+    const rows = await databaseQuery<SiteSettingsRecord>(
+      `SELECT ${settingsFields} FROM "SiteSettings" WHERE "id"='main' LIMIT 1`,
     );
-    return NextResponse.json({ ok: true, settings: rows[0] });
+    return NextResponse.json({ ok: true, settings: rows[0] ?? null });
   } catch {
     return NextResponse.json({ ok: false, message: "Не удалось загрузить настройки." }, { status: 500 });
   }
@@ -32,7 +29,7 @@ export async function PATCH(request: Request) {
     const validated = validateSettingsPayload(await request.json());
     if (!("data" in validated)) return NextResponse.json({ ok: false, message: validated.error }, { status: 400 });
     const data = validated.data;
-    const rows = await neonQuery<SiteSettingsRecord>(
+    const rows = await databaseQuery<SiteSettingsRecord>(
       `INSERT INTO "SiteSettings"
        ("id","updatedAt","siteName","heroTitle","heroSubtitle","heroButtonText","heroButtonLink","phone","email","telegram","whatsapp","address","footerText")
        VALUES ('main',CURRENT_TIMESTAMP,$1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)

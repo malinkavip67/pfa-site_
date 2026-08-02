@@ -3,12 +3,12 @@ import Button from "@/components/ui/Button";
 import Card from "@/components/ui/Card";
 import Container from "@/components/ui/Container";
 import Typography from "@/components/ui/Typography";
-import { neonQuery } from "@/lib/neon";
+import { databaseQuery } from "@/lib/postgres";
 
 export const dynamic = "force-dynamic";
 
 export default async function AdminOverviewPage() {
-  const counts = (await neonQuery<{
+  const counts = (await databaseQuery<{
     newApplications: number;
     activeApplications: number;
     players: number;
