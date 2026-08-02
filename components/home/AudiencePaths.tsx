@@ -59,8 +59,10 @@ const content = {
       parentEyebrow: "Обращение родителя",
       parentTitle: "Обсудим карьеру игрока",
       parentDescription: "Оставьте контактные данные. Заявка поступит в PFA, чтобы команда могла лично ответить на ваши вопросы.",
-      consentBeforeLink: "Я даю согласие PFA на обработку указанных данных для рассмотрения заявки и ответа в соответствии с",
-      privacyLink: "политикой конфиденциальности",
+      consentBeforeLink: "Я свободно даю",
+      consentLink: "согласие на обработку персональных данных",
+      privacyBeforeLink: "До отправки заявки ознакомьтесь с",
+      privacyLink: "политикой обработки персональных данных",
       playerConfirmation: "Мне исполнилось 18 лет. Если нет, форму должен заполнить родитель или законный представитель.",
       parentConfirmation: "Я являюсь родителем или законным представителем игрока и имею право передавать его данные.",
     },
@@ -103,8 +105,10 @@ const content = {
       parentEyebrow: "Parent enquiry",
       parentTitle: "Let’s discuss the player’s career",
       parentDescription: "Leave your contact details. The application will reach PFA so the team can personally answer your questions.",
-      consentBeforeLink: "I consent to PFA processing the submitted data to review and respond to this enquiry in accordance with the",
-      privacyLink: "privacy policy",
+      consentBeforeLink: "I freely give my",
+      consentLink: "consent to personal data processing",
+      privacyBeforeLink: "Before submitting the application, please read the",
+      privacyLink: "personal data processing policy",
       playerConfirmation: "I am at least 18 years old. Otherwise, this form must be completed by a parent or legal representative.",
       parentConfirmation: "I am the player’s parent or legal representative and have the right to provide their data.",
     },
@@ -161,7 +165,7 @@ export default function AudiencePaths({ locale = "ru", initialAudience = null }:
           email: formData.get("email"),
           story: formData.get("story"),
           isAdult: formData.get("audienceConfirmation") === "confirmed",
-          consent: formData.get("privacyConsent") === "granted",
+          consent: formData.get("personalDataConsent") === "granted",
         }),
       });
 
@@ -317,7 +321,7 @@ export default function AudiencePaths({ locale = "ru", initialAudience = null }:
                 <label className="flex cursor-pointer items-start gap-3 text-xs leading-5 text-slate-300">
                   <input
                     required
-                    name="privacyConsent"
+                    name="personalDataConsent"
                     type="checkbox"
                     value="granted"
                     className="mt-0.5 h-4 w-4 shrink-0 accent-[#00EB52]"
@@ -326,14 +330,26 @@ export default function AudiencePaths({ locale = "ru", initialAudience = null }:
                     {copy.form.consentBeforeLink}{" "}
                     <a
                       className="font-bold text-white underline decoration-pfa-accent/70 underline-offset-4 transition-colors hover:text-pfa-accent"
+                      href={localizePath("/personal-data-consent", locale)}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      {copy.form.consentLink}
+                    </a>.
+                  </span>
+                </label>
+
+                <Typography variant="caption" className="normal-case leading-5 tracking-normal text-slate-400">
+                  {copy.form.privacyBeforeLink}{" "}
+                    <a
+                      className="font-bold text-white underline decoration-pfa-accent/70 underline-offset-4 transition-colors hover:text-pfa-accent"
                       href={localizePath("/privacy", locale)}
                       target="_blank"
                       rel="noreferrer"
                     >
                       {copy.form.privacyLink}
                     </a>.
-                  </span>
-                </label>
+                </Typography>
 
                 <label className="flex cursor-pointer items-start gap-3 text-xs leading-5 text-slate-300">
                   <input

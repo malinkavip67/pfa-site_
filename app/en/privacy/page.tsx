@@ -1,54 +1,104 @@
-import type { Metadata } from "next";
-import Card from "@/components/ui/Card";
-import Container from "@/components/ui/Container";
-import PageHero from "@/components/ui/PageHero";
-import Typography from "@/components/ui/Typography";
-import { CONTACT_EMAIL } from "@/lib/constants";
-import { createPageMetadata } from "@/lib/metadata";
+import type { Metadata } from 'next';
+import LegalDocument, { type LegalSection } from '@/components/legal/LegalDocument';
+import { DATABASE_PROCESSOR, LEGAL_ENTITY } from '@/lib/legal-details';
+import { createPageMetadata } from '@/lib/metadata';
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Privacy policy",
-  description: "Information about personal data processing and protection on the Premier Football Agency website.",
-  path: "/en/privacy",
-  keywords: ["PFA privacy policy", "personal data processing"],
+  title: 'Personal data processing policy',
+  description: 'The personal data processing and protection policy of Premier Football Agency LLC.',
+  path: '/en/privacy',
+  keywords: ['PFA personal data policy', 'personal data protection'],
 });
 
-const sections = [
-  ["Data we receive", "When a player or parent submits a form, PFA receives the last name, first name, phone number, email address and brief introduction they provide. The hosting provider may also automatically record limited technical information, including IP address, browser type, access time and date, required for website security and stability."],
-  ["Purpose and legal basis", "Data is used to review and respond to enquiries, discuss possible cooperation, protect the website against abuse and meet applicable legal obligations. When submitting a form, you separately confirm your consent to processing the provided data for these purposes. PFA does not sell personal data or use it for automated decision-making."],
-  ["Minors’ data", "The player form is intended for people aged 18 or older. If the player is a minor, their parent or legal representative must submit the parent form and confirm that they have the right to provide the player’s information."],
-  ["Cookies and local storage", "No analytics or advertising cookies are currently enabled. The website uses only essential local storage to remember that the cookie notice has been dismissed. Technical providers may process service logs and other strictly necessary data to deliver pages, prevent attacks and resolve errors."],
-  ["Retention and disclosure", "Information is retained only for as long as necessary to handle the enquiry or meet mandatory requirements. Hosting and email providers may receive limited access required to provide their services. We take reasonable organisational and technical measures to protect the data."],
-  ["Your rights and withdrawal", "You may request information about your data, correction, restriction or deletion where this is not prevented by law, and you may withdraw your consent. Contact PFA at the address below. After receiving the request, we will stop processing based on consent unless another lawful basis applies."],
-] as const;
+const sections: readonly LegalSection[] = [
+  {
+    title: 'Data controller',
+    paragraphs: [
+      `${LEGAL_ENTITY.fullName} (the Controller). OGRN ${LEGAL_ENTITY.ogrn}, INN ${LEGAL_ENTITY.inn}, KPP ${LEGAL_ENTITY.kpp}.`,
+      `Registered address: ${LEGAL_ENTITY.address}. Website: ${LEGAL_ENTITY.website}.`,
+      'This Policy applies to personal data submitted through the website, the application form and subsequent communication concerning an application.',
+    ],
+  },
+  {
+    title: 'Data subjects and data categories',
+    paragraphs: [
+      'The Controller processes data of adult football players and parents or legal representatives of minor football players who submit an application.',
+    ],
+    items: [
+      'the applicant’s first and last name;',
+      'telephone number and email address;',
+      'football experience, team, position, goals and other information voluntarily provided in the free-text field;',
+      'confirmation of legal age or parental/legal representative authority;',
+      'limited technical information required for website operation and security, including IP address, request date and time, browser and device information and technical logs.',
+    ],
+  },
+  {
+    title: 'Purposes and legal basis',
+    paragraphs: [
+      'Data is processed to receive and review an application, contact the applicant, assess possible cooperation, continue communication, protect the website and comply with Russian law.',
+      'Application data is processed on the basis of the data subject’s separate consent. If a contract is subsequently entered into, other lawful grounds applicable to that contract and statutory obligations may apply.',
+    ],
+  },
+  {
+    title: 'Processing operations',
+    paragraphs: [
+      'The Controller may collect, record, organise, accumulate, store, update, retrieve, use, disclose to an authorised processor, restrict, erase and destroy personal data by automated and non-automated means.',
+      'No decision producing legal consequences is made solely by automated processing, and application data is not made publicly available.',
+    ],
+  },
+  {
+    title: 'Storage in the Russian Federation',
+    paragraphs: [
+      'Personal data of Russian citizens is recorded, organised, accumulated, stored, updated and retrieved using databases located in the Russian Federation. The application form does not involve cross-border data transfers.',
+      `Database infrastructure is provided by ${DATABASE_PROCESSOR.name}, address: ${DATABASE_PROCESSOR.address}, acting on the Controller’s instructions solely to provide and protect the infrastructure.`,
+    ],
+  },
+  {
+    title: 'Retention and deletion',
+    paragraphs: [
+      'If cooperation does not begin, application data is retained until the purpose is achieved, but no longer than 12 months after the most recent interaction. A contract or a statutory obligation may require a different retention period.',
+      'Data is erased or destroyed when the purpose is achieved, the retention period expires or consent is withdrawn, unless another lawful basis permits continued processing.',
+    ],
+  },
+  {
+    title: 'Disclosure and confidentiality',
+    paragraphs: [
+      'The Controller does not sell personal data. Access is limited to authorised personnel and infrastructure providers that require it to perform assigned functions and are bound by confidentiality and security obligations.',
+      'Disclosure to clubs, sports organisations or other potential partners requires a separate lawful basis and is limited to the interaction agreed with the applicant.',
+    ],
+  },
+  {
+    title: 'Security measures',
+    paragraphs: [
+      'The Controller applies legal, organisational and technical safeguards, including access controls, secure connections, authentication, operation monitoring, software updates, recovery measures and incident response procedures.',
+    ],
+  },
+  {
+    title: 'Data subject rights',
+    paragraphs: [
+      'A data subject may request information, correction, restriction or deletion, withdraw consent, and lodge a complaint with Roskomnadzor or a court.',
+      `A written request may be sent to the Controller at: ${LEGAL_ENTITY.address}. It should contain sufficient information to identify the applicant and locate the application, together with the requested action.`,
+    ],
+  },
+  {
+    title: 'Technical storage and updates',
+    paragraphs: [
+      'The website does not use advertising or analytics cookies. Local browser storage is used only to remember dismissal of the technical notice. The administration area uses an essential secure session cookie for authorised access.',
+      'The Controller may update this Policy following changes to its processes or Russian law. The current version is always available on this page. The Russian-language version governs in the event of any discrepancy.',
+    ],
+  },
+];
 
 export default function EnglishPrivacyPage() {
   return (
-    <>
-      <PageHero eyebrow="Legal information" title="Privacy" description="We treat the information you share with Premier Football Agency with care." />
-      <Container className="py-20 max-md:py-14">
-        <Card as="div" className="mx-auto max-w-4xl border-white/10 bg-[#08111d] p-10 max-sm:p-6">
-          <Typography variant="bodyLarge" className="text-white">This policy describes Premier Football Agency’s approach to processing the personal data of website visitors and contact-form users.</Typography>
-          <Typography variant="caption" className="mt-4 text-slate-500">Last updated: 16 July 2026</Typography>
-
-          <div className="mt-10 divide-y divide-white/10 border-y border-white/10">
-            {sections.map(([title, text], index) => (
-              <section className="grid grid-cols-[56px_1fr] gap-6 py-8 max-sm:grid-cols-1 max-sm:gap-3" key={title}>
-                <Typography as="span" variant="sectionSubtitle">{String(index + 1).padStart(2, "0")}</Typography>
-                <div>
-                  <Typography as="h2" variant="sectionTitle" className="text-xl leading-tight tracking-[-.025em]">{title}</Typography>
-                  <Typography variant="bodyMedium" className="mt-4 text-base leading-8 text-slate-300">{text}</Typography>
-                </div>
-              </section>
-            ))}
-          </div>
-
-          <div className="mt-10 border-l border-pfa-accent/60 pl-6">
-            <Typography variant="bodyMedium" className="text-slate-300">Personal data enquiries:</Typography>
-            <a className="mt-2 block break-all text-lg font-bold text-white transition-colors hover:text-pfa-accent" href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
-          </div>
-        </Card>
-      </Container>
-    </>
+    <LegalDocument
+      eyebrow="Legal information"
+      title="Personal data processing policy"
+      description="Rules governing personal data processing and protection for website visitors and applicants."
+      introduction={`This Policy describes how ${LEGAL_ENTITY.shortName} processes personal data and keeps it secure.`}
+      updatedLabel="Version dated 2 August 2026"
+      sections={sections}
+      notice="An application can be submitted only after separate consent to personal data processing has been confirmed."
+    />
   );
 }

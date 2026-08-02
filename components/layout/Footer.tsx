@@ -68,8 +68,9 @@ export default function Footer({ settings }: FooterProps) {
 
         <div className="mt-14 flex items-center justify-between gap-6 border-t border-white/10 pt-7 max-sm:flex-col max-sm:items-start">
           <Typography variant="caption" className="text-slate-500">© 2026 {locale === "ru" ? "Премьер Футбольное Агентство" : "Premier Football Agency"}</Typography>
-          <div className="flex items-center gap-6 max-sm:flex-col max-sm:items-start max-sm:gap-3">
-            <Link className="text-[10px] font-bold uppercase tracking-[.14em] text-slate-400 transition-colors hover:text-pfa-accent" href={localizePath("/privacy", locale)}>{locale === "ru" ? "Политика конфиденциальности" : "Privacy policy"}</Link>
+          <div className="flex flex-wrap items-center justify-end gap-x-6 gap-y-3 max-sm:flex-col max-sm:items-start">
+            <Link className="text-[10px] font-bold uppercase tracking-[.14em] text-slate-400 transition-colors hover:text-pfa-accent" href={localizePath("/privacy", locale)}>{locale === "ru" ? "Политика обработки данных" : "Personal data policy"}</Link>
+            <Link className="text-[10px] font-bold uppercase tracking-[.14em] text-slate-400 transition-colors hover:text-pfa-accent" href={localizePath("/personal-data-consent", locale)}>{locale === "ru" ? "Согласие на обработку данных" : "Data processing consent"}</Link>
             <Link className="text-[10px] font-bold uppercase tracking-[.14em] text-slate-400 transition-colors hover:text-pfa-accent" href="#top">{locale === "ru" ? "Наверх ↑" : "Back to top ↑"}</Link>
           </div>
         </div>

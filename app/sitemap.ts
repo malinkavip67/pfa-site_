@@ -6,8 +6,8 @@ import { SITE_URL } from "@/lib/constants";
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const lastModified = new Date();
   const [players, news] = await Promise.all([getPlayers(), getPublishedNews()]);
-  const staticPaths = ["", "/players", "/news", "/services", "/partners", "/faq", "/contacts", "/privacy"];
-  const englishPaths = ["/en", "/en/players", "/en/news", "/en/services", "/en/partners", "/en/faq", "/en/contacts", "/en/privacy"];
+  const staticPaths = ["", "/players", "/news", "/services", "/partners", "/faq", "/contacts", "/privacy", "/personal-data-consent"];
+  const englishPaths = ["/en", "/en/players", "/en/news", "/en/services", "/en/partners", "/en/faq", "/en/contacts", "/en/privacy", "/en/personal-data-consent"];
   return [
     ...staticPaths.map((path, index) => ({ url: `${SITE_URL}${path}`, lastModified, changeFrequency: "weekly" as const, priority: index === 0 ? 1 : 0.7 })),
     ...englishPaths.map((path) => ({ url: `${SITE_URL}${path}`, lastModified, changeFrequency: "weekly" as const, priority: 0.6 })),
