@@ -83,7 +83,7 @@ const sections: readonly LegalSection[] = [
   {
     title: 'Technical storage and updates',
     paragraphs: [
-      'The website does not use advertising or analytics cookies. Local browser storage is used only to remember dismissal of the technical notice. The administration area uses an essential secure session cookie for authorised access.',
+      'The website does not use advertising cookies. Yandex Metrica and Google Analytics may be enabled only after the visitor gives separate consent. Their code is not loaded and analytics data is not transmitted before consent. The selected settings are stored in local browser storage. The administration area uses an essential secure session cookie for authorised access. Further information is provided in the Cookie Policy.',
       'The Controller may update this Policy following changes to its processes or Russian law. The current version is always available on this page. The Russian-language version governs in the event of any discrepancy.',
     ],
   },

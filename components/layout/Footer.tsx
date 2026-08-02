@@ -9,6 +9,7 @@ import SocialLink from "@/components/ui/SocialLink";
 import Typography from "@/components/ui/Typography";
 import { CONTACT_PHONE_NUMBERS, INSTAGRAM_URL } from "@/lib/contact-details";
 import { NAVIGATION, SITE_NAME } from "@/lib/constants";
+import { COOKIE_SETTINGS_EVENT } from "@/lib/cookie-consent";
 import { getLocaleFromPathname, localizePath, NAVIGATION_LABELS } from "@/lib/i18n";
 import type { ResolvedSiteSettings } from "@/lib/site-settings";
 
@@ -71,6 +72,14 @@ export default function Footer({ settings }: FooterProps) {
           <div className="flex flex-wrap items-center justify-end gap-x-6 gap-y-3 max-sm:flex-col max-sm:items-start">
             <Link className="text-[10px] font-bold uppercase tracking-[.14em] text-slate-400 transition-colors hover:text-pfa-accent" href={localizePath("/privacy", locale)}>{locale === "ru" ? "Политика обработки данных" : "Personal data policy"}</Link>
             <Link className="text-[10px] font-bold uppercase tracking-[.14em] text-slate-400 transition-colors hover:text-pfa-accent" href={localizePath("/personal-data-consent", locale)}>{locale === "ru" ? "Согласие на обработку данных" : "Data processing consent"}</Link>
+            <Link className="text-[10px] font-bold uppercase tracking-[.14em] text-slate-400 transition-colors hover:text-pfa-accent" href={localizePath("/cookies", locale)}>{locale === "ru" ? "Политика cookies" : "Cookie policy"}</Link>
+            <button
+              type="button"
+              className="text-left text-[10px] font-bold uppercase tracking-[.14em] text-slate-400 transition-colors hover:text-pfa-accent"
+              onClick={() => window.dispatchEvent(new Event(COOKIE_SETTINGS_EVENT))}
+            >
+              {locale === "ru" ? "Настройки cookies" : "Cookie settings"}
+            </button>
             <Link className="text-[10px] font-bold uppercase tracking-[.14em] text-slate-400 transition-colors hover:text-pfa-accent" href="#top">{locale === "ru" ? "Наверх ↑" : "Back to top ↑"}</Link>
           </div>
         </div>
