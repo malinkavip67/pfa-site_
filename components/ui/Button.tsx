@@ -12,6 +12,7 @@ interface Props {
   type?: "button" | "submit" | "reset";
   disabled?: boolean;
   onClick?: () => void;
+  showIcon?: boolean;
 }
 
 const BASE_STYLES = "inline-flex items-center justify-center text-xs font-bold uppercase tracking-[.11em] transition duration-300 hover:-translate-y-0.5";
@@ -31,9 +32,9 @@ const SIZE_STYLES = {
   compact: "min-h-14 gap-4 px-7",
 } as const;
 
-export default function Button({ children, href, variant = "primary", shape = "pill", size = "default", className = "", type = "button", disabled = false, onClick }: Props) {
+export default function Button({ children, href, variant = "primary", shape = "pill", size = "default", className = "", type = "button", disabled = false, onClick, showIcon = true }: Props) {
   const styles = `${BASE_STYLES} ${VARIANT_STYLES[variant]} ${SHAPE_STYLES[shape]} ${SIZE_STYLES[size]} ${className}`;
-  const content = <>{children}<ArrowUpRight aria-hidden="true" size={19} /></>;
+  const content = <>{children}{showIcon && <ArrowUpRight aria-hidden="true" size={19} />}</>;
 
   if (href) {
     return <Link href={href} className={styles} onClick={onClick}>{content}</Link>;
