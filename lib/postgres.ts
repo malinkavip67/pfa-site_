@@ -3,11 +3,20 @@ import "server-only";
 import { randomUUID } from "node:crypto";
 import { Pool, type QueryResultRow } from "pg";
 
-const connectionString = process.env.DATABASE_URL;
+const rawConnectionString = process.env.DATABASE_URL;
 
-if (!connectionString) {
+if (!rawConnectionString) {
   throw new Error("DATABASE_URL is not configured.");
 }
+
+const connectionUrl = new URL(rawConnectionString);
+const sslMode = connectionUrl.searchParams.get("sslmode");
+
+if (sslMode && ["prefer", "require", "verify-ca"].includes(sslMode)) {
+  connectionUrl.searchParams.set("sslmode", "verify-full");
+}
+
+const connectionString = connectionUrl.toString();
 
 const globalForPostgres = globalThis as unknown as {
   postgresPool: Pool | undefined;
@@ -23,7 +32,7 @@ const postgresPool = globalForPostgres.postgresPool ?? new Pool({
 });
 
 postgresPool?.on("error", () => {
-  console.error("PostgreSQL pool connection error.");
+  console.warn("PostgreSQL pool connection was interrupted.");
 });
 
 if (postgresPool && process.env.NODE_ENV !== "production") {

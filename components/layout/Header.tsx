@@ -7,6 +7,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import ApplicationButton from "@/components/forms/ApplicationButton";
+import InstallAppButton from "@/components/pwa/InstallAppButton";
 import { NAVIGATION } from "@/lib/constants";
 import { getLocaleFromPathname, localizePath, NAVIGATION_LABELS, type Locale } from "@/lib/i18n";
 
@@ -114,12 +115,7 @@ export default function Header({ siteName }: HeaderProps) {
 
       <div className="flex items-center gap-4 max-lg:hidden">
         <ApplicationButton shape="square" size="compact" className="min-h-11 border border-white/30 bg-transparent px-5 text-[10px] text-white shadow-none hover:border-pfa-accent hover:bg-transparent hover:text-pfa-accent max-xl:px-4">{locale === "ru" ? "Оставить заявку" : "Leave an application"}</ApplicationButton>
-        <Link
-          href="/admin/login"
-          className="text-[10px] font-bold uppercase tracking-[.1em] text-slate-200 transition-colors hover:text-pfa-accent"
-        >
-          {locale === "ru" ? "Вход" : "Admin"}
-        </Link>
+        <InstallAppButton locale={locale} compact />
         <label className="relative flex items-center" aria-label={locale === "ru" ? "Язык сайта" : "Website language"}>
           <select className="h-11 appearance-none bg-transparent pl-2 pr-6 text-[10px] font-bold text-white outline-none" value={locale} onChange={(event) => { window.location.href = localizePath("/", event.target.value as Locale); }}>
             <option className="bg-pfa-background" value="ru">RU</option>
@@ -176,11 +172,9 @@ export default function Header({ siteName }: HeaderProps) {
               ))}
             </nav>
 
+            <InstallAppButton locale={locale} mobile />
             <div className="flex items-center gap-4">
               <ApplicationButton shape="square" size="compact" className="flex-1" onClick={closeMenu}>{locale === "ru" ? "Оставить заявку" : "Leave an application"}</ApplicationButton>
-              <Link href="/admin/login" onClick={closeMenu} className="text-xs font-bold uppercase text-white transition-colors hover:text-pfa-accent">
-                {locale === "ru" ? "Вход" : "Admin"}
-              </Link>
               <Link href={alternateHref} onClick={closeMenu} className="text-xs font-bold text-white transition-colors hover:text-pfa-accent">{alternateLocale.toUpperCase()}</Link>
             </div>
           </motion.div>

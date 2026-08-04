@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title">
+  <title id="title">PFA</title>
+  <rect width="512" height="512" fill="#050B14"/>
+  <circle cx="256" cy="256" r="196" fill="#08111D"/>
+  <path d="M137 305 169 177h60c48 0 75 21 66 56-8 35-43 55-91 55h-23l-4 17h-40Zm53-53h22c20 0 33-7 36-19 3-12-6-17-26-17h-21l-11 36Zm91 53 32-128h42l-32 128h-42Z" fill="#F8FAFC"/>
+  <path d="m132 287 234-63-8 36-235 63 9-36Z" fill="#00EB52"/>
+  <text x="256" y="370" fill="#F8FAFC" font-family="Arial, sans-serif" font-size="34" font-weight="800" text-anchor="middle" letter-spacing="7">PFA</text>
+</svg>

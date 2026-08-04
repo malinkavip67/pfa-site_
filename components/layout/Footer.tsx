@@ -80,6 +80,7 @@ export default function Footer({ settings }: FooterProps) {
             >
               {locale === "ru" ? "Настройки cookies" : "Cookie settings"}
             </button>
+            <Link className="text-[10px] font-bold uppercase tracking-[.14em] text-slate-400 transition-colors hover:text-pfa-accent" href="/admin/login">{locale === "ru" ? "Вход для администратора" : "Administrator login"}</Link>
             <Link className="text-[10px] font-bold uppercase tracking-[.14em] text-slate-400 transition-colors hover:text-pfa-accent" href="#top">{locale === "ru" ? "Наверх ↑" : "Back to top ↑"}</Link>
           </div>
         </div>
