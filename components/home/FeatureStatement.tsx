@@ -12,7 +12,7 @@ export default function FeatureStatement({ locale = "ru" }: Props) {
   return (
     <section aria-labelledby="about-title" className="relative overflow-hidden border-y border-white/10 py-20 max-md:py-16">
       <Image
-        src={locale === "ru" ? "/images/about/pfa-office-preview-ru.webp" : "/images/about/pfa-office-preview.png"}
+        src={locale === "ru" ? "/images/about/pfa-office-preview-ru.webp" : "/images/about/pfa-office-preview.webp"}
         fill
         loading="lazy"
         sizes="100vw"

@@ -45,7 +45,7 @@ export default function PlayerJourney({ locale = "ru" }: Props) {
         fill
         priority={false}
         sizes="100vw"
-        src="/images/journey/player-journey-preview.png"
+        src="/images/journey/player-journey-preview.webp"
         alt=""
         aria-hidden="true"
         className="object-cover object-[center_30%] opacity-90 max-md:object-[62%_center]"
