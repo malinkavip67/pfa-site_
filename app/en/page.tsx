@@ -11,7 +11,6 @@ import PlayerJourney from "@/components/home/PlayerJourney";
 import { englishAboutDirections, englishPartners, englishStats } from "@/data/english";
 import { getPlayers } from "@/data/players";
 import { createPageMetadata } from "@/lib/metadata";
-import { getSiteSettings } from "@/lib/site-settings";
 
 export const metadata: Metadata = createPageMetadata({
   title: "We create champions",
@@ -28,7 +27,5 @@ export default async function EnglishHomePage({ searchParams }: EnglishHomePageP
   const requestedApplication = (await searchParams).application;
   const initialAudience = requestedApplication === "parent" ? "parent" : requestedApplication === "player" ? "player" : null;
   const players = await getPlayers();
-  const settings = await getSiteSettings();
-
-  return <><Hero locale="en" settings={settings} /><HeroStats stats={englishStats} locale="en" /><About directions={englishAboutDirections} locale="en" /><FeatureStatement locale="en" /><PlayerJourney locale="en" /><AudiencePaths key={initialAudience ?? "closed"} locale="en" initialAudience={initialAudience} /><FeaturedPlayers players={players} locale="en" /><Partners partners={englishPartners} locale="en" /><CTA locale="en" /></>;
+  return <><Hero locale="en" /><HeroStats stats={englishStats} locale="en" /><About directions={englishAboutDirections} locale="en" /><FeatureStatement locale="en" /><PlayerJourney locale="en" /><AudiencePaths key={initialAudience ?? "closed"} locale="en" initialAudience={initialAudience} /><FeaturedPlayers players={players} locale="en" /><Partners partners={englishPartners} locale="en" /><CTA locale="en" /></>;
 }

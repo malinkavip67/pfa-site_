@@ -1,6 +1,5 @@
 export const SITE_NAME = "Premier Football Agency";
-export const SITE_URL = "https://pfa.agency";
-export const CONTACT_EMAIL = "hello@pfa.agency";
+export const SITE_URL = "https://pfa-agency.ru";
 
 export const NAVIGATION = [
   { label: "Главная", href: "/" },

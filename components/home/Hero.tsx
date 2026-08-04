@@ -28,7 +28,7 @@ export default function Hero({ locale = "ru", settings }: Props) {
           priority
           sizes="100vw"
           className="object-cover object-[66%_center] brightness-[1.16] contrast-[1.06] saturate-[1.06] md:object-center"
-          alt="Футболист с мячом на ночном стадионе"
+          alt={locale === "ru" ? "Футболист с мячом на ночном стадионе" : "Football player with a ball in a night stadium"}
         />
       </motion.div>
 
