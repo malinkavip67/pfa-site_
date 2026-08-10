@@ -16,6 +16,7 @@ const ITEMS = [
   { href: "/admin", label: "Обзор" },
   { href: "/admin/applications", label: "Заявки" },
   { href: "/admin/players", label: "Игроки" },
+  { href: "/admin/leadership", label: "Руководство" },
   { href: "/admin/news", label: "Новости" },
   { href: "/admin/settings", label: "Настройки сайта" },
 ] as const;

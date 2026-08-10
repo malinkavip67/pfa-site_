@@ -41,12 +41,12 @@ model Application {
 }
 
 model Player {
-  id            String   @id @default(cuid())
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  id            String    @id @default(cuid())
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
   firstName     String
   lastName      String
-  slug          String   @unique
+  slug          String    @unique
   birthDate     DateTime?
   nationality   String?
   city          String?
@@ -55,12 +55,12 @@ model Player {
   height        Int?
   weight        Int?
   preferredFoot String?
-  description   String?  @db.Text
-  achievements  String?  @db.Text
+  description   String?   @db.Text
+  achievements  String?   @db.Text
   photoUrl      String?
   videoUrl      String?
-  isPublished   Boolean  @default(false)
-  sortOrder     Int      @default(0)
+  isPublished   Boolean   @default(false)
+  sortOrder     Int       @default(0)
 
   @@index([isPublished])
   @@index([sortOrder])
@@ -101,11 +101,27 @@ model SiteSettings {
 }
 
 model AdminCredential {
-  adminId         String    @id
-  passwordHash    String?
-  resetTokenHash  String?   @unique
-  resetExpiresAt  DateTime?
-  updatedAt       DateTime  @updatedAt
+  adminId        String    @id
+  passwordHash   String?
+  resetTokenHash String?   @unique
+  resetExpiresAt DateTime?
+  updatedAt      DateTime  @updatedAt
 
   @@index([resetExpiresAt])
+}
+
+model LeadershipMember {
+  id          String   @id
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  firstName   String?
+  lastName    String?
+  position    String?
+  description String?  @db.Text
+  photoUrl    String?
+  isPublished Boolean  @default(true)
+  sortOrder   Int      @default(0)
+
+  @@index([isPublished])
+  @@index([sortOrder])
 }

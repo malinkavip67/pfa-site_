@@ -49,3 +49,16 @@ export interface SiteSettingsRecord {
   address: string | null;
   footerText: string | null;
 }
+
+export interface AdminLeadershipRecord {
+  id: string;
+  createdAt: string;
+  updatedAt: string;
+  firstName: string | null;
+  lastName: string | null;
+  position: string | null;
+  description: string | null;
+  photoUrl: string | null;
+  isPublished: boolean;
+  sortOrder: number;
+}

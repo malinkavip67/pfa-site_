@@ -6,10 +6,12 @@ import FeaturedPlayers from "@/components/home/FeaturedPlayers";
 import FeatureStatement from "@/components/home/FeatureStatement";
 import Hero from "@/components/home/Hero";
 import HeroStats from "@/components/home/HeroStats";
+import Leadership from "@/components/home/Leadership";
 import Partners from "@/components/home/Partners";
 import PlayerJourney from "@/components/home/PlayerJourney";
 import { partners } from "@/data/partners";
 import { getPlayers } from "@/data/players";
+import { getLeadership } from "@/data/leadership";
 import { aboutDirections } from "@/data/services";
 import { stats } from "@/data/stats";
 import { createPageMetadata } from "@/lib/metadata";
@@ -30,6 +32,7 @@ export default async function HomePage({ searchParams }: HomePageProps) {
   const requestedApplication = (await searchParams).application;
   const initialAudience = requestedApplication === "parent" ? "parent" : requestedApplication === "player" ? "player" : null;
   const players = await getPlayers();
+  const leadership = await getLeadership();
   const settings = await getSiteSettings();
-  return <><Hero settings={settings} /><HeroStats stats={stats} /><About directions={aboutDirections} /><FeatureStatement /><PlayerJourney /><AudiencePaths key={initialAudience ?? "closed"} initialAudience={initialAudience} /><FeaturedPlayers players={players} /><Partners partners={partners} /><CTA /></>;
+  return <><Hero settings={settings} /><HeroStats stats={stats} /><About directions={aboutDirections} /><FeatureStatement /><Leadership members={leadership} /><PlayerJourney /><AudiencePaths key={initialAudience ?? "closed"} initialAudience={initialAudience} /><FeaturedPlayers players={players} /><Partners partners={partners} /><CTA /></>;
 }

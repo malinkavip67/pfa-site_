@@ -143,6 +143,35 @@ export function validateNewsPayload(body: unknown) {
   };
 }
 
+export function validateLeadershipPayload(body: unknown) {
+  if (!body || typeof body !== "object") return { error: "Некорректные данные руководителя." };
+  const payload = body as Record<string, unknown>;
+  const firstName = optionalString(payload.firstName, "Имя", 100);
+  const lastName = optionalString(payload.lastName, "Фамилия", 100);
+  const position = optionalString(payload.position, "Должность", 180);
+  const description = optionalString(payload.description, "Описание", 2_000);
+  const photoUrl = optionalUrl(payload.photoUrl, "Фотография", true);
+  const sortOrderValue = Number(payload.sortOrder ?? 0);
+  const fields = [firstName, lastName, position, description, photoUrl];
+  const invalid = fields.find((field) => "error" in field);
+  if (invalid && "error" in invalid) return invalid;
+  if (!Number.isInteger(sortOrderValue) || sortOrderValue < 1 || sortOrderValue > 3) {
+    return { error: "Порядок отображения должен быть числом от 1 до 3." };
+  }
+
+  return {
+    data: {
+      firstName: firstName.value,
+      lastName: lastName.value,
+      position: position.value,
+      description: description.value,
+      photoUrl: photoUrl.value,
+      isPublished: payload.isPublished === true,
+      sortOrder: sortOrderValue,
+    },
+  };
+}
+
 export function validateSettingsPayload(body: unknown) {
   if (!body || typeof body !== "object") return { error: "Некорректные настройки." };
   const payload = body as Record<string, unknown>;
