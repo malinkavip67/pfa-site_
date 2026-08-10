@@ -27,6 +27,9 @@ const manropeLatin = localFont({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://pfa-agency.ru"),
+  verification: {
+    google: "bEw0MRkprpAgNJ6_nz9iA2zHgXjZ2oB1VptJFiRfYwg",
+  },
   title: { default: "Премьер Футбольное Агентство — Мы создаём чемпионов", template: "%s — PFA" },
   description: "Международное футбольное агентство. Стратегическое управление карьерой профессиональных футболистов.",
   applicationName: "PFA",
