@@ -37,7 +37,7 @@ export const metadata: Metadata = {
   category: "sports",
   appleWebApp: { capable: true, statusBarStyle: "black-translucent", title: "PFA" },
   icons: {
-    icon: [{ url: "/icons/pwa-icon.svg", type: "image/svg+xml" }],
+    icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],
     apple: [{ url: "/icons/pwa-icon.svg", type: "image/svg+xml" }],
   },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1, "max-video-preview": -1 } },
