@@ -1,9 +1,5 @@
 import type { Metadata } from "next";
 import ApplicationsDashboard from "@/components/admin/ApplicationsDashboard";
-import Card from "@/components/ui/Card";
-import Container from "@/components/ui/Container";
-import SectionHeading from "@/components/ui/SectionHeading";
-import Typography from "@/components/ui/Typography";
 import { databaseQuery } from "@/lib/postgres";
 import type { ApplicationRecord } from "@/types/application";
 
@@ -38,34 +34,16 @@ async function loadApplications(): Promise<{ applications: ApplicationRecord[]; 
 export default async function ApplicationsPage() {
   const { applications, error } = await loadApplications();
 
-  return (
-    <section className="min-h-screen border-b border-white/10 bg-[#050b14] py-20 max-md:py-14">
-      <Container>
-        <SectionHeading index="CRM">Заявки</SectionHeading>
-        <div className="mt-6 grid grid-cols-[minmax(0,1fr)_minmax(280px,.55fr)] items-end gap-10 max-lg:grid-cols-1">
-          <Typography as="h1" variant="sectionTitle" className="text-[clamp(1.8rem,3.4vw,3.4rem)] leading-[.94] tracking-[-.04em]">
-            Работа с<br /><span className="text-pfa-accent">обращениями</span>
-          </Typography>
-          <Typography variant="bodyLarge" className="border-l border-pfa-accent/60 pl-6 text-white max-lg:border-l-0 max-lg:border-t max-lg:pl-0 max-lg:pt-5">
-            Новые заявки, история общения и следующий шаг — в одном рабочем пространстве.
-          </Typography>
+  if (error) {
+    return (
+      <section className="min-h-[calc(100vh-72px)] bg-[#050b14] p-8 text-white">
+        <div className="mx-auto max-w-3xl rounded-2xl border border-red-400/20 bg-[#0c1726] p-8 shadow-sm">
+          <h1 className="text-2xl font-extrabold">Не удалось загрузить заявки</h1>
+          <p className="mt-3 text-sm leading-6 text-slate-300">Проверьте подключение к базе данных и повторите попытку.</p>
         </div>
+      </section>
+    );
+  }
 
-        <div className="mt-12">
-          {error ? (
-            <Card as="div" className="border-red-400/30 bg-red-950/15 p-8">
-              <Typography as="h2" variant="sectionTitle" className="text-[clamp(1.35rem,3vw,2.4rem)]">
-                Не удалось загрузить заявки
-              </Typography>
-              <Typography variant="bodyMedium" className="mt-4 max-w-2xl text-slate-200">
-                Проверьте подключение к базе и убедитесь, что ручной SQL инициализации выполнен в Neon.
-              </Typography>
-            </Card>
-          ) : (
-            <ApplicationsDashboard initialApplications={applications} />
-          )}
-        </div>
-      </Container>
-    </section>
-  );
+  return <ApplicationsDashboard initialApplications={applications} />;
 }

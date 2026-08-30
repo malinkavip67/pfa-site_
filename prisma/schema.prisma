@@ -41,26 +41,28 @@ model Application {
 }
 
 model Player {
-  id            String    @id @default(cuid())
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-  firstName     String
-  lastName      String
-  slug          String    @unique
-  birthDate     DateTime?
-  nationality   String?
-  city          String?
-  position      String?
-  club          String?
-  height        Int?
-  weight        Int?
-  preferredFoot String?
-  description   String?   @db.Text
-  achievements  String?   @db.Text
-  photoUrl      String?
-  videoUrl      String?
-  isPublished   Boolean   @default(false)
-  sortOrder     Int       @default(0)
+  id                  String    @id @default(cuid())
+  createdAt           DateTime  @default(now())
+  updatedAt           DateTime  @updatedAt
+  firstName           String
+  lastName            String
+  slug                String    @unique
+  birthDate           DateTime?
+  nationality         String?
+  city                String?
+  position            String?
+  club                String?
+  clubContractUntil   DateTime?
+  agencyContractUntil DateTime?
+  height              Int?
+  weight              Int?
+  preferredFoot       String?
+  description         String?   @db.Text
+  achievements        String?   @db.Text
+  photoUrl            String?
+  videoUrl            String?
+  isPublished         Boolean   @default(false)
+  sortOrder           Int       @default(0)
 
   @@index([isPublished])
   @@index([sortOrder])

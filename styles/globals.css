@@ -21,6 +21,21 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .text-outline { color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,.72); }
 ::selection { color: var(--color-pfa-background); background: var(--color-pfa-accent); }
 
+.crm-input {
+  width: 100%;
+  min-height: 3rem;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: .75rem;
+  background: #050b14;
+  padding: 0 1rem;
+  color: #fff;
+  font-size: .875rem;
+  outline: none;
+  transition: border-color .2s ease, box-shadow .2s ease;
+}
+.crm-input::placeholder { color: #64748b; }
+.crm-input:focus { border-color: #00a63e; box-shadow: 0 0 0 3px rgba(16,185,129,.12); }
+
 :focus-visible { outline: 2px solid var(--color-pfa-accent); outline-offset: 4px; }
 .skip-link { position: fixed; top: 1rem; left: 1rem; z-index: 100; translate: 0 -150%; border-radius: 999px; background: var(--color-pfa-accent); padding: .75rem 1rem; color: var(--color-pfa-accent-contrast); font-size: .75rem; font-weight: 700; text-transform: uppercase; transition: translate .2s ease; }
 .skip-link:focus { translate: 0; }

@@ -1,7 +1,11 @@
 import { NextResponse } from "next/server";
 import { isAdminAuthenticated } from "@/lib/admin-auth";
 import { createDatabaseId, databaseQuery } from "@/lib/postgres";
-import type { ApplicationRecord } from "@/types/application";
+import {
+  APPLICATION_STATUSES,
+  type ApplicationRecord,
+  type ApplicationStatusValue,
+} from "@/types/application";
 
 export const runtime = "nodejs";
 
@@ -49,6 +53,13 @@ export async function POST(request: Request) {
     }
 
     const payload = body as Record<string, unknown>;
+    const isAdminEntry = payload.adminEntry === true;
+    const isAdmin = isAdminEntry ? await isAdminAuthenticated() : false;
+
+    if (isAdminEntry && !isAdmin) {
+      return NextResponse.json({ ok: false, message: "Требуется авторизация." }, { status: 401 });
+    }
+
     const type = payload.type === "PLAYER" || payload.type === "PARENT" ? payload.type : null;
     const firstName = readRequiredString(payload.firstName, 100);
     const lastName = readRequiredString(payload.lastName, 100);
@@ -57,6 +68,13 @@ export async function POST(request: Request) {
     const story = readRequiredString(payload.story, 10_000);
     const isAdult = payload.isAdult === true;
     const consent = payload.consent === true;
+    const internalNote = typeof payload.internalNote === "string"
+      ? payload.internalNote.trim().slice(0, 10_000) || null
+      : null;
+    const requestedStatus = typeof payload.status === "string"
+      && APPLICATION_STATUSES.includes(payload.status as ApplicationStatusValue)
+      ? payload.status as ApplicationStatusValue
+      : "NEW";
 
     if (!type || !firstName || !lastName || !phone || !email || !story) {
       return NextResponse.json({ ok: false, message: "Заполните все обязательные поля." }, { status: 400 });
@@ -75,15 +93,22 @@ export async function POST(request: Request) {
     }
 
     const id = createDatabaseId();
-    await databaseQuery(
+    const rows = await databaseQuery<ApplicationRecord>(
       `INSERT INTO "Application"
-       ("id","createdAt","updatedAt","type","firstName","lastName","phone","email","story","isAdult","consent","status")
-       VALUES ($1,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,$2::"ApplicationType",$3,$4,$5,$6,$7,$8,$9,'NEW'::"ApplicationStatus")`,
-      [id, type, firstName, lastName, phone, email, story, isAdult, consent],
+       ("id","createdAt","updatedAt","type","firstName","lastName","phone","email","story","isAdult","consent","status","internalNote")
+       VALUES ($1,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,$2::"ApplicationType",$3,$4,$5,$6,$7,$8,$9,$10::"ApplicationStatus",$11)
+       RETURNING "id","createdAt","type","firstName","lastName","phone","email","story",
+       "isAdult","consent","status","internalNote"`,
+      [id, type, firstName, lastName, phone, email, story, isAdult, consent, isAdmin ? requestedStatus : "NEW", isAdmin ? internalNote : null],
     );
 
     return NextResponse.json(
-      { ok: true, id, message: "Заявка успешно отправлена." },
+      {
+        ok: true,
+        id,
+        application: rows[0] ? { ...rows[0], createdAt: String(rows[0].createdAt) } : undefined,
+        message: "Заявка успешно отправлена.",
+      },
       { status: 201 },
     );
   } catch (error) {

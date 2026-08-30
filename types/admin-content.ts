@@ -10,6 +10,8 @@ export interface AdminPlayerRecord {
   city: string | null;
   position: string | null;
   club: string | null;
+  clubContractUntil: string | null;
+  agencyContractUntil: string | null;
   height: number | null;
   weight: number | null;
   preferredFoot: string | null;

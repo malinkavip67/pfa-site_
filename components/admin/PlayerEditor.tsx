@@ -35,6 +35,8 @@ export default function PlayerEditor({ player }: Props) {
     const payload = {
       ...data, firstName, lastName, slug, photoUrl,
       height: data.height || null, weight: data.weight || null,
+      clubContractUntil: data.clubContractUntil || null,
+      agencyContractUntil: data.agencyContractUntil || null,
       sortOrder: data.sortOrder || 0,
       isPublished: data.isPublished === "on",
     };
@@ -71,6 +73,8 @@ export default function PlayerEditor({ player }: Props) {
         <Field label="Город"><input name="city" defaultValue={player?.city ?? ""} className={fieldClass} /></Field>
         <Field label="Позиция"><input name="position" defaultValue={player?.position ?? ""} className={fieldClass} /></Field>
         <Field label="Клуб"><input name="club" defaultValue={player?.club ?? ""} className={fieldClass} /></Field>
+        <Field label="Контракт с клубом до"><input name="clubContractUntil" type="date" defaultValue={player?.clubContractUntil?.slice(0, 10) ?? ""} className={fieldClass} /></Field>
+        <Field label="Договор с PFA до"><input name="agencyContractUntil" type="date" defaultValue={player?.agencyContractUntil?.slice(0, 10) ?? ""} className={fieldClass} /></Field>
         <Field label="Рост, см"><input name="height" type="number" min="1" defaultValue={player?.height ?? ""} className={fieldClass} /></Field>
         <Field label="Вес, кг"><input name="weight" type="number" min="1" defaultValue={player?.weight ?? ""} className={fieldClass} /></Field>
         <Field label="Рабочая нога"><input name="preferredFoot" defaultValue={player?.preferredFoot ?? ""} className={fieldClass} /></Field>

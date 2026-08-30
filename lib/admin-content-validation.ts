@@ -72,6 +72,8 @@ export function validatePlayerPayload(body: unknown) {
   const city = optionalString(payload.city, "Город", 120);
   const position = optionalString(payload.position, "Позиция", 120);
   const club = optionalString(payload.club, "Клуб", 180);
+  const clubContractUntil = optionalDate(payload.clubContractUntil, "Срок контракта с клубом");
+  const agencyContractUntil = optionalDate(payload.agencyContractUntil, "Срок договора с PFA");
   const height = optionalPositiveInteger(payload.height, "Рост");
   const weight = optionalPositiveInteger(payload.weight, "Вес");
   const preferredFoot = optionalString(payload.preferredFoot, "Рабочая нога", 50);
@@ -81,7 +83,7 @@ export function validatePlayerPayload(body: unknown) {
   const videoUrl = optionalUrl(payload.videoUrl, "Видео");
   const sortOrderValue = Number(payload.sortOrder ?? 0);
 
-  const fields = [firstName, lastName, slug, birthDate, nationality, city, position, club, height, weight, preferredFoot, description, achievements, photoUrl, videoUrl];
+  const fields = [firstName, lastName, slug, birthDate, nationality, city, position, club, clubContractUntil, agencyContractUntil, height, weight, preferredFoot, description, achievements, photoUrl, videoUrl];
   const invalid = fields.find((field) => "error" in field);
   if (invalid && "error" in invalid) return invalid;
   if (!SLUG_PATTERN.test(slug.value!)) {
@@ -101,6 +103,8 @@ export function validatePlayerPayload(body: unknown) {
       city: city.value,
       position: position.value,
       club: club.value,
+      clubContractUntil: clubContractUntil.value,
+      agencyContractUntil: agencyContractUntil.value,
       height: height.value,
       weight: weight.value,
       preferredFoot: preferredFoot.value,
