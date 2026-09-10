@@ -1,0 +1,20 @@
+priority,cluster,intent,query_seed,target_url,status
+1,Футбольное агентство,commercial,футбольное агентство,/,verify_frequency
+1,Футбольное агентство,commercial,агентство футболистов,/,verify_frequency
+1,Футбольный агент,commercial,футбольный агент,/services,verify_frequency
+1,Футбольный агент,commercial,найти футбольного агента,/services,verify_frequency
+1,Представительство,commercial,представительство футболиста,/services,needs_dedicated_page_review
+1,Карьера,commercial,сопровождение карьеры футболиста,/services,needs_dedicated_page_review
+1,Трансферы,commercial,трансфер футболиста,/services,needs_dedicated_page_review
+1,Контракты,commercial,контракт футболиста с клубом,/services,needs_dedicated_page_review
+1,Скаутинг,commercial,оценка футбольного игрока,/services,needs_dedicated_page_review
+1,Просмотр,commercial,как попасть на просмотр в футбольный клуб,/services,needs_dedicated_page_review
+2,Юридическая помощь,commercial,юридическое сопровождение футболиста,/services,needs_dedicated_page_review
+2,Молодые игроки,commercial,футбольный агент для подростка,/faq,verify_frequency
+2,Родители,informational,как выбрать футбольного агента ребенку,/faq,content_article_candidate
+2,Заявка,informational,что отправить футбольному агенту,/faq,content_article_candidate
+2,Спортивное резюме,informational,как составить резюме футболиста,/news,content_article_candidate
+2,Игровое видео,informational,как снять видео для футбольного агента,/news,content_article_candidate
+2,Контракт,informational,что проверить в контракте футболиста,/news,content_article_candidate
+3,Бренд,branded,PFA футбольное агентство,/,monitor
+3,Бренд,branded,Premier Football Agency,/,monitor

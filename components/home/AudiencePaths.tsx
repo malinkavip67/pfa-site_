@@ -8,6 +8,7 @@ import Button from "@/components/ui/Button";
 import Card from "@/components/ui/Card";
 import Container from "@/components/ui/Container";
 import Typography from "@/components/ui/Typography";
+import { APPLICATION_SUBMITTED_EVENT } from "@/lib/analytics-events";
 import { localizePath, type Locale } from "@/lib/i18n";
 
 interface Props {
@@ -174,6 +175,7 @@ export default function AudiencePaths({ locale = "ru", initialAudience = null }:
       }
 
       form.reset();
+      window.dispatchEvent(new Event(APPLICATION_SUBMITTED_EVENT));
       setSubmissionState({ status: "success", message: copy.form.success });
     } catch (error) {
       setSubmissionState({

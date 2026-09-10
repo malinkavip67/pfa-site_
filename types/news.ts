@@ -5,6 +5,7 @@ export interface NewsItem {
   excerpt?: string;
   content?: string;
   date: string;
+  publishedAt?: string;
   image: string;
   slug: string;
 }

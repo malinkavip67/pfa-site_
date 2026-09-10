@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
 import Services from "@/components/home/Services";
+import ServiceDetails from "@/components/services/ServiceDetails";
+import CTA from "@/components/home/CTA";
+import StructuredData from "@/components/layout/StructuredData";
 import { englishServices } from "@/data/english";
 import { createPageMetadata } from "@/lib/metadata";
+import { breadcrumbStructuredData, serviceCatalogStructuredData } from "@/lib/structured-data";
 
 export const metadata: Metadata = createPageMetadata({
   title: "Services",
@@ -11,5 +15,5 @@ export const metadata: Metadata = createPageMetadata({
 });
 
 export default function EnglishServicesPage() {
-  return <Services services={englishServices} locale="en" />;
+  return <><StructuredData data={serviceCatalogStructuredData.en} /><StructuredData data={breadcrumbStructuredData([["Home", "/en"], ["Services", "/en/services"]])} /><Services services={englishServices} locale="en" /><ServiceDetails locale="en" /><CTA locale="en" /></>;
 }

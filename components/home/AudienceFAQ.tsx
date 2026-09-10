@@ -37,7 +37,7 @@ const content = {
       },
       {
         question: "Что произойдёт после заполнения формы?",
-        answer: "После нажатия кнопки откроется ваше почтовое приложение с готовым письмом. Проверьте данные и отправьте письмо — после этого команда PFA сможет рассмотреть обращение и связаться с вами.",
+        answer: "После отправки заявка поступит команде PFA на рассмотрение. Если мы увидим возможность помочь, представитель агентства свяжется с вами по указанному телефону или электронной почте.",
       },
     ],
   },
@@ -68,7 +68,7 @@ const content = {
       },
       {
         question: "What happens after the form is completed?",
-        answer: "Your email application will open with a ready message. Review the details and send it so the PFA team can consider the enquiry and contact you.",
+        answer: "After submission, the application is sent to the PFA team for review. If we see a way to help, an agency representative will contact you using the phone number or email address provided.",
       },
     ],
   },

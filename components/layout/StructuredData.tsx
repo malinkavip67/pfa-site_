@@ -1,4 +1,4 @@
-type JsonValue = string | number | boolean | null | JsonValue[] | { [key: string]: JsonValue };
+export type JsonValue = string | number | boolean | null | JsonValue[] | { [key: string]: JsonValue };
 
 interface Props {
   data: { [key: string]: JsonValue };

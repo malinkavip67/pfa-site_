@@ -8,6 +8,7 @@ import {
   parseCookieConsent,
   type CookieConsent,
 } from "@/lib/cookie-consent";
+import { APPLICATION_SUBMITTED_EVENT } from "@/lib/analytics-events";
 
 type AnalyticsCommand = (...args: unknown[]) => void;
 type YandexCommand = AnalyticsCommand & { a?: unknown[][]; l?: number };
@@ -144,6 +145,23 @@ export default function Analytics({ googleAnalyticsId, yandexMetricaId }: Props)
     }
 
     lastTrackedUrl.current = currentUrl;
+  }, [googleAnalyticsId, isAllowed, pathname, yandexMetricaId]);
+
+  useEffect(() => {
+    if (!isAllowed || pathname.startsWith("/admin") || !isAnalyticsEnvironment()) return;
+
+    const trackApplication = () => {
+      const yandexId = Number(yandexMetricaId);
+      if (Number.isSafeInteger(yandexId) && yandexId > 0) {
+        window.ym?.(yandexId, "reachGoal", "application_submitted");
+      }
+      if (googleAnalyticsId?.startsWith("G-")) {
+        window.gtag?.("event", "generate_lead", { form_name: "player_application" });
+      }
+    };
+
+    window.addEventListener(APPLICATION_SUBMITTED_EVENT, trackApplication);
+    return () => window.removeEventListener(APPLICATION_SUBMITTED_EVENT, trackApplication);
   }, [googleAnalyticsId, isAllowed, pathname, yandexMetricaId]);
 
   return null;

@@ -1,0 +1,20 @@
+period,query,impressions,clicks,query_type,target_url,action
+2026-08-08..2026-09-08,агентство футбольное в рф,3,0,non_branded,/,improve_home_relevance
+2026-08-08..2026-09-08,pfa-agency.ru,2,2,branded,/,monitor
+2026-08-08..2026-09-08,pfa агентство,2,3,branded,/,monitor_yandex_export_anomaly
+2026-08-08..2026-09-08,футбольное агентство,2,0,non_branded,/,improve_title_and_snippet
+2026-08-08..2026-09-08,футбольные агентства в россии,2,1,non_branded,/,improve_home_relevance
+2026-08-08..2026-09-08,футбольное агентство pfa,2,2,branded,/,monitor
+2026-08-08..2026-09-08,агентство pfa,2,0,branded,/,monitor
+2026-08-08..2026-09-08,премьер футбол агентство,1,1,branded,/,monitor
+2026-08-08..2026-09-08,"ооо «премьер футбольное агентство» инн 7720969779",1,0,branded,/,strengthen_organization_data
+2026-08-08..2026-09-08,футбольное агентство свои,1,0,non_branded,/,research_intent
+2026-08-08..2026-09-08,услуга футбольный агент,1,0,non_branded,/services,improve_service_relevance
+2026-08-08..2026-09-08,pfa футбольна агентство,1,1,branded,/,monitor
+2026-08-08..2026-09-08,игроки команды пфа,1,0,branded,/players,improve_players_indexing
+2026-08-08..2026-09-08,pfa-agency,1,2,branded,/,monitor_yandex_export_anomaly
+2026-08-08..2026-09-08,трансферное агентство футбол,1,0,non_branded,/services#transfers,improve_transfer_section
+2026-08-08..2026-09-08,можно ли самому обратиться в футбольное агентство напрямую,1,0,informational,/faq,retain_direct_answer
+2026-08-08..2026-09-08,нанять футбольного агента,1,0,commercial,/services,improve_conversion_copy
+2026-08-08..2026-09-08,pfa agency,1,1,branded,/,monitor
+2026-08-08..2026-09-08,футбольное агентство промоушен,1,0,non_branded,/services,clarify_brand_service

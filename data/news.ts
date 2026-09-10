@@ -16,7 +16,7 @@ function format(row:Row,index=0):NewsItem{
     ? optimizedNewsImages[row.imageUrl] ?? row.imageUrl
     : "/images/hero/hero-pfa-player.webp";
 
-  return{id:row.id,displayId:String(index+1).padStart(2,"0"),title:row.title,slug:row.slug,excerpt:row.excerpt??undefined,content:row.content,image,date:row.publishedAt?new Date(row.publishedAt).toLocaleDateString("ru-RU"):""};
+  return{id:row.id,displayId:String(index+1).padStart(2,"0"),title:row.title,slug:row.slug,excerpt:row.excerpt??undefined,content:row.content,image,date:row.publishedAt?new Date(row.publishedAt).toLocaleDateString("ru-RU"):"",publishedAt:row.publishedAt?new Date(row.publishedAt).toISOString():undefined};
 }
 const fields=`"id","title","slug","excerpt","content","imageUrl","publishedAt"`;
 export async function getPublishedNews():Promise<NewsItem[]>{try{return(await databaseQuery<Row>(`SELECT ${fields} FROM "News" WHERE "isPublished"=true AND "publishedAt"<=CURRENT_TIMESTAMP ORDER BY "publishedAt" DESC`)).map(format);}catch{console.warn("Published news are temporarily unavailable.");return[];}}
