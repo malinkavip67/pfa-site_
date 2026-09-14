@@ -28,11 +28,6 @@ export const englishServices: Service[] = [
 
 export const englishPlayers: Player[] = [
   {
-    id: "01", name: "Roman Proshunin", position: "Midfielder", club: "A. Zhuravlev Football Academy", country: "Russia", city: "Moscow", age: 23, birthDate: "24.06.2003", height: 180, weight: 75, preferredFoot: "Left", image: "/images/players/roman-proshunin.jpg", slug: "roman-proshunin",
-    summary: "A technical left-footed midfielder with strong football intelligence and an excellent first touch. He combines refined dribbling with a powerful long-range strike, contributes both in build-up play and finishing, and uses his acceleration and vision to play aggressive vertical passes and press consistently.",
-    highlights: ["Refined dribbling technique and a powerful long-range strike with his left foot.", "Effective contribution in both build-up play and finishing attacks.", "Aggressive vertical passing and consistent participation in pressing."],
-  },
-  {
     id: "03", name: "Sergey Kudryavtsev", position: "Goalkeeper", country: "Russia", city: "Yaroslavl", age: 19, birthDate: "12.10.2006", height: 190, weight: 82, preferredFoot: "Right", image: "/images/players/sergey-kudryavtsev-v2.webp", slug: "sergey-kudryavtsev",
     summary: "A modern goalkeeper with sharp reactions, confident play on the line and quick positional decisions. He is reliable in one-on-one situations, commands his penalty area and starts attacks with accurate distribution.",
     highlights: ["Sharp reactions and confident play on the goal line.", "Reliable decision-making in one-on-one situations.", "Strong command of the penalty area and accurate distribution."],

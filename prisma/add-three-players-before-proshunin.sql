@@ -47,12 +47,11 @@ ON CONFLICT ("slug") DO UPDATE SET
 
 UPDATE "Player"
 SET "sortOrder" = CASE "slug"
-  WHEN 'roman-proshunin' THEN 4
-  WHEN 'roman-zuev' THEN 5
-  WHEN 'sergey-kudryavtsev' THEN 6
+  WHEN 'roman-zuev' THEN 4
+  WHEN 'sergey-kudryavtsev' THEN 5
   ELSE "sortOrder"
 END,
 "updatedAt" = CURRENT_TIMESTAMP
-WHERE "slug" IN ('roman-proshunin', 'roman-zuev', 'sergey-kudryavtsev');
+WHERE "slug" IN ('roman-zuev', 'sergey-kudryavtsev');
 
 COMMIT;
