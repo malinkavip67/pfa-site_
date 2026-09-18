@@ -30,16 +30,22 @@ export default function Leadership({ members, locale = "ru" }: Props) {
           </Typography>
         </AnimatedReveal>
 
-        <div className="mt-12 grid grid-cols-3 gap-5 max-lg:grid-cols-2 max-md:grid-cols-1">
+        <div className="mx-auto mt-12 grid max-w-7xl grid-cols-3 gap-5 max-md:max-w-xl max-md:grid-cols-1">
           {members.slice(0, 3).map((member, index) => {
-            const fullName = [member.firstName, member.lastName].filter(Boolean).join(" ");
+            const fullName = [member.lastName, member.firstName].filter(Boolean).join(" ");
             const isDraft = !fullName && !member.position && !member.description && !member.photoUrl;
             return (
               <AnimatedReveal key={member.id} delay={index * 0.08} className="h-full">
                 <Card className="group h-full overflow-hidden bg-[#09121f]">
-                  <div className="relative aspect-[4/4.5] overflow-hidden border-b border-white/10 bg-[radial-gradient(circle_at_50%_35%,rgba(0,235,82,.12),transparent_42%),linear-gradient(145deg,#0c1928,#060c14)]">
+                  <div className="relative aspect-[4/5] overflow-hidden border-b border-white/10 bg-[radial-gradient(circle_at_50%_35%,rgba(0,235,82,.12),transparent_42%),linear-gradient(145deg,#0c1928,#060c14)]">
                     {member.photoUrl ? (
-                      <Image src={member.photoUrl} fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover object-center transition duration-700 group-hover:scale-[1.025]" alt={fullName || placeholder} />
+                      <Image
+                        src={member.photoUrl}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 30vw"
+                        className="object-cover object-center transition duration-700 group-hover:scale-[1.025]"
+                        alt={fullName || placeholder}
+                      />
                     ) : (
                       <div className="absolute inset-0 grid place-items-center p-8 text-center">
                         <div>
@@ -49,7 +55,7 @@ export default function Leadership({ members, locale = "ru" }: Props) {
                       </div>
                     )}
                   </div>
-                  <div className="min-h-44 p-6">
+                  <div className="min-h-36 p-6">
                     <Typography as="h3" variant="bodyLarge" className="text-white">{fullName || placeholder}</Typography>
                     <Typography variant="sectionSubtitle" className="mt-3">{member.position || (isDraft ? (locale === "ru" ? "Информация готовится" : "Information is being prepared") : placeholder)}</Typography>
                     {member.description && <Typography variant="bodyMedium" className="mt-4 text-slate-300">{member.description}</Typography>}
