@@ -1,6 +1,7 @@
 import { randomBytes } from "node:crypto";
 import { NextResponse } from "next/server";
 import { isAdminAuthenticated } from "@/lib/admin-auth";
+import { SITE_URL } from "@/lib/constants";
 import { createDatabaseId, databaseQuery } from "@/lib/postgres";
 import { QUESTIONNAIRE_SELECT, toQuestionnaireRecord } from "@/lib/player-questionnaire";
 
@@ -32,6 +33,5 @@ export async function POST(request: Request) {
      VALUES ($1,$2,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,'INVITED',$3)`,
     [id, token, linkedPlayerId],
   );
-  const origin = new URL(request.url).origin;
-  return NextResponse.json({ ok: true, id, token, url: `${origin}/player-questionnaire/${token}` }, { status: 201 });
+  return NextResponse.json({ ok: true, id, token, url: `${SITE_URL}/player-questionnaire/${token}` }, { status: 201 });
 }

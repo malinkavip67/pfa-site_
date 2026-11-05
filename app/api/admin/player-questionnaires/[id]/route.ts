@@ -1,7 +1,7 @@
 import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
 import { isAdminAuthenticated } from "@/lib/admin-auth";
-import { createDatabaseId, withDatabaseTransaction } from "@/lib/postgres";
+import { createDatabaseId, databaseQuery, withDatabaseTransaction } from "@/lib/postgres";
 import { slugify } from "@/lib/admin-content-validation";
 
 export const runtime = "nodejs";
@@ -65,5 +65,21 @@ export async function PATCH(request: Request, { params }: Context) {
   } catch (error) {
     if (error instanceof Error && error.message === "NOT_READY") return NextResponse.json({ ok: false, message: "Анкета ещё не заполнена." }, { status: 409 });
     return NextResponse.json({ ok: false, message: "Не удалось подтвердить анкету." }, { status: 500 });
+  }
+}
+
+export async function DELETE(_: Request, { params }: Context) {
+  if (!(await isAdminAuthenticated())) return NextResponse.json({ ok: false }, { status: 401 });
+  try {
+    const { id } = await params;
+    const rows = await databaseQuery<{ id: string }>(
+      `DELETE FROM "PlayerQuestionnaire" WHERE "id"=$1 RETURNING "id"`,
+      [id],
+    );
+    if (!rows[0]) return NextResponse.json({ ok: false, message: "Анкета не найдена." }, { status: 404 });
+    revalidatePath("/admin/player-questionnaires");
+    return NextResponse.json({ ok: true });
+  } catch {
+    return NextResponse.json({ ok: false, message: "Не удалось удалить анкету." }, { status: 500 });
   }
 }
