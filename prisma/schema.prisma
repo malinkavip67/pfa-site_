@@ -20,6 +20,13 @@ enum ApplicationStatus {
   ARCHIVED
 }
 
+enum PlayerQuestionnaireStatus {
+  INVITED
+  SUBMITTED
+  NEEDS_CLARIFICATION
+  CONFIRMED
+}
+
 model Application {
   id           String            @id @default(cuid())
   createdAt    DateTime          @default(now())
@@ -63,10 +70,45 @@ model Player {
   videoUrl            String?
   isPublished         Boolean   @default(false)
   sortOrder           Int       @default(0)
+  questionnaires      PlayerQuestionnaire[]
 
   @@index([isPublished])
   @@index([sortOrder])
   @@index([createdAt])
+}
+
+model PlayerQuestionnaire {
+  id                 String                    @id @default(cuid())
+  token              String                    @unique
+  createdAt          DateTime                  @default(now())
+  updatedAt          DateTime                  @updatedAt
+  submittedAt        DateTime?
+  confirmedAt        DateTime?
+  status             PlayerQuestionnaireStatus @default(INVITED)
+  fullName           String?
+  birthDate          DateTime?
+  citizenship        String?
+  height             Int?
+  weight             Int?
+  preferredFoot      String?
+  positions          String[]                  @default([])
+  clubs              String?                   @db.Text
+  videoLinks         String[]                  @default([])
+  transfermarktUrl   String?
+  achievements       String?                   @db.Text
+  individualFeatures String?                   @db.Text
+  contact            String?
+  consent            Boolean                   @default(false)
+  photoData          Bytes?
+  photoMimeType      String?
+  photoFileName      String?
+  photoSize          Int?
+  linkedPlayerId     String?
+  linkedPlayer       Player?                   @relation(fields: [linkedPlayerId], references: [id], onDelete: SetNull)
+
+  @@index([status])
+  @@index([createdAt])
+  @@index([linkedPlayerId])
 }
 
 model News {

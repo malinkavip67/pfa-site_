@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  ClipboardList,
   FileText,
   LayoutDashboard,
   Menu,
@@ -27,6 +28,7 @@ const ITEMS = [
   { href: "/admin", label: "Обзор", icon: LayoutDashboard },
   { href: "/admin/applications", label: "Заявки", icon: FileText },
   { href: "/admin/players", label: "Наши игроки", icon: Users },
+  { href: "/admin/player-questionnaires", label: "Анкеты игроков", icon: ClipboardList },
   { href: "/admin/leadership", label: "Руководство", icon: UserRoundCog },
   { href: "/admin/news", label: "Новости", icon: Newspaper },
   { href: "/admin/settings", label: "Настройки", icon: Settings },

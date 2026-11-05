@@ -1,7 +1,7 @@
 import "server-only";
 
 import { randomUUID } from "node:crypto";
-import { Pool, type QueryResultRow } from "pg";
+import { Pool, type PoolClient, type QueryResultRow } from "pg";
 
 const rawConnectionString = process.env.DATABASE_URL;
 
@@ -53,6 +53,23 @@ export async function databaseQuery<T extends QueryResultRow>(
 
     const result = await postgresPool.query<T>(query, params);
     return result.rows;
+  }
+}
+
+export async function withDatabaseTransaction<T>(
+  action: (client: PoolClient) => Promise<T>,
+) {
+  const client = await postgresPool.connect();
+  try {
+    await client.query("BEGIN");
+    const result = await action(client);
+    await client.query("COMMIT");
+    return result;
+  } catch (error) {
+    await client.query("ROLLBACK");
+    throw error;
+  } finally {
+    client.release();
   }
 }
 
